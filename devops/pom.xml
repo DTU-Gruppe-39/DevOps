@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.devops.maven</groupId>
+    <artifactId>devops</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <tomcat.version>9.0.21</tomcat.version>
+    </properties>
+    <dependencies>
+        <!--Embedded Tomcat-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+        <!-- JSP - to shut up Tomcat -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>HelloTomcat</mainClass>
+                        </transformer>
+                        <!-- includes Services in jar-->
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+
+                    </transformers>
+                    <finalName>Heroku01</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <!--&lt;!&ndash; Rest Spec &ndash;&gt;-->
+    <!--<dependency>-->
+        <!--<groupId>javax.ws.rs</groupId>-->
+        <!--<artifactId>javax.ws.rs-api</artifactId>-->
+        <!--<version>2.1.1</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash; Servlet spec &ndash;&gt;-->
+    <!--<dependency>-->
+        <!--<groupId>javax.servlet</groupId>-->
+        <!--<artifactId>javax.servlet-api</artifactId>-->
+        <!--<version>4.0.1</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash; Container &ndash;&gt;-->
+    <!--<dependency>-->
+        <!--<groupId>org.glassfish.jersey.containers</groupId>-->
+        <!--<artifactId>jersey-container-servlet</artifactId>-->
+        <!--<version>2.27</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash; Injection manager &ndash;&gt;-->
+    <!--<dependency>-->
+        <!--<groupId>org.glassfish.jersey.inject</groupId>-->
+        <!--<artifactId>jersey-hk2</artifactId>-->
+        <!--<version>2.27</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash; Old school xml bindings to shut up tomcat &ndash;&gt;-->
+    <!--<dependency>-->
+        <!--<groupId>javax.xml.bind</groupId>-->
+        <!--<artifactId>jaxb-api</artifactId>-->
+        <!--<version>2.3.0</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash; Same as Above &ndash;&gt;-->
+    <!--<dependency>-->
+        <!--<groupId>javax.activation</groupId>-->
+        <!--<artifactId>activation</artifactId>-->
+        <!--<version>1.1</version>-->
+    <!--</dependency>-->
+
+</project>
