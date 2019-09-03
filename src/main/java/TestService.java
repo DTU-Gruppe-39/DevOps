@@ -10,12 +10,12 @@ public class TestService {
         return "Hello World";
     }
 
-//    @Path("json")
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Hello getHelloJson(){
-//        return new Hello();
-//    }
+    @Path("json")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getHelloJson(){
+        return "Json";
+    }
 
 
 }
