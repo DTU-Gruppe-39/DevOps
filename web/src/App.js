@@ -18,7 +18,7 @@ function App() {
         >
           Learn React
         </a>
-        <p>Test</p>
+        <p>Windows 120Hz</p>
       </header>
     </div>
   );
