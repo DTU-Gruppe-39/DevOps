@@ -19,6 +19,9 @@ function App() {
           Learn React
         </a>
         <p>Windows 120Hz</p>
+          <p>
+              Magnus er en luder!
+          </p>
       </header>
     </div>
   );
