@@ -22,6 +22,7 @@ function App() {
         >
           Learn React
         </a>
+        <div className="d-flex justify-content-between">
         <InputGroup className="mb-3">
           <FormControl
               placeholder="Recipient's username"
@@ -29,8 +30,8 @@ function App() {
               aria-describedby="basic-addon2"
           />
         </InputGroup>
-        <Button variant="primary">Primary</Button>
-
+        <Button className="mb-3" variant="primary">Primary</Button>
+        </div>
         <p>Windows 120Hz</p>
           <p>
               Magnus er en luder!
