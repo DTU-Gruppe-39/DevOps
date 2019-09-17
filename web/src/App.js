@@ -35,7 +35,10 @@ function App() {
         <Button className="mb-3" variant="primary">Primary</Button>
         </div>
         <p>Windows 120Hz</p>
+        <switch>
         <Route path={"/about"} component={About}/>
+          <Route exact path ={"/"} render={ () => <h1>Startside Stress</h1> } />
+        </switch>
 
           <p>
               Magnus er en luder!
