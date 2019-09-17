@@ -5,7 +5,8 @@ import './App.css';
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
+import Switch from "react-router-dom/es/Switch";
 
 
 function App() {
@@ -35,10 +36,11 @@ function App() {
         <Button className="mb-3" variant="primary">Primary</Button>
         </div>
         <p>Windows 120Hz</p>
-        <switch>
-        <Route path={"/about"} component={About}/>
+        <Switch>
+          <Route path={"/about/:text"} component={About}/>
           <Route exact path ={"/"} render={ () => <h1>Startside Stress</h1> } />
-        </switch>
+          <Route render={()=><h1>404</h1>} />
+        </Switch>
 
           <p>
               Magnus er en luder!
@@ -48,9 +50,11 @@ function App() {
   );
 }
 export default App;
-const About = () => {
-  return <div>
-  <h1>
-    About luder Magnus
-  </h1>
-</div>};
+const About = withRouter(({history,match})=>{
+  console.log(history);
+  console.log(match);
+  return <div><h1>About {match.params.text}</h1>
+    <Button onClick={()=>history.push("/")}>Go to front</Button>
+  </div>
+});
+
