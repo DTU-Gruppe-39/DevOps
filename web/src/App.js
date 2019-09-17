@@ -5,6 +5,8 @@ import './App.css';
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
         <Button className="mb-3" variant="primary">Primary</Button>
         </div>
         <p>Windows 120Hz</p>
+        <Route path={"/about"} component={About}/>
+
           <p>
               Magnus er en luder!
           </p>
@@ -40,5 +44,10 @@ function App() {
     </div>
   );
 }
-
 export default App;
+const About = () => {
+  return <div>
+  <h1>
+    About luder Magnus
+  </h1>
+</div>};
