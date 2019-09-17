@@ -19,7 +19,10 @@ function App() {
         >
           Learn React
         </a>
-        <p>Test</p>
+        <p>Windows 120Hz</p>
+          <p>
+              Magnus er en luder!
+          </p>
       </header>
     </div>
   );
