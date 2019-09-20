@@ -7,7 +7,10 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
 import Switch from "react-router-dom/es/Switch";
+import GiraffeStore from "./stores/GiraffeStore";
+import {observer} from "mobx-react";
 
+const giraffeStore = new GiraffeStore();
 
 function App() {
   return (
@@ -43,13 +46,18 @@ function App() {
         </Switch>
 
           <p>
-              Magnus er en luder!
+              Nedenstående er giraffer!
           </p>
+        <ul>
+          {giraffeStore.giraffes.map((giraffeName, key) =>
+          <li key={key}>{giraffeName}</li>)}
+        </ul>
+        <Button variant="primary" onClick={()=>giraffeStore.giraffes.push("Rasmus")}>Tilføj giraf</Button>
       </header>
     </div>
   );
 }
-export default App;
+export default observer(App);
 const About = withRouter(({history,match})=>{
   console.log(history);
   console.log(match);
