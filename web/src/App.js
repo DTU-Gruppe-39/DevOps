@@ -46,7 +46,7 @@ function App() {
         </Switch>
 
           <p>
-              Nedenstående er giraffer!
+              Nedenstående er giraffer! wgwg
           </p>
         <ul>
           {giraffeStore.giraffes.map((giraffeName, key) =>
