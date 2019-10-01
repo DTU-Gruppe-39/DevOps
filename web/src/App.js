@@ -1,22 +1,19 @@
 import React from 'react';
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {BrowserRouter as Router, Route, Link, withRouter, Switch} from "react-router-dom";
 import {observer} from "mobx-react";
-
+import './App.css';
 
 function App() {
   return (
       <div className="App">
 
-        <div className="col-12">
           <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <button className="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
+            <button className="btn btn-outline-light" id="menu-toggle">Toggle Menu</button>
             <button className="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -46,13 +43,12 @@ function App() {
               </ul>
             </div>
           </nav>
-        </div>
+        {/*</div>*/}
 
 
-        <div className="d-flex" id="wrapper">
-        <div className="sidebar">
-          <div className="bg-light border-right" id="sidebar-wrapper">
-            <div className="sidebar-heading"></div>
+        <div className="d-flex float-left" id="sidebar">
+          <div className="bg-light border-right">
+            <div className="sidebar-heading space"></div>
             <div className="list-group list-group-flush">
               <a href="#" className="list-group-item list-group-item-action bg-light">Use cases</a>
               <a href="#" className="list-group-item list-group-item-action bg-light">Stakeholders</a>
@@ -61,9 +57,11 @@ function App() {
               <a href="#" className="list-group-item list-group-item-action bg-light">Profile</a>
               <a href="#" className="list-group-item list-group-item-action bg-light">Status</a>
             </div>
-          </div>
         </div>
         </div>
+
+        <div className="card"></div>
+        <div className="card"></div>
         {/*<header className="App-header">*/}
         {/*</header>*/}
       </div>

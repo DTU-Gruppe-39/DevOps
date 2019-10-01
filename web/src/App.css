@@ -22,10 +22,28 @@
 .App-link {
   color: #61dafb;
 }
+.space{
+  width: 50px;
+  height: 100px;
+}
 
-.sidebar1{
-  left: 0px;
-  background: yellow;
+.sidebar{
+  height: 100%;
+}
+
+.list-group-item{
+  padding: 20px;
+}
+.navbar{
+  background-color: steelblue !important;
+}
+
+.card{
+  margin: 20px;
+  height: 250px;
+  width: 250px;
+  border-color: dimgrey;
+
 }
 
 @keyframes App-logo-spin {
