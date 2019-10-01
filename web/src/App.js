@@ -5,8 +5,7 @@ import './App.css';
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import {BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
-import Switch from "react-router-dom/es/Switch";
+import {BrowserRouter as Router, Route, Link, withRouter, Switch} from "react-router-dom";
 import GiraffeStore from "./stores/GiraffeStore";
 import {observer} from "mobx-react";
 
