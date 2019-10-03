@@ -1,6 +1,7 @@
 import React from "react";
 import {observer} from "mobx-react";
 import StakeholdersStore from "../stores/StakeholdersStore";
+import "./Stakeholders.css";
 
 class Stakeholders extends React.Component {
     stakeholderStore = new StakeholdersStore();
@@ -47,20 +48,17 @@ class Stakeholders extends React.Component {
 
     render() {
         return (
-            <div className="stakeholder">
+            <div className="stakeholder float-left justify-content-center">
                 <div className="stakeholder-form">
-                    <form onSubmit={this.handleSubmit}>
+                    <form className="stakeinput" onSubmit={this.handleSubmit}>
                         <label>
-                            Name:
-                            <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} required />
+                            <input name="name" type="text" placeholder="Name" value={this.state.name} onChange={this.handleInputChange} required />
                         </label>
                         <label>
-                            Contact person:
-                            <input name="contactperson" type="text" value={this.state.contactperson} onChange={this.handleInputChange} required />
+                            <input name="contactperson" type="text" placeholder="Contact person" value={this.state.contactperson} onChange={this.handleInputChange} required />
                         </label>
                         <label>
-                            Email:
-                            <input name="email" type="email" value={this.state.email} onChange={this.handleInputChange} required />
+                            <input name="email" type="email" placeholder="Email" value={this.state.email} onChange={this.handleInputChange} required />
                         </label>
                         <label>
                             Direct stakeholder:
@@ -73,14 +71,25 @@ class Stakeholders extends React.Component {
                         <input type="submit" value="Submit" />
                     </form>
                 </div>
-                <div className="stakeholderList">
+                <div className="stakeholderList d-flex justify-content-center" >
                     <ul>
-                        {this.stakeholderStore.stakeholderList.map((stakeholder, key) =>
-                            <li key={key}>{("Name: " + stakeholder.name + ", " +
-                            "Contact person: " + stakeholder.contactperson + ", " +
-                            "Email: " + stakeholder.email + ", " +
-                                (stakeholder.direct ? "Direct stakeholder" : "Indirect stakeholder"))}</li>
-                        )}
+                        <h3 className="d-flex justify-content-center">Stakeholders</h3>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Contact Person</th>
+                                <th>Email</th>
+                                <th>Direct Stakeholder </th>
+                            </tr>
+                            {this.stakeholderStore.stakeholderList.map((stakeholder, key) =>(
+                                    <tr>
+                                        <td key={key}>{stakeholder.name}</td>
+                                        <td key={key}>{stakeholder.contactperson}</td>
+                                        <td key={key}>{stakeholder.email}</td>
+                                        <td key={key}>{(stakeholder.direct ? "Direct stakeholder" : "Indirect stakeholder")}</td>
+                                    </tr>),
+                            )}
+                        </table>
                     </ul>
                 </div>
             </div>
