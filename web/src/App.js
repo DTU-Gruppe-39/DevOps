@@ -1,8 +1,6 @@
 import React from 'react';
 import logo from './Ionic_Logo.png';
 import 'bootstrap/dist/css/bootstrap.css';
-import FormControl from "react-bootstrap/FormControl";
-import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import {BrowserRouter as Router, Route, Link, withRouter, Switch, HashRouter} from "react-router-dom";
 import {observer} from "mobx-react";
@@ -13,6 +11,9 @@ import Events from "./views/Events";
 import Status from "./views/Status";
 import Profile from "./views/Profile";
 import Dashboard from "./views/Dashboard";
+// import StakeholdersStore from "./stores/StakeholdersStore";
+
+// const stakeholdersStore = new StakeholdersStore();
 
 function App() {
   return (

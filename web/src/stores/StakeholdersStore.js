@@ -1,7 +1,7 @@
 import {decorate, observable} from "mobx";
 
-export default class StakeholderStore {
-    stakeholders = [{
+export default class StakeholdersStore {
+    stakeholderList = [{
         name: 'DTU',
         contactperson: 'Kenneth Olsen',
         email: 'keno@dtu.dk',
@@ -10,6 +10,6 @@ export default class StakeholderStore {
 }
 
 
-decorate(StakeholderStore, {
-    stakeholders: observable
+decorate(StakeholdersStore, {
+    stakeholderList: observable
 })

@@ -1,51 +1,84 @@
 import React from "react";
+import {observer} from "mobx-react";
+import StakeholdersStore from "../stores/StakeholdersStore";
 
 class Stakeholders extends React.Component {
+    stakeholderStore = new StakeholdersStore();
     constructor(props) {
         super(props);
-        this.state = {value: 'coconut'};
+        this.state = {
+            name: '',
+            contactperson: '',
+            email: '',
+            direct: true
+        };
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+        // alert('A name was submitted: ' + this.state.name);
         event.preventDefault();
+        const name = this.state.name;
+        const contactperson = this.state.contactperson;
+        const email = this.state.email;
+        const direct = this.state.direct;
+        this.stakeholderStore.stakeholderList.push({name, contactperson, email, direct});
     }
 
     render() {
         return (
-            <div className="stakeholder-form">
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Contact person:
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <div className="radio">
+            <div className="stakeholder">
+                <div className="stakeholder-form">
+                    <form onSubmit={this.handleSubmit}>
                         <label>
-                            <input type="radio" value="Direct" checked={true} />
-                            Direct
+                            Name:
+                            <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} />
                         </label>
-                    </div>
-                    <div className="radio">
                         <label>
-                            <input type="radio" value="Indirect" />
-                            Indirect
+                            Contact person:
+                            <input name="contactperson" type="text" value={this.state.contactperson} onChange={this.handleInputChange} />
                         </label>
-                    </div>
-                    <input type="submit" value="Submit" />
-                </form>
+                        <label>
+                            Email:
+                            <input name="email" type="email" value={this.state.email} onChange={this.handleInputChange} />
+                        </label>
+                        <label>
+                            Direct stakeholder:
+                            <input
+                                name="direct"
+                                type="checkbox"
+                                checked={this.state.direct}
+                                onChange={this.handleInputChange} />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div>
+                <div className="stakeholderList">
+                    <ul>
+                        {this.stakeholderStore.stakeholderList.map((stakeholder, key) =>
+                            <li key={key}>{("Name: " + stakeholder.name + ", " +
+                            "Contact person: " + stakeholder.contactperson + ", " +
+                            "Email: " + stakeholder.email + ", " +
+                                (stakeholder.direct ? "Direct" : "Indirect"))}</li>
+                        )}
+                    </ul>
+                </div>
             </div>
+
         );
     }
 }
-export default Stakeholders;
+export default observer(Stakeholders);
