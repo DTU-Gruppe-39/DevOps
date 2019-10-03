@@ -36,6 +36,13 @@ class Stakeholders extends React.Component {
         const email = this.state.email;
         const direct = this.state.direct;
         this.stakeholderStore.stakeholderList.push({name, contactperson, email, direct});
+
+        this.setState({
+            name: '',
+            contactperson: '',
+            email: '',
+            direct: true
+        });
     }
 
     render() {
@@ -45,15 +52,15 @@ class Stakeholders extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Name:
-                            <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} />
+                            <input name="name" type="text" value={this.state.name} onChange={this.handleInputChange} required />
                         </label>
                         <label>
                             Contact person:
-                            <input name="contactperson" type="text" value={this.state.contactperson} onChange={this.handleInputChange} />
+                            <input name="contactperson" type="text" value={this.state.contactperson} onChange={this.handleInputChange} required />
                         </label>
                         <label>
                             Email:
-                            <input name="email" type="email" value={this.state.email} onChange={this.handleInputChange} />
+                            <input name="email" type="email" value={this.state.email} onChange={this.handleInputChange} required />
                         </label>
                         <label>
                             Direct stakeholder:
@@ -72,7 +79,7 @@ class Stakeholders extends React.Component {
                             <li key={key}>{("Name: " + stakeholder.name + ", " +
                             "Contact person: " + stakeholder.contactperson + ", " +
                             "Email: " + stakeholder.email + ", " +
-                                (stakeholder.direct ? "Direct" : "Indirect"))}</li>
+                                (stakeholder.direct ? "Direct stakeholder" : "Indirect stakeholder"))}</li>
                         )}
                     </ul>
                 </div>

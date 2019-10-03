@@ -1,8 +1,7 @@
 import React from 'react';
 import logo from './Ionic_Logo.png';
 import 'bootstrap/dist/css/bootstrap.css';
-import Button from "react-bootstrap/Button";
-import {BrowserRouter as Router, Route, Link, withRouter, Switch, HashRouter} from "react-router-dom";
+import {Route, Link, HashRouter} from "react-router-dom";
 import {observer} from "mobx-react";
 import './App.css';
 import Stakeholders from "./views/stakeholders";
@@ -21,7 +20,7 @@ function App() {
       <div className="App">
           <div className="topbar">
               <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                  <img src={logo} />
+                  <img src={logo} alt="Company logo" />
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -40,12 +39,12 @@ function App() {
           <div className="bg-light border-right">
             <div className="sidebar-heading space"></div>
             <div className="list-group list-group-flush">
-              <a><Link to="/Dashboard" className="list-group-item list-group-item-action bg-light">Dashboard</Link></a>
-              <a><Link to="/Stakeholders" className="list-group-item list-group-item-action bg-light">Stakeholders</Link></a>
-              <a><Link to="/Usecases" className="list-group-item list-group-item-action bg-light">Use cases</Link></a>
-              <a><Link to="/Events" className="list-group-item list-group-item-action bg-light">Events</Link></a>
-              <a><Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link></a>
-              <a><Link to="/Status" className="list-group-item list-group-item-action bg-light">Status</Link></a>
+              <Link to="/Dashboard" className="list-group-item list-group-item-action bg-light">Dashboard</Link>
+              <Link to="/Stakeholders" className="list-group-item list-group-item-action bg-light">Stakeholders</Link>
+              <Link to="/Usecases" className="list-group-item list-group-item-action bg-light">Use cases</Link>
+              <Link to="/Events" className="list-group-item list-group-item-action bg-light">Events</Link>
+              <Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>
+              <Link to="/Status" className="list-group-item list-group-item-action bg-light">Status</Link>
             </div>
         </div>
         </div>
@@ -67,11 +66,4 @@ function App() {
   );
 }
 export default observer(App);
-const About = withRouter(({history,match})=>{
-  console.log(history);
-  console.log(match);
-  return <div><h1>About {match.params.text}</h1>
-    <Button onClick={()=>history.push("/")}>Go to front</Button>
-  </div>
-});
 
