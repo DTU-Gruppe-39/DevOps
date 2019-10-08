@@ -3,12 +3,12 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoConnector {
-    private String username = System.getenv("DEVOPSMONGOUSER");
-    private String password = System.getenv("DEVOPSMONGOPASS");
+    private String username = System.getenv("magnus");
+    private String password = System.getenv("kqly123");
     private String dbName = "test";
 
     public MongoDatabase getDb() {
-        MongoClient mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@Her skal din connection string være!!!");
+        MongoClient mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@devops69-1bknv.mongodb.net/admin?retryWrites=true&w=majority");
         return mongoClient.getDatabase(dbName);
     }
 
