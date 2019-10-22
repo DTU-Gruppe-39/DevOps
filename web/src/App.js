@@ -10,9 +10,6 @@ import Events from "./views/Events";
 import Status from "./views/Status";
 import Profile from "./views/Profile";
 import Dashboard from "./views/Dashboard";
-// import StakeholdersStore from "./stores/StakeholdersStore";
-
-// const stakeholdersStore = new StakeholdersStore();
 
 function App() {
   return (
