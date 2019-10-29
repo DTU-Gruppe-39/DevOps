@@ -7,9 +7,9 @@ import './App.css';
 import Stakeholders from "./views/stakeholders";
 import Usecases from "./views/Usecases"
 import Events from "./views/Events";
-import Status from "./views/Status";
 import Profile from "./views/Profile";
 import Dashboard from "./views/Dashboard";
+import TaskOverview from "./views/TaskOverview";
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
               <Link to="/Usecases" className="list-group-item list-group-item-action bg-light">Use cases</Link>
               <Link to="/Events" className="list-group-item list-group-item-action bg-light">Events</Link>
               <Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>
-              <Link to="/Status" className="list-group-item list-group-item-action bg-light">Status</Link>
+              <Link to="/TaskOverview" className="list-group-item list-group-item-action bg-light">TaskOverview</Link>
             </div>
         </div>
         </div>
@@ -52,7 +52,7 @@ function App() {
             <Route exact path="/Usecases" component={Usecases}/>
             <Route exact path="/Events" component={Events}/>
             <Route exact path="/Profile" component={Profile}/>
-            <Route exact path="/Status" component={Status}/>
+            <Route exact path="/TaskOverview" component={TaskOverview}/>
 
 
         </div>
