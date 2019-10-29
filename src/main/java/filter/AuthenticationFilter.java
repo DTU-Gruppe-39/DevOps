@@ -1,8 +1,12 @@
 package filter;
 
 import api.Secured;
+import data.DTO.Role;
+import io.jsonwebtoken.Claims;
+import util.JWTutil;
 
 import javax.annotation.Priority;
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -26,6 +30,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
   //Get the level of security from Secured annotation
   @Context
   ResourceInfo resourceInfo;
+
   @Override
   public void filter(ContainerRequestContext container) throws IOException {
     //First checks the security set by method level
@@ -43,16 +48,39 @@ public class AuthenticationFilter implements ContainerRequestFilter {
       throw new NotAuthorizedException("You are not authorized for this service");
     else {
       //validating json web token
-      validate(httpHeader, container);
+      validate(httpHeader, secured, container);
     }
   }
 
   //validating JWT and saving user id to be used later on
-  private void validate (String httpHeader, ContainerRequestContext container) {
+  private void validate (String httpHeader, Secured secured, ContainerRequestContext container) {
     //Splitting Bearer from the JWT
     String[] jwt = httpHeader.split(" ");
     if (jwt[1] !=  null) {
+      //Validating JWT and getting claims if valid
+      Claims claims = JWTutil.parseToken(jwt[1]);
+      int userid = (int) claims.get("id");
+      Role userrole = (Role) claims.get("role");
+      container.setProperty("id", userid);
 
+      //Check if user has the required role
+      if (checkRole(secured, container, userrole)) {
+        return;
+      }
+      else {
+        throw new ForbiddenException("Your role does not fit the required role");
+      }
     }
+    else {
+      throw new NotAuthorizedException("");
+    }
+  }
+
+  private boolean checkRole (Secured secured, ContainerRequestContext container, Role userrole) {
+    for (Role role : secured.value()) {
+      if (role.equals(userrole))
+        return true;
+    }
+    return false;
   }
 }
