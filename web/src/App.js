@@ -6,10 +6,10 @@ import {observer} from "mobx-react";
 import './App.css';
 import Stakeholders from "./views/stakeholders";
 import Usecases from "./views/Usecases"
-import Events from "./views/Events";
 import Status from "./views/Status";
 import Profile from "./views/Profile";
 import Dashboard from "./views/Dashboard";
+import Vision from "./views/Vision";
 
 function App() {
   return (
@@ -34,12 +34,12 @@ function App() {
 
         <div className="d-flex float-left" id="sidebar">
           <div className="bg-light border-right">
-            <div className="sidebar-heading space"></div>
+            {/*<div className="sidebar-heading space"></div>*/}
             <div className="list-group list-group-flush">
               <Link to="/Dashboard" className="list-group-item list-group-item-action bg-light">Dashboard</Link>
               <Link to="/Stakeholders" className="list-group-item list-group-item-action bg-light">Stakeholders</Link>
               <Link to="/Usecases" className="list-group-item list-group-item-action bg-light">Use cases</Link>
-              <Link to="/Events" className="list-group-item list-group-item-action bg-light">Events</Link>
+              <Link to="/Vision" className="list-group-item list-group-item-action bg-light">Vision</Link>
               <Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>
               <Link to="/Status" className="list-group-item list-group-item-action bg-light">Status</Link>
             </div>
@@ -50,7 +50,7 @@ function App() {
             <Route exact path="/Dashboard" component={Dashboard}/>
             <Route exact path="/Stakeholders" component={Stakeholders}/>
             <Route exact path="/Usecases" component={Usecases}/>
-            <Route exact path="/Events" component={Events}/>
+            <Route exact path="/Vision" component={Vision}/>
             <Route exact path="/Profile" component={Profile}/>
             <Route exact path="/Status" component={Status}/>
 
