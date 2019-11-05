@@ -38,6 +38,7 @@ function TaskOverview() {
                                     <td key={key}>{task.taskName}</td>
                                     <td key={key}>{task.taskDescription}</td>
                                     <td key={key}>{task.taskId}</td>
+                                    {/*taskWorkers skal ændres til at køre .map siden den indeholder flere workers*/}
                                     <td key={key}>{task.taskWorkers}</td>
                                     <td key={key}>{task.taskStatus}</td>
                                 </tr>),

@@ -7,7 +7,7 @@ public class Task {
     private String name;
     private String description;
     private int id;
-    private List<TaskWorker> taskWorkers = new ArrayList<TaskWorker>();
+    private List<UserTest> taskWorkers = new ArrayList<UserTest>();
     private TaskStatus status;
 
     public Task(String name, String description, int id){
@@ -41,7 +41,7 @@ public class Task {
         this.id = id;
     }
 
-    public List<TaskWorker> getTaskWorkers() {
+    public List<UserTest> getTaskWorkers() {
         return taskWorkers;
     }
 
@@ -53,7 +53,7 @@ public class Task {
         this.status = status;
     }
 
-    public void addTaskWorker(TaskWorker worker){
+    public void addTaskWorker(UserTest worker){
         this.taskWorkers.add(worker);
     }
 }
