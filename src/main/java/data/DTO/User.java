@@ -7,6 +7,10 @@ public class User {
   private int id;
   private String email;
   private Role role;
+  private LoginDetails loginDetails;
+
+  public User() {
+  }
 
   public int getId() {
     return id;

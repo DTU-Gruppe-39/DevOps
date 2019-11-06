@@ -7,11 +7,12 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class StakeholderService {
-    //MongoDatabase database = new data.MongoConnector().getDb();
+    //MongoDatabase database = new data.database.MongoConnector().getDb();
     //MongoCollection<Document> stakeholderCollection = database.getCollection("stakeholder");
 
     @POST
     public void postStakeholder(@FormParam("name") String name,@FormParam("contact") String contact,@FormParam("email") String email, @FormParam("direct") boolean direct) {
+
     }
 
     @GET
