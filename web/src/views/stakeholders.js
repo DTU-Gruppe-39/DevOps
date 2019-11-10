@@ -6,7 +6,7 @@ import {stakeHolderStore} from "../stores/StakeholdersStore";
     function Stakeholders() {
         return (
             <div class="container">
-                <div className="stakeholder float-left justify-content-center">
+                <div className="row justify-content-center">
                     <div className="stakeholder-form">
                         <form className="stakeinput" onSubmit={getOnSubmit()}>
                             <label>

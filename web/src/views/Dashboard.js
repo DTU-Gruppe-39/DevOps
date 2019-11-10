@@ -7,6 +7,9 @@ import "./Dashboard.css"
         return(
             <div className="dashboard-progress">
                 <div class="container">
+                    <div className="row justify-content-center">
+                        <h1>Project progress</h1>
+                    </div>
                     <div class="row justify-content-center">
                         <div class="col-10">
                             <ProgressBar now={progressStore.progress} label={`${progressStore.progress}%`} style={{height: 40}} />
