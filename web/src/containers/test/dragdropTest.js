@@ -53,7 +53,18 @@ export default class containers extends React.Component{
                         <h3><center>To-Do</center></h3>
                         <Droppable id="drop1" style={droppableStyle}>
                             <Draggable id="item1">
-                                {checkTaskStatus()}
+                                {taskStore.taskList.map((task, key) => (
+                                    // console.log(task.taskStatus.toString())
+                                    // if (task.taskStatus.toString() === "In progress") {
+                                        taskStore.taskList.map((task, key) => (
+                                                console.log(task.taskName.toString()),
+                                                    <Item><p key={key}><b>{task.taskName}</b> <br/>
+                                                        {task.taskDescription}</p></Item>
+                                            ),
+                                        )))
+                                    // } else {
+                                    // }
+                                }
                             </Draggable>
                             <Draggable id="item2"><Item>Dette er en case</Item></Draggable>
                         </Droppable>

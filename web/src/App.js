@@ -53,7 +53,9 @@ function App() {
             <Route exact path="/Usecases" component={Usecases}/>
             <Route exact path="/Events" component={Events}/>
             <Route exact path="/Profile" component={Profile}/>
+            {/*<Route exact path="/TaskOverview" component={TaskOverview}/>*/}
             <Route exact path="/TaskOverview" component={KanbanTest}/>
+
 
 
         </div>
