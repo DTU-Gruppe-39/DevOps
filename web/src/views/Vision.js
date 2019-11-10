@@ -30,7 +30,7 @@ import "./Vision.css";
                                 <div className="row justify-content-center">
                                     <div class="col-6">
                                         <h6>{visionStore.vision}</h6>
-                                    </div>7
+                                    </div>
                                 </div>
                             </div>
                         </div>
