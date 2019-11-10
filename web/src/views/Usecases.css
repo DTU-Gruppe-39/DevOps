@@ -1,0 +1,30 @@
+
+.usecaseinput{
+    margin: 20px;
+}
+.usecase-form{
+    margin: 20px;
+    padding-left: 30px;
+}
+
+input{
+    margin: 10px;
+}
+
+li{
+    list-style-type:none;
+}
+
+table ,td ,th{
+    /*margin: 40px;*/
+    padding-right: 55px;
+    padding-left: 75px;
+    padding-bottom: 10px;
+}
+
+th {
+    height: 50px;
+    background-color: steelblue;
+    color: white;
+}
+tr:nth-child(even) {background-color: #e0dede;}
