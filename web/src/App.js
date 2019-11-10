@@ -10,6 +10,7 @@ import Events from "./views/Events";
 import Profile from "./views/Profile";
 import Dashboard from "./views/Dashboard";
 import TaskOverview from "./views/TaskOverview";
+import KanbanTest from "./containers/test/dragdropTest";
 
 function App() {
   return (
@@ -52,7 +53,7 @@ function App() {
             <Route exact path="/Usecases" component={Usecases}/>
             <Route exact path="/Events" component={Events}/>
             <Route exact path="/Profile" component={Profile}/>
-            <Route exact path="/TaskOverview" component={TaskOverview}/>
+            <Route exact path="/TaskOverview" component={KanbanTest}/>
 
 
         </div>
