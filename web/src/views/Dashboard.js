@@ -14,7 +14,7 @@ import "./Dashboard.css"
                     </div>
                     <div className="progress-input">
                         <div className="row justify-content-center">
-                            <div className="col-sm-4">
+                            <div className="col-4">
                                 <form className="progressinputform" onSubmit={getOnSubmit()}>
                                     <label>
                                             <input name="progress"
