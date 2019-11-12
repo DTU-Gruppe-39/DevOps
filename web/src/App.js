@@ -6,9 +6,9 @@ import {observer} from "mobx-react";
 import './App.css';
 import Stakeholders from "./views/stakeholders";
 import Usecases from "./views/Usecases"
-import Status from "./views/Status";
-import Profile from "./views/Profile";
 import Dashboard from "./views/Dashboard";
+import TaskOverview from "./views/TaskOverview";
+import KanbanTest from "./containers/test/dragdropTest";
 import Vision from "./views/Vision";
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
               <Link to="/Usecases" className="list-group-item list-group-item-action bg-light">Use cases</Link>
               <Link to="/Vision" className="list-group-item list-group-item-action bg-light">Vision</Link>
               <Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>
-              <Link to="/Status" className="list-group-item list-group-item-action bg-light">Status</Link>
+              <Link to="/TaskOverview" className="list-group-item list-group-item-action bg-light">TaskOverview</Link>
             </div>
         </div>
         </div>
@@ -52,7 +52,9 @@ function App() {
             <Route exact path="/Usecases" component={Usecases}/>
             <Route exact path="/Vision" component={Vision}/>
             <Route exact path="/Profile" component={Profile}/>
-            <Route exact path="/Status" component={Status}/>
+            <Route exact path="/TaskOverview" component={TaskOverview}/>
+            {/*<Route exact path="/TaskOverview" component={KanbanTest}/>*/}
+
 
 
         </div>
