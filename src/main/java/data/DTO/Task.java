@@ -13,15 +13,24 @@ public class Task extends DocumentObject {
   private String responsible;
   private Status status;
 
-  public Task(String id, String name, String description, String responsible, Status status) {
+  public Task(String id, String name, String description, String responsible) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.responsible = responsible;
-    this.status = status;
+    this.status = Status.NotStarted;
+  }
+  public Task(String name, String description, String responsible) {
+    this.id = null;
+    this.name = name;
+    this.description = description;
+    this.responsible = responsible;
+    this.status = Status.NotStarted;
   }
 
   public Task() {
+    this.id = null;
+    this.status = Status.NotStarted;
   }
 
   public String getName() {
@@ -35,8 +44,6 @@ public class Task extends DocumentObject {
   @Override
   public Map<String, Object> toMap() {
     Map<String, Object> mapToReturn = new HashMap<>();
-    if(!(id.equals(null)))
-      mapToReturn.put("_id",getId());
     mapToReturn.put("name", getName());
     mapToReturn.put("description",getDescription());
     mapToReturn.put("responsible_user_id", getResponsible());
