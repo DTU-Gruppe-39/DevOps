@@ -10,7 +10,7 @@ import {stakeHolderStore} from "../../stores/StakeholdersStore";
 
 const Wrapper = styled.div`
     // width: 100%;
-    padding 32px;
+    padding-top: 32px;
     display: flex;
     justify-content: center;
     `;
@@ -25,24 +25,25 @@ const Item = styled.div`
 
 const droppableStyle = {
     backgroundColor: '#555',
-    width: '350px',
+    // width: '350px',
     height: '550px',
-    margin: '30px',
-    padding: '8px'
+    // margin: 'px',
+    padding: '4px'
 };
 
 function checkTaskStatus() {
-    taskStore.taskList.map(function (task, key) {
-        console.log(task.taskStatus.toString());
-        if (task.taskStatus.toString() === "In progress") {
-            taskStore.taskList.map((task, key) => (
-                    console.log(task.taskName.toString()),
-                        <Item><p key={key}>{task.taskName}</p></Item>
-                ),
-            )
-        } else {
-        }
-    })
+        taskStore.taskList.map(function (task, key) {
+            return
+            console.log(task.taskStatus.toString());
+            if (task.taskStatus.toString() === "In progress") {
+                    taskStore.taskList.map((task, key) => (
+                            console.log(task.taskName.toString()),
+                                <Item><p key={key}>{task.taskName}</p></Item>
+                        ),
+                    )
+            } else {
+            }
+        })
 }
 
 export default class containers extends React.Component{
@@ -55,10 +56,10 @@ export default class containers extends React.Component{
                     <button type="button overviewBtn" className="btn btn-secondary">Kanban</button>
                 </div>
 
-            <Row className="justify-content-center">
+            <Row className="justify-content-center col-11">
 
-                <Wrapper>
-                    <Col md="auto">
+                <Wrapper className="col-12">
+                    <Col className="col-3">
                         <h3><center>To-Do</center></h3>
                         <Droppable id="drop1" style={droppableStyle}>
                             <Draggable id="item1">
@@ -75,21 +76,23 @@ export default class containers extends React.Component{
                                     // }
                                 }
                             </Draggable>
-                            <Draggable id="item2"><Item>Dette er en case</Item></Draggable>
+                            <Draggable id="item2">
+                                <Item>Dette er en case</Item>
+                            </Draggable>
                         </Droppable>
                     </Col>
 
-                    <Col md="auto">
+                    <Col className="col-3">
                         <h3><center>In-Progress</center></h3>
                         <Droppable id="drop2" style={droppableStyle}/>
                     </Col>
 
-                    <Col md="auto">
+                    <Col className="col-3">
                         <h3><center>Completed</center></h3>
                         <Droppable id="drop3" style={droppableStyle}/>
                     </Col>
 
-                    <Col>
+                    <Col className="col-3">
                         <h3><center>Add Task</center></h3>
 
                         <form className="justify-content-center" onSubmit={getOnSubmit} >
