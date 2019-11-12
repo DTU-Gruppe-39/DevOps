@@ -46,9 +46,10 @@ public class MongoConnector {
         user.setRole(Role.ProjectManager);
         user.setEmail("kqly");
         user.setPassword("gegre");
-        userDocumentI.add(user);*/
+        userDocumentI.add(user);
+        System.out.println(userDocumentI.getAll());*/
         TaskController taskController = ControllerRegistry.getTaskController();
         taskController.addTask("Updating Tasks", "Rasmus er en cunt","Rasmus");
-        System.out.println(taskController.getAll());
+        System.out.print(taskController.get("5dca827e1657db726034ad39"));
     }
 }

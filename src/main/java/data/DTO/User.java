@@ -1,5 +1,7 @@
 package data.DTO;
 
+import org.bson.types.ObjectId;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +27,6 @@ public class User extends DocumentObject {
   @Override
   public Map<String, Object> toMap() {
     Map<String, Object> mapToReturn = new HashMap<>();
-    if (!(id.equals(null)))
-      mapToReturn.put("_id",getId());
     mapToReturn.put("email",getEmail());
     mapToReturn.put("password",getPassword());
     mapToReturn.put("role",getRole().toString());
@@ -35,10 +35,10 @@ public class User extends DocumentObject {
 
   @Override
   public void toObject(Map<String, Object> mapOfObject) {
-    this.id = (String) mapOfObject.get("_id");
+    this.id = ((ObjectId) mapOfObject.get("_id")).toString();
     this.email = (String) mapOfObject.get("email");
     this.password = (String) mapOfObject.get("password");
-    this.role = (Role) mapOfObject.get("role");
+    this.role = Role.valueOf((String) mapOfObject.get("role"));
   }
 
   public String getId() {

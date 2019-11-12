@@ -1,5 +1,7 @@
 package data.DTO;
 
+import org.bson.types.ObjectId;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,11 +55,11 @@ public class Task extends DocumentObject {
 
   @Override
   public void toObject(Map<String, Object> mapOfObject) {
-    this.id = (String) mapOfObject.get("_id");
+    this.id = ((ObjectId) mapOfObject.get("_id")).toString();
     this.name = (String) mapOfObject.get("name");
     this.description = (String) mapOfObject.get("description");
     this.responsible = (String) mapOfObject.get("responsible_user_id");
-    this.status = (Status) mapOfObject.get("status");
+    this.status = Status.valueOf((String) mapOfObject.get("status"));
   }
 
   public String getId() {
@@ -90,5 +92,10 @@ public class Task extends DocumentObject {
 
   public void setStatus(Status status) {
     this.status = status;
+  }
+
+  @Override
+  public String toString() {
+    return getId()+", "+getName()+", "+getDescription()+", "+getResponsible()+", "+getStatus().toString();
   }
 }
