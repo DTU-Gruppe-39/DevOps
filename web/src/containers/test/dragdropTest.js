@@ -33,11 +33,11 @@ const droppableStyle = {
 
 function checkTaskStatus() {
     taskStore.taskList.map(function (task, key) {
-        console.log(task.taskStatus.toString());
-        if (task.taskStatus.toString() === "In progress") {
-            taskStore.taskList.map((task, key) => (
-                    console.log(task.taskName.toString()),
-                        <Item><p key={key}>{task.taskName}</p></Item>
+        console.log(task.Status.toString());
+        if (task.Status.toString() === "In progress") {
+            taskStore.List.map((task, key) => (
+                    console.log(task.Name.toString()),
+                        <Item><p key={key}>{task.Name}</p></Item>
                 ),
             )
         } else {
@@ -66,9 +66,9 @@ export default class containers extends React.Component{
                                     // console.log(task.taskStatus.toString())
                                     // if (task.taskStatus.toString() === "In progress") {
                                     taskStore.taskList.map((task, key) => (
-                                            console.log(task.taskName.toString()),
-                                                <Item><p key={key}><b>{task.taskName}</b> <br/>
-                                                    {task.taskDescription}</p></Item>
+                                            console.log(task.Name.toString()),
+                                                <Item><p key={key}><b>{task.Name}</b> <br/>
+                                                    {task.Description}</p></Item>
                                         ),
                                     )))
                                     // } else {
@@ -96,12 +96,12 @@ export default class containers extends React.Component{
                             <label>
                                 <input className="form-control" type="" placeholder="Task title"
                                     // value={taskStore.inputTask.taskName}
-                                       onChange={(e) => taskStore.inputTask.taskName = e.target.value} required/>
+                                       onChange={(e) => taskStore.inputTask.Name = e.target.value} required/>
                             </label>
 
                             <textarea className="form-control" rows="3" id="taskDescription" placeholder="Task description"
                                 // value={taskStore.inputTask.taskDescription}
-                                      onChange={(e) => taskStore.inputTask.taskDescription = e.target.value} required/>
+                                      onChange={(e) => taskStore.inputTask.Description = e.target.value} required/>
                             <label>
                                 <select className="browser-default custom-select" required>
                                     <option value="">Select state</option >
@@ -126,13 +126,16 @@ export default class containers extends React.Component{
 function getOnSubmit() {
     return (e) => {
         e.preventDefault();
+        taskStore.inputTask.Status = 'NotStarted';
+        taskStore.inputTask.Id = (taskStore.taskList.length + 1) + '';
+        taskStore.inputTask.Responsible.id = (taskStore.taskList.length + 2) + '';
         taskStore.taskList.push(taskStore.inputTask);
         taskStore.inputTask = {
-            taskName: '',
-            taskDescription: '',
-            taskId: '1',
-            taskWorkers: 'Bob',
-            taskStatus: ''
+            Name: '',
+            Description: '',
+            Id: '',
+            Responsible: {id:"", name:""},
+            Status: ''
         };
     };
 }

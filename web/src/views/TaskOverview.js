@@ -66,7 +66,7 @@ function TaskOverview() {
                                 <th>Task name</th>
                                 <th>Task Description</th>
                                 <th>TaskId</th>
-                                <th>Taskworkers</th>
+                                <th>TaskResponsible</th>
                                 <th>Status</th>
                             </tr>
                             {taskStore.taskList.map((task, key) => (

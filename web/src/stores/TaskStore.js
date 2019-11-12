@@ -7,7 +7,7 @@ class TaskStore {
         Id: "1",
         // TODO taskworkers should be worker objects or contain the id for the worker with the name
         Responsible: {id:"1", name:"Patrick"},
-        Status: 'In progress'
+        Status: 'InProgress'
     }];
     inputTask = {
         Name: '',
