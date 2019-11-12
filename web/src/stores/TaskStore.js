@@ -2,19 +2,19 @@ import {decorate, observable} from "mobx";
 
 class TaskStore {
     taskList = [{
-        taskName: 'TaskOverview',
-        taskDescription: 'Make a list of the tasks, and present it in a table.',
-        taskId: "1",
+        Name: 'TaskOverview',
+        Description: 'Make a list of the tasks, and present it in a table.',
+        Id: "1",
         // TODO taskworkers should be worker objects or contain the id for the worker with the name
-        taskWorkers: [{id:"1", name:"Patrick"}, {id:"2", name: "Søren"}],
-        taskStatus: 'In progress'
+        Responsible: {id:"1", name:"Patrick"},
+        Status: 'In progress'
     }];
     inputTask = {
-        taskName: '',
-        taskDescription: '',
-        taskId: '',
-        taskWorkers: '',
-        taskStatus: ''
+        Name: '',
+        Description: '',
+        Id: '',
+        Responsible: {id:"", name:""},
+        Status: ''
     }
 }
 
