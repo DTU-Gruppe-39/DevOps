@@ -11,7 +11,6 @@ public class StakeholderControllerImpl implements StakeholderController {
     private StakeholderDocumentI stakeholderDocument = new StakeholderDocumentImpl();
 
     @Override
-
     public void add(Stakeholder stakeholder) {
         stakeholderDocument.add(stakeholder);
     }
