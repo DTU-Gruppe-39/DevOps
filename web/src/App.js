@@ -40,7 +40,7 @@ function App() {
               <Link to="/Stakeholders" className="list-group-item list-group-item-action bg-light">Stakeholders</Link>
               <Link to="/Usecases" className="list-group-item list-group-item-action bg-light">Use cases</Link>
               <Link to="/Vision" className="list-group-item list-group-item-action bg-light">Vision</Link>
-              <Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>
+              {/*<Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>*/}
               <Link to="/TaskOverview" className="list-group-item list-group-item-action bg-light">TaskOverview</Link>
             </div>
         </div>
@@ -51,7 +51,7 @@ function App() {
             <Route exact path="/Stakeholders" component={Stakeholders}/>
             <Route exact path="/Usecases" component={Usecases}/>
             <Route exact path="/Vision" component={Vision}/>
-            <Route exact path="/Profile" component={Profile}/>
+            {/*<Route exact path="/Profile" component={Profile}/>*/}
             <Route exact path="/TaskOverview" component={TaskOverview}/>
             {/*<Route exact path="/TaskOverview" component={KanbanTest}/>*/}
 
