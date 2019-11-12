@@ -5,6 +5,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import controller.ControllerRegistry;
 import controller.interfaces.TaskController;
+import data.DTO.Task;
 
 public class MongoConnector {
     private static String username = System.getenv("devopsusername");
@@ -29,7 +30,9 @@ public class MongoConnector {
 
         TaskController taskController = ControllerRegistry.getTaskController();
         taskController.addTask("Updating Tasks", "Rasmus er en cunt","Rasmus");
-        System.out.print(taskController.get("5dca827e1657db726034ad39"));
-
+        System.out.print(taskController.get("5dca9828687f72785a5f3987"));
+        Task task = new Task("Test task", "Perfekto", "Magnus");
+        taskController.updateTask("5dca9828687f72785a5f3987",task);
+        System.out.println(taskController.get("5dca9828687f72785a5f3987"));
     }
 }

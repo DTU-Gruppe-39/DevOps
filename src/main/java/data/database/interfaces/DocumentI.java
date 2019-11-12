@@ -7,7 +7,7 @@ import data.DTO.DocumentObject;
  */
 public interface DocumentI {
   void add(DocumentObject documentObject);
-  void update(DocumentObject documentObject);
+  void update(String documentId, DocumentObject documentObject);
   DocumentObject get(String documentId);
   void delete(String documentId);
 }

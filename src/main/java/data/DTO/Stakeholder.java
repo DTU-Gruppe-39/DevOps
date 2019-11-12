@@ -1,5 +1,7 @@
 package data.DTO;
 
+import org.bson.types.ObjectId;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,12 +9,14 @@ import java.util.Map;
  * Created by magnus
  */
 public class Stakeholder extends DocumentObject {
+  private String id;
   private String name;
   private String contact_person;
   private String email;
   private Boolean stakeholder_type;
 
-  public Stakeholder(String name, String contact_person, String email, Boolean stakeholder_type) {
+  public Stakeholder(String id, String name, String contact_person, String email, Boolean stakeholder_type) {
+    this.id = id;
     this.name = name;
     this.contact_person = contact_person;
     this.email = email;
@@ -66,9 +70,18 @@ public class Stakeholder extends DocumentObject {
 
   @Override
   public void toObject(Map<String, Object> mapOfObject) {
+    this.id = ((ObjectId) mapOfObject.get("_id")).toString();
     this.name = (String) mapOfObject.get("name");
     this.contact_person = (String) mapOfObject.get("contact_person");
     this.email = (String) mapOfObject.get("email");
     this.stakeholder_type = (Boolean) mapOfObject.get("stakeholder_type");
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 }

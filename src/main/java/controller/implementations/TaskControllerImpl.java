@@ -31,6 +31,6 @@ public class TaskControllerImpl implements TaskController {
 
   @Override
   public void updateTask(String id, Task task) {
-    //taskDocument.update();
+    taskDocument.update(id, task);
   }
 }
