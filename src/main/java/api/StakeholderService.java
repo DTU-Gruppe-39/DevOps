@@ -22,7 +22,7 @@ public class StakeholderService {
 
     @GET
     public Object getStakeholder() {
-        return null;
+        return stakeholderController.getAll();
     }
 
 }
