@@ -1,4 +1,4 @@
-version: 2 # use CircleCI 2.0
+version: 2.1 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
 
@@ -15,7 +15,9 @@ jobs: # a collection of steps
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: devops-{{ checksum "pom.xml" }}
 
-      - run: mvn dependency:go-offline # gets the project dependencies
+      - run:
+          name: get-maven-dependencies
+          command: mvn dependency:go-offline # gets the project dependencies
 
       - save_cache: # saves the project dependencies
           paths:
@@ -32,3 +34,21 @@ jobs: # a collection of steps
           # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/Heroku01.jar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+
+      - run:
+          name: navigate-to-web
+          command: cd web
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # special step to restore the dependency cache
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+
