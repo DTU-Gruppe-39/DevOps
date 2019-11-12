@@ -51,11 +51,6 @@ export default class containers extends React.Component{
         return (
             <div className="spacer">
 
-                <div className="btn-group " id="overview" role="group">
-                    <button type="button overviewBtn" className="btn btn-secondary">List</button>
-                    <button type="button overviewBtn" className="btn btn-secondary">Kanban</button>
-                </div>
-
             <Row className="justify-content-center col-11">
 
                 <Wrapper className="col-12">

@@ -14,18 +14,10 @@ function TaskOverview() {
 
             <div className="spacer"/>
 
-            <div className="slidez">
-                <h6>Overview</h6>
-                <label className="switch">
-                    <input type="checkbox"/>
-                    <span className="slider round"/>
-                </label>
+            <div className="btn-group " id="overview" role="group">
+                <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("List")}>List</button>
+                <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("Kanban")}>Kanban</button>
             </div>
-
-            {/*<div id={"KanbanView"}>*/}
-            {/*    <KanbanTest>*/}
-            {/*    </KanbanTest>*/}
-            {/*</div>*/}
 
             <div>
                 <form className="taskinput" onSubmit={getOnSubmit()}>
@@ -48,16 +40,16 @@ function TaskOverview() {
                                required/>
                     </label>
 
-                    {/*<label>*/}
-                    {/*    <input name="email" type="text" placeholder="Email"*/}
-                    {/*           value={taskStore.inputTask}*/}
-                    {/*           onChange={(e) => taskStore.inputTask = e.target.value} required/>*/}
-                    {/*</label>*/}
                     <input type="submit" value="Submit"/>
                 </form>
             </div>
 
-            <div id={"ListView"}>
+            {taskStore.viewmode === "Kanban" &&<div id={"KanbanView"}>
+                <KanbanTest>
+                </KanbanTest>
+            </div>}
+
+            {taskStore.viewmode === "List" && <div id={"ListView"}>
             <Row className="justify-content-md-center col-lg-12 col-md-12">
                 <Col md="auto">
                     <div>
@@ -82,15 +74,16 @@ function TaskOverview() {
                     </div>
                 </Col>
             </Row>
-            </div>
+            </div>}
         </Container>
     );
-    // function changeFunc() {
-    //     return (e) => {
-    //       e.default();
-    //
-    //     };
-    // }
+    function clickFunc(mode) {
+        return (e) => {
+          e.preventDefault();
+          taskStore.viewmode = mode;
+
+        };
+    }
 
     function getOnSubmit() {
         return (e) => {

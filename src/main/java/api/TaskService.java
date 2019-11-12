@@ -12,7 +12,7 @@ public class TaskService {
     //MongoCollection<Document> taskCollection = database.getCollection("task");
 
     @POST
-    public void postTask(@FormParam("taskName") String taskName, @FormParam("taskDescription") String taskDescription, @FormParam("taskId") String taskid, @FormParam("taskWorkers") String taskWorkers, @FormParam("taskStatus") String taskStatus) {
+    public void postTask(@FormParam("Name") String name, @FormParam("Description") String description, @FormParam("Responsible") String responsible) {
     }
 
     @GET
