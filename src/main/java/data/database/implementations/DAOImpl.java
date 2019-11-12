@@ -31,7 +31,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   private DocumentObject objectToReturn;
   ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
   Class<T> type = (Class<T>) superClass.getActualTypeArguments()[0];
-  private List<T> listOfObjectsToReturn = new ArrayList<>();
 
   private MongoDatabase getDatabase() {
     MongoClient mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@devops69-1bknv.mongodb.net/admin?retryWrites=true&w=majority");
@@ -50,6 +49,8 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
 
   @Override
   public List getAll() {
+    objectToReturn = null;
+    List<T> listOfObjectsToReturn = new ArrayList<>();
     for (Document document : collection.find()) {
       try {
         objectToReturn = getInstance();
@@ -80,6 +81,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
 
   @Override
   public DocumentObject get(String documentId) {
+    objectToReturn = null;
     Document document = collection.find(eq("_id", new ObjectId(documentId))).first();
     try {
       objectToReturn = getInstance();
