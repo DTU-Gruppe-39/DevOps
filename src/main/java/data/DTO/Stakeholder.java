@@ -10,9 +10,9 @@ public class Stakeholder extends DocumentObject {
   private String name;
   private String contact_person;
   private String email;
-  private String stakeholder_type;
+  private Boolean stakeholder_type;
 
-  public Stakeholder(String name, String contact_person, String email, String stakeholder_type) {
+  public Stakeholder(String name, String contact_person, String email, Boolean stakeholder_type) {
     this.name = name;
     this.contact_person = contact_person;
     this.email = email;
@@ -46,11 +46,11 @@ public class Stakeholder extends DocumentObject {
     this.email = email;
   }
 
-  public String getStakeholder_type() {
+  public Boolean getStakeholder_type() {
     return stakeholder_type;
   }
 
-  public void setStakeholder_type(String stakeholder_type) {
+  public void setStakeholder_type(Boolean stakeholder_type) {
     this.stakeholder_type = stakeholder_type;
   }
 
@@ -69,6 +69,6 @@ public class Stakeholder extends DocumentObject {
     this.name = (String) mapOfObject.get("name");
     this.contact_person = (String) mapOfObject.get("contact_person");
     this.email = (String) mapOfObject.get("email");
-    this.stakeholder_type = (String) mapOfObject.get("stakeholder_type");
+    this.stakeholder_type = (Boolean) mapOfObject.get("stakeholder_type");
   }
 }
