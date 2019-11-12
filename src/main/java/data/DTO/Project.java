@@ -1,6 +1,5 @@
 package data.DTO;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,14 +66,10 @@ public class Project extends DocumentObject {
 
   @Override
   public Map<String, Object> toMap() {
-    Map<String, Object> mapToReturn = new HashMap<>();
-    mapToReturn.put("name",getName());
-    mapToReturn.put("projectleader_id", getProjectleader().getId());
-    return mapToReturn;
+    return null;
   }
 
   @Override
   public void toObject(Map<String, Object> mapOfObject) {
-
   }
 }
