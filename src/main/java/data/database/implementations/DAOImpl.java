@@ -22,7 +22,7 @@ import static com.mongodb.client.model.Filters.eq;
 /**
  * Created by magnus
  */
-public class DAOImpl <T extends DocumentObject> implements DocumentI, CollectionI {
+public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, CollectionI {
   private final static String username = System.getenv("devopsusername");
   private final static String password = System.getenv("devopspassword");
   private static MongoDatabase db = new MongoConnector().getDb();
