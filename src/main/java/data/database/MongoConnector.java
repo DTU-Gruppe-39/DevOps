@@ -4,10 +4,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import data.DTO.Role;
-import data.DTO.User;
-import data.database.implementations.UserDocumentImpl;
-import data.database.interfaces.UserDocumentI;
+import controller.ControllerRegistry;
+import controller.interfaces.TaskController;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -43,11 +41,14 @@ public class MongoConnector {
         List<Document> docs = new ArrayList<>();
         brugere.find().into(docs);
         System.out.println(docs);
-        UserDocumentI userDocumentI = new UserDocumentImpl();
+        /*UserDocumentI userDocumentI = new UserDocumentImpl();
         User user = new User();
         user.setRole(Role.ProjectManager);
         user.setEmail("kqly");
         user.setPassword("gegre");
-        userDocumentI.add(user);
+        userDocumentI.add(user);*/
+        TaskController taskController = ControllerRegistry.getTaskController();
+        taskController.addTask("Updating Tasks", "Rasmus er en cunt","Rasmus");
+        System.out.println(taskController.getAll());
     }
 }
