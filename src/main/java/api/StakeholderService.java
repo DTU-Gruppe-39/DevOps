@@ -6,6 +6,7 @@ import data.DTO.Stakeholder;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("stakeholder")
 @Produces(MediaType.APPLICATION_JSON)
@@ -16,12 +17,12 @@ public class StakeholderService {
     private StakeholderController stakeholderController = ControllerRegistry.getStakeholderController();
 
     @POST
-    public void postStakeholder(@FormParam("name") String name,@FormParam("contact") String contact,@FormParam("email") String email, @FormParam("direct") boolean direct) {
-        stakeholderController.add(name, contact, email, direct);
+    public void postStakeholder(Stakeholder stakeholder) {
+        stakeholderController.add(stakeholder);
     }
 
     @GET
-    public Object getStakeholder() {
+    public List<Stakeholder> getStakeholder() {
         return stakeholderController.getAll();
     }
 

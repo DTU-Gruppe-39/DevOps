@@ -9,9 +9,10 @@ import java.util.List;
 
 public class StakeholderControllerImpl implements StakeholderController {
     private StakeholderDocumentI stakeholderDocument = new StakeholderDocumentImpl();
+
     @Override
-    public void add(String name, String contact_person, String email, Boolean stakeholder_type) {
-        Stakeholder stakeholder = new Stakeholder(null, name, contact_person, email, stakeholder_type);
+
+    public void add(Stakeholder stakeholder) {
         stakeholderDocument.add(stakeholder);
     }
 
@@ -24,4 +25,5 @@ public class StakeholderControllerImpl implements StakeholderController {
     public Stakeholder get(String id) {
         return (Stakeholder) stakeholderDocument.get(id);
     }
+
 }
