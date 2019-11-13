@@ -2,9 +2,11 @@ package api;
 
 import controller.ControllerRegistry;
 import controller.interfaces.TaskController;
+import data.DTO.Task;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("task")
 @Produces(MediaType.APPLICATION_JSON)
@@ -18,7 +20,7 @@ public class TaskService {
     }
 
     @GET
-    public Object getTask() {
+    public List<Task> getTask() {
         return taskController.getAll();
     }
 

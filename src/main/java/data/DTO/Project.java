@@ -7,6 +7,7 @@ import java.util.Map;
  * Created by magnus
  */
 public class Project extends DocumentObject {
+  private String id;
   private String name;
   private User projectleader;
   private List<User> developers;
@@ -16,7 +17,8 @@ public class Project extends DocumentObject {
   public Project() {
   }
 
-  public Project(String name, User projectleader, List<User> developers, List<Stakeholder> stakeholder, List<Task> tasks) {
+  public Project(String id, String name, User projectleader, List<User> developers, List<Stakeholder> stakeholder, List<Task> tasks) {
+    this.id = id;
     this.name = name;
     this.projectleader = projectleader;
     this.developers = developers;
@@ -71,5 +73,13 @@ public class Project extends DocumentObject {
 
   @Override
   public void toObject(Map<String, Object> mapOfObject) {
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 }

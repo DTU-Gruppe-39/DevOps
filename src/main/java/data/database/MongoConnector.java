@@ -2,16 +2,13 @@ package data.database;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import controller.ControllerRegistry;
+import controller.implementations.StakeholderControllerImpl;
+import controller.interfaces.StakeholderController;
 import controller.interfaces.TaskController;
-import org.bson.Document;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import data.DTO.Stakeholder;
+import data.DTO.Task;
 
 public class MongoConnector {
     private static String username = System.getenv("devopsusername");
@@ -19,7 +16,13 @@ public class MongoConnector {
 
     public MongoDatabase getDb() {
         MongoClient mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@devops69-1bknv.mongodb.net/admin?retryWrites=true&w=majority");
-        MongoDatabase database = mongoClient.getDatabase("devops");
+        MongoDatabase database;
+        if (System.getenv("TESTDB").equals("false")) {
+            database = mongoClient.getDatabase("production");
+        }
+        else {
+            database = mongoClient.getDatabase("test");
+        }
         return database;
     }
 
@@ -28,27 +31,14 @@ public class MongoConnector {
         MongoDatabase test = new MongoConnector().getDb();
         System.out.println("Connected to " + test.getName());
 
-        //Document doc = new Document("name","Brian");
-        MongoCollection<Document> brugere = test.getCollection("brugere");
-        Map<String, Object> doc = new HashMap<>();
-        Map<String, Object> addresser = new HashMap<>();
-        addresser.put("kqly", "test1");
-        addresser.put("kqly2", "test3");
-        doc.put("name","Magnus");
-        doc.put("adresser", addresser);
-        Document document = new Document(doc);
-        brugere.insertOne(document);
-        List<Document> docs = new ArrayList<>();
-        brugere.find().into(docs);
-        System.out.println(docs);
-        /*UserDocumentI userDocumentI = new UserDocumentImpl();
-        User user = new User();
-        user.setRole(Role.ProjectManager);
-        user.setEmail("kqly");
-        user.setPassword("gegre");
-        userDocumentI.add(user);*/
+        StakeholderController stakeholderController = new StakeholderControllerImpl();
+        for (Stakeholder stakeholder : stakeholderController.getAll()) {
+            System.out.println(stakeholder.getName());
+        }
+
         TaskController taskController = ControllerRegistry.getTaskController();
-        taskController.addTask("Updating Tasks", "Rasmus er en cunt","Rasmus");
-        System.out.println(taskController.getAll());
+        for (Task task : taskController.getAll()) {
+            System.out.println(task.toString());
+        }
     }
 }

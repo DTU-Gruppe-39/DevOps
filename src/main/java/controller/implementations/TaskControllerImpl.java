@@ -28,4 +28,9 @@ public class TaskControllerImpl implements TaskController {
   public Task get(String id) {
     return (Task) taskDocument.get(id);
   }
+
+  @Override
+  public void updateTask(String id, Task task) {
+    taskDocument.update(id, task);
+  }
 }

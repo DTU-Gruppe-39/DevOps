@@ -9,6 +9,7 @@ import data.database.MongoConnector;
 import data.database.interfaces.CollectionI;
 import data.database.interfaces.DocumentI;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
@@ -30,7 +31,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   private DocumentObject objectToReturn;
   ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
   Class<T> type = (Class<T>) superClass.getActualTypeArguments()[0];
-  private List<T> listOfObjectsToReturn = new ArrayList<>();
 
   private MongoDatabase getDatabase() {
     MongoClient mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@devops69-1bknv.mongodb.net/admin?retryWrites=true&w=majority");
@@ -49,6 +49,8 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
 
   @Override
   public List getAll() {
+    objectToReturn = null;
+    List<T> listOfObjectsToReturn = new ArrayList<>();
     for (Document document : collection.find()) {
       try {
         objectToReturn = getInstance();
@@ -72,14 +74,15 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   }
 
   @Override
-  public void update(DocumentObject documentObject) {
+  public void update(String documentId, DocumentObject documentObject) {
     Document document = new Document(documentObject.toMap());
-    collection.updateOne(eq("_id",document.get("_id")),document);
+    collection.updateOne(eq("_id", new ObjectId(documentId)),document);
   }
 
   @Override
   public DocumentObject get(String documentId) {
-    Document document = collection.find(eq("_id", documentId)).first();
+    objectToReturn = null;
+    Document document = collection.find(eq("_id", new ObjectId(documentId))).first();
     try {
       objectToReturn = getInstance();
     } catch (Exception e) {
@@ -95,6 +98,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
 
   @Override
   public void delete(String documentId) {
-    collection.deleteOne(eq("_id",documentId));
+    collection.deleteOne(eq("_id",new ObjectId(documentId)));
   }
 }
