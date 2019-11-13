@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import {observer} from "mobx-react";
 import {taskStore} from "../stores/TaskStore";
 import KanbanTest from "../containers/test/dragdropTest";
+import api, {postTask} from "../stores/Api";
 
 
 function TaskOverview() {
@@ -63,11 +64,11 @@ function TaskOverview() {
                             </tr>
                             {taskStore.taskList.map((task, key) => (
                                 <tr>
-                                    <td key={key}>{task.Name}</td>
-                                    <td key={key}>{task.Description}</td>
-                                    <td key={key}>{task.Id}</td>
-                                    <td key={key}>{task.Responsible.name}</td>
-                                    <td key={key}>{task.Status}</td>
+                                    <td>{task.Name}</td>
+                                    <td>{task.Description}</td>
+                                    <td>{task.Id}</td>
+                                    <td>{task.Responsible.name}</td>
+                                    <td>{task.Status}</td>
                                 </tr>),
                             )}
                         </table>
@@ -99,7 +100,9 @@ function TaskOverview() {
                 Responsible: {id:"", name:""},
                 Status: ''
             };
+            postTask(taskStore.inputTask);
         };
+
     }
 }
 
