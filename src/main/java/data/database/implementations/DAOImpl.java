@@ -76,7 +76,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   @Override
   public void update(String documentId, DocumentObject documentObject) {
     Document document = new Document(documentObject.toMap());
-    collection.updateOne(eq("_id", new ObjectId(documentId)),document);
+    collection.replaceOne(eq("_id", new ObjectId(documentId)),document);
   }
 
   @Override
