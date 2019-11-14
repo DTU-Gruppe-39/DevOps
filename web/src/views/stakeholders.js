@@ -2,6 +2,7 @@ import React from "react";
 import {observer} from "mobx-react";
 import "./Stakeholders.css";
 import {stakeHolderStore} from "../stores/StakeholdersStore";
+import {postStakeholder} from "../stores/Api";
 
     function Stakeholders() {
         return (
@@ -73,6 +74,7 @@ import {stakeHolderStore} from "../stores/StakeholdersStore";
                 email: '',
                 direct: true
             };
+            postStakeholder(stakeHolderStore.inputStakeholder);
         };
     }
 export default observer(Stakeholders);
