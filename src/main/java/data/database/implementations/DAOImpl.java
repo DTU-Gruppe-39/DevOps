@@ -34,9 +34,10 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   private DocumentObject objectToReturn;
   ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
   Class<T> type = (Class<T>) superClass.getActualTypeArguments()[0];
+  private MongoClient mongoClient;
 
   private MongoDatabase getDatabase() {
-    MongoClient mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@devops69-1bknv.mongodb.net/admin?retryWrites=true&w=majority");
+    mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@devops69-1bknv.mongodb.net/admin?retryWrites=true&w=majority");
     MongoDatabase database = mongoClient.getDatabase("devops");
     return database;
   }
@@ -107,16 +108,34 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   public User validateLogin(LoginDetails loginDetails) {
     objectToReturn = null;
     try {
-      objectToReturn = getInstance();
+      objectToReturn = new User();
     } catch (Exception e) {
       System.out.println("Could not define subclass of superclass"+e);
     }
-    Document document = collection.find(and(eq("username",loginDetails.getUsername()),eq("password",loginDetails.getPassword()))).first();
+    Document loginDocument = collection.find(and(eq("username",loginDetails.getUsername()),eq("password",loginDetails.getPassword()))).first();
+
+    MongoCollection<Document> userCollection = db.getCollection("user");
+    Document userDocument = userCollection.find(eq("_id",new ObjectId((String) loginDocument.get("user_reference_id")))).first();
     Map<String, Object> map = new HashMap<>();
-    for (Map.Entry<String, Object> element : document.entrySet()) {
+    for (Map.Entry<String, Object> element : userDocument.entrySet()) {
       map.put(element.getKey(), element.getValue());
     }
     objectToReturn.toObject(map);
     return (User) objectToReturn;
+  }
+
+  public void addUser (User user, LoginDetails loginDetails) {
+    //Inserting user details
+    Document userDocument = new Document(user.toMap());
+    collection.insertOne(userDocument);
+
+    //Getting id for created user
+    String userId = (String) collection.find(eq("email", user.getEmail())).first().get("_id");
+
+    //Creating login for user
+    MongoCollection<Document> loginCollection = db.getCollection("login");
+    loginDetails.setUser_reference_id(userId);
+    Document loginDocument = new Document(loginDetails.toMap());
+    loginCollection.insertOne(loginDocument);
   }
 }

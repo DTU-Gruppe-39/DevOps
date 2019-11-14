@@ -6,6 +6,8 @@ import controller.interfaces.AuthenticationController;
 import controller.interfaces.UserController;
 import data.DTO.LoginDetails;
 import data.DTO.User;
+import data.database.implementations.LoginDocumentImpl;
+import data.database.interfaces.LoginDocumentI;
 import util.JWTutil;
 
 import javax.ws.rs.NotAuthorizedException;
@@ -15,6 +17,7 @@ import javax.ws.rs.NotAuthorizedException;
  */
 public class AuthenticationControllerImpl implements AuthenticationController {
   private UserController userController = ControllerRegistry.getUserController();
+  private LoginDocumentI loginDocument = new LoginDocumentImpl();
 
   @Override
   public String login(LoginDetails loginDetails) {
@@ -31,10 +34,9 @@ public class AuthenticationControllerImpl implements AuthenticationController {
     return userController.get(JWTutil.getUserId(token));
   }
 
-
   private User validateLoginDetails (LoginDetails loginDetails) {
     try {
-      return null;
+      return loginDocument.validateLogin(loginDetails);
       //return userDocumentI.validateLogin(loginDetails);
     } catch (MongoException mongoException) {
       throw new NotAuthorizedException("Wrong username or password");

@@ -1,6 +1,7 @@
 package controller.implementations;
 
 import controller.interfaces.UserController;
+import data.DTO.LoginDetails;
 import data.DTO.User;
 import data.database.implementations.UserDocumentImpl;
 import data.database.interfaces.UserDocumentI;
@@ -24,13 +25,8 @@ public class UserControllerImpl implements UserController {
   }
 
   @Override
-  public void add(User element) {
-    userDocument.add(element);
-  }
-
-  @Override
-  public void update(String id, User replaceElement) {
-    userDocument.update(id, replaceElement);
+  public void add(User element, LoginDetails loginDetails) {
+    userDocument.addUser(element, loginDetails);
   }
 
   @Override
