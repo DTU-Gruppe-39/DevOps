@@ -14,12 +14,6 @@ public class TaskControllerImpl implements TaskController {
   private TaskDocumentI taskDocument = new TaskDocumentImpl();
 
   @Override
-  public void addTask(String name, String description, String responsible) {
-    Task task = new Task(name, description, responsible);
-    taskDocument.add(task);
-  }
-
-  @Override
   public List<Task> getAll() {
     return taskDocument.getAll();
   }
@@ -30,7 +24,17 @@ public class TaskControllerImpl implements TaskController {
   }
 
   @Override
-  public void updateTask(String id, Task task) {
-    taskDocument.update(id, task);
+  public void add(Task task) {
+    taskDocument.add(task);
+  }
+
+  @Override
+  public void update(String id, Task replaceTask) {
+    taskDocument.update(id, replaceTask);
+  }
+
+  @Override
+  public void delete(String id) {
+    taskDocument.delete(id);
   }
 }
