@@ -25,8 +25,8 @@ public class TaskService {
     }
 
     @PUT
-    public void putTask(String id, Task task) {
-        taskController.update(id, task);
+    public void putTask(Task task) {
+        taskController.update("kqly", task);
     }
 
     @DELETE
