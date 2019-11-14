@@ -16,6 +16,16 @@ public class StakeholderControllerImpl implements StakeholderController {
     }
 
     @Override
+    public void update(String id, Stakeholder replaceStakeholder) {
+        stakeholderDocument.update(id, replaceStakeholder);
+    }
+
+    @Override
+    public void delete(String id) {
+        stakeholderDocument.delete(id);
+    }
+
+    @Override
     public List<Stakeholder> getAll() {
         return stakeholderDocument.getAll();
     }

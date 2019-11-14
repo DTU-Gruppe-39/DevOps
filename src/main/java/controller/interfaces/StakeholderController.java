@@ -8,4 +8,6 @@ public interface StakeholderController {
     List<Stakeholder> getAll();
     Stakeholder get(String id);
     void add(Stakeholder stakeholder);
+    void update(String id, Stakeholder replaceStakeholder);
+    void delete(String id);
 }
