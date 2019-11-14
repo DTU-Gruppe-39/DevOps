@@ -3,6 +3,7 @@ package api;
 import controller.ControllerRegistry;
 import controller.interfaces.AuthenticationController;
 import data.DTO.LoginDetails;
+import data.DTO.Role;
 import data.DTO.User;
 
 import javax.ws.rs.*;
@@ -31,6 +32,20 @@ public class AuthenticationService {
   @GET
   @Path("validate")
   public User validate() {
-      return authenticationController.validate((String) container.getProperty("id"));
+      return authenticationController.validate((String) container.getProperty("token"));
+  }
+
+  @GET
+  @Path("developer")
+  @Secured(Role.Developer)
+  public String developerTest() {
+    return "Hello developer";
+  }
+
+  @GET
+  @Path("project")
+  @Secured(Role.ProjectManager)
+  public String projectManager() {
+    return "Hello project manager";
   }
 }

@@ -64,9 +64,10 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     if (jwt[1] !=  null) {
       //Validating JWT and getting claims if valid
       Claims claims = JWTutil.parseToken(jwt[1]);
-      int userid = (int) claims.get("id");
-      Role userrole = (Role) claims.get("role");
+      String userid = (String) claims.get("id");
+      Role userrole = Role.valueOf((String) claims.get("role"));
       String useremail = (String) claims.getSubject();
+      container.setProperty("token",jwt[1]);
       container.setProperty("id", userid);
       container.setProperty("role", userrole);
       container.setProperty("email", useremail);
