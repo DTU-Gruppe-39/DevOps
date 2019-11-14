@@ -68,13 +68,14 @@ import {postStakeholder} from "../stores/Api";
         return (e) => {
             e.preventDefault();
             stakeHolderStore.stakeholderList.push(stakeHolderStore.inputStakeholder);
+            postStakeholder(stakeHolderStore.inputStakeholder);
             stakeHolderStore.inputStakeholder = {
                 name: '',
                 contactperson: '',
                 email: '',
                 direct: true
             };
-            postStakeholder(stakeHolderStore.inputStakeholder);
+
         };
     }
 export default observer(Stakeholders);

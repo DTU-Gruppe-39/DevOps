@@ -93,6 +93,7 @@ function TaskOverview() {
             taskStore.inputTask.Id = (taskStore.taskList.length + 1) + '';
             taskStore.inputTask.Responsible.id = (taskStore.taskList.length + 2) + '';
             taskStore.taskList.push(taskStore.inputTask);
+            postTask(taskStore.inputTask);
             taskStore.inputTask = {
                 Name: '',
                 Description: '',
@@ -100,10 +101,11 @@ function TaskOverview() {
                 Responsible: {id:"", name:""},
                 Status: ''
             };
-            postTask(taskStore.inputTask);
+
         };
 
     }
+
 }
 
 export default observer(TaskOverview);
