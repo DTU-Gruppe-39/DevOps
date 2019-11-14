@@ -10,7 +10,7 @@ import javax.ws.rs.NotAuthorizedException;
  */
 public class JWTutil {
   //Skal importeres fra et andet sted senere
-  private static String secret = "kqly";
+  private static String secret = System.getenv("JWTSECRET");
 
   public static String generateToken (User user) {
     Claims tokenClaims = Jwts.claims()
@@ -45,5 +45,14 @@ public class JWTutil {
     catch (ExpiredJwtException e) {
       throw new NotAuthorizedException("");
     }
+  }
+
+  public static String getUserId (Claims claims) {
+    return (String) claims.get("id");
+  }
+
+  public static String getUserId (String jwt) {
+    Claims claims = parseToken(jwt);
+    return (String) claims.get("id");
   }
 }

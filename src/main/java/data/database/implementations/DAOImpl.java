@@ -5,6 +5,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import data.DTO.DocumentObject;
+import data.DTO.LoginDetails;
+import data.DTO.User;
 import data.database.MongoConnector;
 import data.database.interfaces.CollectionI;
 import data.database.interfaces.DocumentI;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
 
@@ -99,5 +102,21 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   @Override
   public void delete(String documentId) {
     collection.deleteOne(eq("_id",new ObjectId(documentId)));
+  }
+
+  public User validateLogin(LoginDetails loginDetails) {
+    objectToReturn = null;
+    try {
+      objectToReturn = getInstance();
+    } catch (Exception e) {
+      System.out.println("Could not define subclass of superclass"+e);
+    }
+    Document document = collection.find(and(eq("username",loginDetails.getUsername()),eq("password",loginDetails.getPassword()))).first();
+    Map<String, Object> map = new HashMap<>();
+    for (Map.Entry<String, Object> element : document.entrySet()) {
+      map.put(element.getKey(), element.getValue());
+    }
+    objectToReturn.toObject(map);
+    return (User) objectToReturn;
   }
 }

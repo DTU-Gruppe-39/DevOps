@@ -24,14 +24,13 @@ public class AuthenticationService {
 
   @POST
   @Path("login")
-  public String postLogin(@FormParam("email") String email, @FormParam("password") String password) {
-    LoginDetails loginDetails = new LoginDetails(email, password);
+  public String postLogin(LoginDetails loginDetails) {
     return authenticationController.login(loginDetails);
   }
 
   @GET
   @Path("validate")
-  public User getUser() {
+  public User validate() {
     return null;
   }
 }
