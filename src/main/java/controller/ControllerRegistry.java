@@ -43,6 +43,7 @@ public class ControllerRegistry {
   public static UsecaseController getUsecaseController () {
     if (usecaseController == null) usecaseController = new UsecaseControllerImpl();
     return usecaseController;
+  }
 
   public static UserController getUserController () {
     if(userController == null) userController = new UserControllerImpl();
@@ -50,3 +51,5 @@ public class ControllerRegistry {
 
   }
 }
+
+

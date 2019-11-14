@@ -15,6 +15,13 @@ public class Usecase extends DocumentObject {
 
     }
 
+    public Usecase(String id, String userStory, String priority, String responsible){
+        this.id = id;
+        this.userStory = userStory;
+        this.priority = priority;
+        this.responsible = responsible;
+    }
+
     public Usecase(String userStory, String priority, String responsible){
         this.id = null;
         this.userStory = userStory;
