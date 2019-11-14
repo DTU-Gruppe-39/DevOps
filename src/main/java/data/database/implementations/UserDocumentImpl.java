@@ -8,6 +8,6 @@ import data.database.interfaces.UserDocumentI;
  */
 public class UserDocumentImpl extends DAOImpl<User> implements UserDocumentI{
   public UserDocumentImpl() {
-    super("users");
+    super("user");
   }
 }

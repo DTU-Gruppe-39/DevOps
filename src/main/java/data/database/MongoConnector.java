@@ -3,6 +3,11 @@ package data.database;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import controller.ControllerRegistry;
+import controller.interfaces.TaskController;
+import controller.interfaces.UserController;
+import data.DTO.Task;
+import data.DTO.User;
 
 public class MongoConnector {
     private static String username = System.getenv("devopsusername");
@@ -24,16 +29,15 @@ public class MongoConnector {
     public static void main(String[] args) {
         MongoDatabase test = new MongoConnector().getDb();
         System.out.println("Connected to " + test.getName());
-
-        /*StakeholderController stakeholderController = new StakeholderControllerImpl();
-        for (Stakeholder stakeholder : stakeholderController.getAll()) {
-            System.out.println(stakeholder.getName());
+        UserController userController = ControllerRegistry.getUserController();
+        for (User stakeholder : userController.getAll()) {
+            System.out.println("test: "+stakeholder.getId());
         }
 
         TaskController taskController = ControllerRegistry.getTaskController();
         for (Task task : taskController.getAll()) {
             System.out.println(task.toString());
-        }*/
+        }
 
         /*Stakeholder stakeholder = new Stakeholder();
         stakeholder.setContact_person("Magnus");
