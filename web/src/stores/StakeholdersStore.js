@@ -1,17 +1,32 @@
 import {decorate, observable} from "mobx";
 
 class StakeholdersStore {
+    constructor(){
+        this.getStakeholders();
+    }
+    getStakeholders(){
+        const localurl = "http://localhost:8080/api/task";
+        const serverurl = "https://test-devops69.herokuapp.com/api/stakeholder";
+        console.log("Getting stakeholders");
+        fetch(serverurl)
+            .then((response)=>response.json()
+                .then((jsonresponse)=>{
+                    console.log(jsonresponse);
+                    this.stakeholderList = jsonresponse;
+                })
+            )
+    }
     stakeholderList = [{
         name: 'DTU',
-        contactperson: 'Kenneth Olsen',
+        contact_person: 'Kenneth Olsen',
         email: 'keno@dtu.dk',
-        direct: true
+        stakeholder_type: true
     }];
     inputStakeholder = {
         name: '',
-        contactperson: '',
+        contact_person: '',
         email: '',
-        direct: true
+        stakeholder_type: true
     }
 }
 

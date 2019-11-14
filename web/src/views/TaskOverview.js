@@ -10,6 +10,8 @@ import api, {postTask} from "../stores/Api";
 
 
 function TaskOverview() {
+
+
     return(
         <Container>
 
@@ -24,20 +26,22 @@ function TaskOverview() {
                 <form className="taskinput" onSubmit={getOnSubmit()}>
                     <label>
                         <input name="name" type="text" placeholder="Name"
-                               value={taskStore.inputTask.Name}
-                               onChange={(e) => taskStore.inputTask.Name = e.target.value} required/>
+                               value={taskStore.inputTask.name}
+                               onChange={(e) => taskStore.inputTask.name = e.target.value} required/>
                     </label>
                     <label>
                         <input name="description" type="text" placeholder="Description"
-                               value={taskStore.inputTask.Description}
-                               onChange={(e) => taskStore.inputTask.Description = e.target.value}
+                               value={taskStore.inputTask.description}
+                               onChange={(e) => taskStore.inputTask.description = e.target.value}
                                required/>
                     </label>
 
                     <label>
-                        <input name="responsible name" type="text" placeholder="Task Responsible name"
-                               value={taskStore.inputTask.Responsible.name}
-                               onChange={(e) => taskStore.inputTask.Responsible.name = e.target.value}
+                        <input name="responsible" type="text" placeholder="Task Responsible name"
+                               value={taskStore.inputTask.responsible}
+                               // value={taskStore.inputTask.responsible.name}
+                               onChange={(e) => taskStore.inputTask.responsible = e.target.value}
+                               // onChange={(e) => taskStore.inputTask.responsible.name = e.target.value}
                                required/>
                     </label>
 
@@ -64,11 +68,12 @@ function TaskOverview() {
                             </tr>
                             {taskStore.taskList.map((task, key) => (
                                 <tr>
-                                    <td>{task.Name}</td>
-                                    <td>{task.Description}</td>
-                                    <td>{task.Id}</td>
-                                    <td>{task.Responsible.name}</td>
-                                    <td>{task.Status}</td>
+                                    <td>{task.name}</td>
+                                    <td>{task.description}</td>
+                                    <td>{task.id}</td>
+                                    {/*<td>{task.responsible.name}</td>*/}
+                                    <td>{task.responsible}</td>
+                                    <td>{task.status}</td>
                                 </tr>),
                             )}
                         </table>
@@ -89,18 +94,26 @@ function TaskOverview() {
     function getOnSubmit() {
         return (e) => {
             e.preventDefault();
-            taskStore.inputTask.Status = 'NotStarted';
-            taskStore.inputTask.Id = (taskStore.taskList.length + 1) + '';
-            taskStore.inputTask.Responsible.id = (taskStore.taskList.length + 2) + '';
+            taskStore.inputTask.status = 'NotStarted';
+            taskStore.inputTask.id = (taskStore.taskList.length + 1) + '';
+            // taskStore.inputTask.responsible.id = (taskStore.taskList.length + 2) + '';
+
             taskStore.taskList.push(taskStore.inputTask);
             postTask(taskStore.inputTask);
             taskStore.inputTask = {
-                Name: '',
-                Description: '',
-                Id: '',
-                Responsible: {id:"", name:""},
-                Status: ''
+                name: '',
+                description: '',
+                id: '',
+                responsible: '',
+                status: ''
             };
+            // taskStore.inputTask = {
+            //     name: '',
+            //     description: '',
+            //     id: '',
+            //     responsible: {id:"", name:""},
+            //     status: ''
+            // };
 
         };
 

@@ -10,6 +10,7 @@ const taskPost = async (json, url) =>{
         {method:"POST",
             // mode: '',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(json)})
@@ -28,6 +29,7 @@ const stakeholderPost = async (json, url) =>{
         {method:"POST",
             // mode: '',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(json)})

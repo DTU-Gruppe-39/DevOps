@@ -17,8 +17,8 @@ import {postStakeholder} from "../stores/Api";
                             </label>
                             <label>
                                 <input name="contactperson" type="text" placeholder="Contact person"
-                                       value={stakeHolderStore.inputStakeholder.contactperson}
-                                       onChange={(e) => stakeHolderStore.inputStakeholder.contactperson = e.target.value}
+                                       value={stakeHolderStore.inputStakeholder.contact_person}
+                                       onChange={(e) => stakeHolderStore.inputStakeholder.contact_person = e.target.value}
                                        required/>
                             </label>
                             <label>
@@ -31,8 +31,8 @@ import {postStakeholder} from "../stores/Api";
                                 <input
                                     name="direct"
                                     type="checkbox"
-                                    checked={stakeHolderStore.inputStakeholder.direct}
-                                    onChange={(e) => {stakeHolderStore.inputStakeholder.direct ^= true}}/>
+                                    checked={stakeHolderStore.inputStakeholder.stakeholder_type}
+                                    onChange={(e) => {stakeHolderStore.inputStakeholder.stakeholder_type ^= true}}/>
                             </label>
                             <input type="submit" value="Submit"/>
                         </form>
@@ -50,9 +50,9 @@ import {postStakeholder} from "../stores/Api";
                                 {stakeHolderStore.stakeholderList.map((stakeholder, key) => (
                                     <tr>
                                         <td key={key}>{stakeholder.name}</td>
-                                        <td key={key}>{stakeholder.contactperson}</td>
+                                        <td key={key}>{stakeholder.contact_person}</td>
                                         <td key={key}>{stakeholder.email}</td>
-                                        <td key={key}>{(stakeholder.direct ? "Direct stakeholder" : "Indirect stakeholder")}</td>
+                                        <td key={key}>{(stakeholder.stakeholder_type ? "Direct stakeholder" : "Indirect stakeholder")}</td>
                                     </tr>),
                                 )}
                             </table>
@@ -71,9 +71,9 @@ import {postStakeholder} from "../stores/Api";
             postStakeholder(stakeHolderStore.inputStakeholder);
             stakeHolderStore.inputStakeholder = {
                 name: '',
-                contactperson: '',
+                contact_person: '',
                 email: '',
-                direct: true
+                stakeholder_type: true
             };
 
         };
