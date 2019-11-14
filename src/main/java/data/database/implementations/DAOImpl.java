@@ -130,12 +130,16 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
     collection.insertOne(userDocument);
 
     //Getting id for created user
-    String userId = (String) collection.find(eq("email", user.getEmail())).first().get("_id");
+    ObjectId userId = (ObjectId) collection.find(eq("email", user.getEmail())).first().get("_id");
 
     //Creating login for user
     MongoCollection<Document> loginCollection = db.getCollection("login");
-    loginDetails.setUser_reference_id(userId);
+    loginDetails.setUser_reference_id(userId.toString());
     Document loginDocument = new Document(loginDetails.toMap());
     loginCollection.insertOne(loginDocument);
+  }
+
+  public void deleteLogin(String userid) {
+    collection.deleteOne(eq("user_reference_id", new ObjectId(userid)));
   }
 }
