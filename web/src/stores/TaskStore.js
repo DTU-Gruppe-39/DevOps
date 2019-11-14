@@ -28,12 +28,12 @@ class TaskStore {
     //     Status: 'InProgress'
     // }];
     taskList = [{
-        name: 'TaskOverview',
-        description: 'Make a list of the tasks, and present it in a table.',
-        id: "1",
+        name: '',
+        description: '',
+        id: "",
         // TODO taskworkers should be worker objects or contain the id for the worker with the name
         responsible: "",
-        status: 'InProgress'
+        status: ''
     }];
     // inputTask = {
     //     Name: '',

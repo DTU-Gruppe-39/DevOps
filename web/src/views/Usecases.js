@@ -1,6 +1,7 @@
 import React from "react";
 import {observer} from "mobx-react";
 import {usecasesStore} from "../stores/UsecasesStore";
+import api, {postUsecase} from "../stores/Api";
 import "./Usecases.css";
 
     function Usecases() {
@@ -62,6 +63,7 @@ import "./Usecases.css";
             e.preventDefault();
             usecasesStore.inputUsecases.id = usecasesStore.usecasesList.length + 1;
             usecasesStore.usecasesList.push(usecasesStore.inputUsecases);
+            postUsecase(usecasesStore.inputUsecases);
             usecasesStore.inputUsecases = {
                 id: null,
                 userStory: '',

@@ -1,11 +1,26 @@
 import {decorate, observable} from "mobx";
 
 class UsecasesStore {
+    constructor(){
+        this.getUsecases();
+    }
+    getUsecases(){
+        const localurl = "http://localhost:8080/api/usecase";
+        const serverurl = "https://test-devops69.herokuapp.com/api/usecase";
+        console.log("Getting usecases");
+        fetch(serverurl)
+            .then((response)=>response.json()
+                .then((jsonresponse)=>{
+                    console.log(jsonresponse);
+                    this.usecasesList = jsonresponse;
+                })
+            )
+    }
     usecasesList = [{
-        id: 1,
-        userStory: 'As project manager I wish to create new projects',
-        priority: '4',
-        responsible: 'Magnus'
+        id: "",
+        userStory: '',
+        priority: '',
+        responsible: ''
     }];
     inputUsecases = {
         id: null,

@@ -17,9 +17,9 @@ class StakeholdersStore {
             )
     }
     stakeholderList = [{
-        name: 'DTU',
-        contact_person: 'Kenneth Olsen',
-        email: 'keno@dtu.dk',
+        name: '',
+        contact_person: '',
+        email: '',
         stakeholder_type: true
     }];
     inputStakeholder = {

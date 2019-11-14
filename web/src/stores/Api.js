@@ -35,3 +35,21 @@ const stakeholderPost = async (json, url) =>{
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url
 }
+
+export const postUsecase = (usecase) => {
+    console.log("This task will be posted: " + JSON.stringify(usecase))
+    // return post(task,"http://localhost:3000")
+    return usecasePost(usecase,'https://test-devops69.herokuapp.com')
+}
+
+const usecasePost = async (json, url) =>{
+    return await fetch(url + '/api/usecase',
+        {method:"POST",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(json)})
+    // then(resp=>resp.json()) + url
+}
