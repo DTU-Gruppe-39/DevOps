@@ -2,6 +2,7 @@ package api;
 
 import controller.ControllerRegistry;
 import controller.interfaces.UserController;
+import data.DTO.NewUser;
 import data.DTO.User;
 
 import javax.ws.rs.*;
@@ -18,10 +19,10 @@ import java.util.List;
 public class UserService {
   private UserController userController = ControllerRegistry.getUserController();
 
-  /*@POST
-  public void postUser(User user, LoginDetails loginDetails) {
-    userController.add(user, loginDetails);
-  }*/
+  @POST
+  public void postUser(NewUser newUser) {
+    userController.add(newUser.getUser(), newUser.getLoginDetails());
+  }
 
   @GET
   public List<User> getUsers() {

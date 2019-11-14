@@ -8,4 +8,5 @@ import data.DTO.User;
  */
 public interface LoginDocumentI {
   User validateLogin(LoginDetails loginDetails);
+  void deleteLogin(String documentId);
 }
