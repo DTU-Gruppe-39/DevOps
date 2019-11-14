@@ -28,7 +28,7 @@ public class StakeholderService {
 
     @PUT
     public void putStakeholder(Stakeholder updatedStakeholder) {
-        stakeholderController.update("fgeg", updatedStakeholder);
+        stakeholderController.update(updatedStakeholder.getId(), updatedStakeholder);
     }
 
     @DELETE
