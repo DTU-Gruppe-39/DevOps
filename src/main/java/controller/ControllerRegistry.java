@@ -4,11 +4,14 @@ import controller.implementations.AuthenticationControllerImpl;
 import controller.implementations.StakeholderControllerImpl;
 import controller.implementations.TaskControllerImpl;
 import controller.implementations.UsecaseControllerImpl;
+import controller.interfaces.UsecaseController;
+import data.DTO.Stakeholder;
+import controller.implementations.UserControllerImpl;
 import controller.interfaces.AuthenticationController;
 import controller.interfaces.StakeholderController;
 import controller.interfaces.TaskController;
-import controller.interfaces.UsecaseController;
-import data.DTO.Stakeholder;
+import controller.interfaces.UserController;
+
 
 /**
  * Created by magnus
@@ -18,6 +21,8 @@ public class ControllerRegistry {
   private static TaskController taskController;
   private static StakeholderController stakeholderController;
   private static UsecaseController usecaseController;
+  private static UserController userController;
+
 
   public static AuthenticationController getAuthenticationController () {
     if (authenticationController == null) authenticationController = new AuthenticationControllerImpl();
@@ -34,8 +39,14 @@ public class ControllerRegistry {
     return stakeholderController;
   }
 
+
   public static UsecaseController getUsecaseController () {
     if (usecaseController == null) usecaseController = new UsecaseControllerImpl();
     return usecaseController;
+
+  public static UserController getUserController () {
+    if(userController == null) userController = new UserControllerImpl();
+    return userController;
+
   }
 }

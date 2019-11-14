@@ -3,6 +3,7 @@ package api;
 import controller.ControllerRegistry;
 import controller.interfaces.AuthenticationController;
 import data.DTO.LoginDetails;
+import data.DTO.Role;
 import data.DTO.User;
 
 import javax.ws.rs.*;
@@ -24,14 +25,27 @@ public class AuthenticationService {
 
   @POST
   @Path("login")
-  public String postLogin(@FormParam("email") String email, @FormParam("password") String password) {
-    LoginDetails loginDetails = new LoginDetails(email, password);
+  public String login(LoginDetails loginDetails) {
     return authenticationController.login(loginDetails);
   }
 
   @GET
   @Path("validate")
-  public User getUser() {
-    return null;
+  public User validate() {
+      return authenticationController.validate((String) container.getProperty("token"));
+  }
+
+  @GET
+  @Path("developer")
+  @Secured(Role.Developer)
+  public String developerTest() {
+    return "Hello developer";
+  }
+
+  @GET
+  @Path("project")
+  @Secured(Role.ProjectManager)
+  public String projectManager() {
+    return "Hello project manager";
   }
 }

@@ -1,7 +1,14 @@
 package data.database.interfaces;
 
+import data.DTO.DocumentObject;
+import data.DTO.LoginDetails;
+import data.DTO.User;
+
 /**
  * Created by magnus
  */
-public interface UserDocumentI extends CollectionI, DocumentI {
+public interface UserDocumentI extends CollectionI {
+  DocumentObject get(String documentId);
+  void delete(String documentId);
+  void addUser (User user, LoginDetails loginDetails);
 }
