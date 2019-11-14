@@ -27,8 +27,8 @@ public class StakeholderService {
     }
 
     @PUT
-    public void putStakeholder(String id, Stakeholder updatedStakeholder) {
-        stakeholderController.update(id, updatedStakeholder);
+    public void putStakeholder(Stakeholder updatedStakeholder) {
+        stakeholderController.update(updatedStakeholder.getId(), updatedStakeholder);
     }
 
     @DELETE

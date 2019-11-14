@@ -12,7 +12,7 @@ public class HelloTomcat {
         tomcat.setBaseDir("temp");
         String port = System.getenv("PORT"); //Til Heroku
         if (port==null){
-            port="8080";
+            port="5005";
         }
 
         tomcat.setPort(Integer.parseInt(port));

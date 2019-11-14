@@ -37,7 +37,6 @@ public class AuthenticationControllerImpl implements AuthenticationController {
   private User validateLoginDetails (LoginDetails loginDetails) {
     try {
       return loginDocument.validateLogin(loginDetails);
-      //return userDocumentI.validateLogin(loginDetails);
     } catch (MongoException mongoException) {
       throw new NotAuthorizedException("Wrong username or password");
     }

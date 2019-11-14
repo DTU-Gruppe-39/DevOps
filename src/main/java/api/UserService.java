@@ -2,7 +2,6 @@ package api;
 
 import controller.ControllerRegistry;
 import controller.interfaces.UserController;
-import data.DTO.LoginDetails;
 import data.DTO.User;
 
 import javax.ws.rs.*;
@@ -19,10 +18,10 @@ import java.util.List;
 public class UserService {
   private UserController userController = ControllerRegistry.getUserController();
 
-  @POST
+  /*@POST
   public void postUser(User user, LoginDetails loginDetails) {
     userController.add(user, loginDetails);
-  }
+  }*/
 
   @GET
   public List<User> getUsers() {
@@ -30,7 +29,7 @@ public class UserService {
   }
 
   @PUT
-  public void putUser(String id, User user) {
+  public void putUser(User user) {
   }
 
   @DELETE

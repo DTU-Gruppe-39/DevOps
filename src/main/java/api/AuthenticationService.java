@@ -24,13 +24,13 @@ public class AuthenticationService {
 
   @POST
   @Path("login")
-  public String postLogin(LoginDetails loginDetails) {
+  public String login(LoginDetails loginDetails) {
     return authenticationController.login(loginDetails);
   }
 
   @GET
   @Path("validate")
   public User validate() {
-    return null;
+      return authenticationController.validate((String) container.getProperty("id"));
   }
 }
