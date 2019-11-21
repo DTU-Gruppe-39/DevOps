@@ -3,11 +3,11 @@ package controller.implementations;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.codemodel.internal.JArray;
 import controller.interfaces.MusicController;
 import data.DTO.Track;
 import data.localstorage.SpotifySingleton;
 import org.glassfish.jersey.server.Uri;
+import org.json.JSONObject;
 import util.SpotifyAuth;
 
 import javax.ws.rs.ClientErrorException;
@@ -27,7 +27,7 @@ import java.util.List;
 public class MusicControllerImpl implements MusicController {
     SpotifySingleton storage = SpotifySingleton.getInstance();
 
-    public List<Track> getSearch(String songName) throws IOException {
+    public Object getSearch(String songName) throws IOException {
         if (storage.getClientCredentialsFlowToken() == null)
         {
             SpotifyAuth.GetClientCredentialsFlowAuthToken();
@@ -38,14 +38,25 @@ public class MusicControllerImpl implements MusicController {
         WebTarget webTarget = client.target("https://api.spotify.com/v1/search?q=track:" + URLEncoder.encode(songName, "UTF-8") + "*&type=track&market=DK&limit=" + limit + "&offset=0");
 
         Response response = SendClientCredentialsRequest(webTarget);
+
+        Object object = response.readEntity(Object.class);
+
+        System.out.println("Object: " + object);
+
+        JSONObject jsonObject = new JSONObject(object);
+        System.out.println("JsonObject: " + jsonObject);
+
+        return object;
+
+
 //        List<Track> listOfTracks = new ArrayList<>();
 //        String strResponse = response.readEntity(String.class);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonResponse = objectMapper.writeValueAsString(response);
-
-        JsonNode jsonNode = objectMapper.readTree(jsonResponse);
-        String jsonArray = jsonNode.get("tracks").get("items").asText();
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String jsonResponse = objectMapper.writeValueAsString(response);
+//
+//        JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+//        String jsonArray = jsonNode.get("tracks").get("items").asText();
 
 
 
@@ -67,7 +78,7 @@ public class MusicControllerImpl implements MusicController {
 //        }
 //
 //        return listTracks;
-        return null;
+//        return (T) response;
     }
 
 

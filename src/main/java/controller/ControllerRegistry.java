@@ -1,16 +1,8 @@
 package controller;
 
-import controller.implementations.AuthenticationControllerImpl;
-import controller.implementations.StakeholderControllerImpl;
-import controller.implementations.TaskControllerImpl;
-import controller.implementations.UsecaseControllerImpl;
-import controller.interfaces.UsecaseController;
+import controller.implementations.*;
+import controller.interfaces.*;
 import data.DTO.Stakeholder;
-import controller.implementations.UserControllerImpl;
-import controller.interfaces.AuthenticationController;
-import controller.interfaces.StakeholderController;
-import controller.interfaces.TaskController;
-import controller.interfaces.UserController;
 
 
 /**
@@ -22,6 +14,7 @@ public class ControllerRegistry {
   private static StakeholderController stakeholderController;
   private static UsecaseController usecaseController;
   private static UserController userController;
+  private static MusicController musicController;
 
 
   public static AuthenticationController getAuthenticationController () {
@@ -49,6 +42,11 @@ public class ControllerRegistry {
     if(userController == null) userController = new UserControllerImpl();
     return userController;
 
+  }
+
+  public static MusicController getMusicController () {
+    if (musicController == null) musicController = new MusicControllerImpl();
+    return musicController;
   }
 }
 
