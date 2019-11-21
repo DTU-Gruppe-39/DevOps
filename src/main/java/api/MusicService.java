@@ -3,6 +3,7 @@ package api;
 import controller.ControllerRegistry;
 import controller.interfaces.MusicController;
 import data.DTO.MusicRequest;
+import data.DTO.Track;
 import org.json.JSONObject;
 
 import javax.ws.rs.*;
@@ -23,14 +24,13 @@ public class MusicService {
 
     @GET
     @Path("search/{songname}")
-    public Object getSearch(@PathParam("songname") String songname) {
+    public List<Track> getSearch(@PathParam("songname") String songname) {
         try {
 //            System.out.println("Songname: " + songname);
             return musicController.getSearch(songname);
         } catch (IOException e) {
             e.printStackTrace();
-            JSONObject jsonObject = new JSONObject(e.getMessage());
-            return jsonObject;
+            return null;
         }
     }
 
