@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import {observer} from "mobx-react";
 import {taskStore} from "../stores/TaskStore";
 import KanbanTest from "../containers/test/dragdropTest";
-import api, {postTask} from "../stores/Api";
+import api, {deleteTask, postTask} from "../stores/Api";
 
 
 function TaskOverview() {
@@ -14,7 +14,6 @@ function TaskOverview() {
 
     return(
         <Container>
-
             <div className="spacer"/>
 
             <div className="btn-group " id="overview" role="group">
@@ -22,8 +21,8 @@ function TaskOverview() {
                 <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("Kanban")}>Kanban</button>
             </div>
 
-            <div>
-                <form className="taskinput" onSubmit={getOnSubmit()}>
+            <div className="row justify-content-lg-center">
+                <form className="taskrowinput" onSubmit={getOnSubmit()}>
                     <label>
                         <input name="name" type="text" placeholder="Name"
                                value={taskStore.inputTask.name}
@@ -48,12 +47,11 @@ function TaskOverview() {
                     <input type="submit" value="Submit"/>
                 </form>
             </div>
-
+            <h3 className="d-flex justify-content-center">Tasks</h3>
             {taskStore.viewmode === "Kanban" &&<div id={"KanbanView"}>
                 <KanbanTest>
                 </KanbanTest>
             </div>}
-
             {taskStore.viewmode === "List" && <div id={"ListView"}>
             <Row className="justify-content-md-center col-lg-12 col-md-12">
                 <Col md="auto">
@@ -62,18 +60,18 @@ function TaskOverview() {
                             <tr>
                                 <th>Task name</th>
                                 <th>Task Description</th>
-                                <th>TaskId</th>
                                 <th>TaskResponsible</th>
                                 <th>Status</th>
+                                <th>Remove</th>
                             </tr>
                             {taskStore.taskList.map((task, key) => (
                                 <tr>
                                     <td>{task.name}</td>
                                     <td>{task.description}</td>
-                                    <td>{task.id}</td>
                                     {/*<td>{task.responsible.name}</td>*/}
                                     <td>{task.responsible}</td>
                                     <td>{task.status}</td>
+                                    <td><button className="alert-danger" onClick={deleteFunc(task.id, key)}>Delete</button></td>
                                 </tr>),
                             )}
                         </table>
@@ -83,6 +81,17 @@ function TaskOverview() {
             </div>}
         </Container>
     );
+
+    function deleteFunc(task, key) {
+        return (e) => {
+            e.preventDefault();
+            deleteTask(task);
+            taskStore.taskList.splice(key,1);
+
+        };
+    }
+
+
     function clickFunc(mode) {
         return (e) => {
           e.preventDefault();

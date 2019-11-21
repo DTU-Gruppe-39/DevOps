@@ -5,6 +5,11 @@ export const postTask = (task) => {
     return taskPost(task,'https://test-devops69.herokuapp.com')
 }
 
+export const deleteTask = (task) => {
+    console.log("This task will be deleted: " + JSON.stringify(task));
+    return taskDel(task,'https://test-devops69.herokuapp.com')
+}
+
 const taskPost = async (json, url) =>{
     return await fetch(url + '/api/task',
         {method:"POST",
@@ -17,6 +22,16 @@ const taskPost = async (json, url) =>{
     // then(resp=>resp.json()) + url
 }
 
+const taskDel = async (json, url) =>{
+    return await fetch(url + '/api/task',
+        {method:"DELETE",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: json})
+}
 
 export const postStakeholder = (stakeholder) => {
     console.log("This task will be posted: " + JSON.stringify(stakeholder))

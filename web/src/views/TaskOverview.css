@@ -16,6 +16,12 @@ input {
     margin-top: 18px;
 }
 
+.taskinput {
+    width: 100%;
+    padding-left: 75px;
+    justify-content: center;
+}
+
 #submit {
     margin: 10px;
     position: relative;

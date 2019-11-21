@@ -24,16 +24,12 @@ function App() {
                   <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
-                </div>
               </nav>
           </div>
         {/*</div>*/}
 
 
-        <div className="d-flex float-left" id="sidebar">
-          <div className="bg-light border-right">
+        <div className="sidebar" id="sidebar">
             {/*<div className="sidebar-heading space"></div>*/}
             <div className="list-group list-group-flush">
               <Link to="/Dashboard" className="list-group-item list-group-item-action bg-light">Dashboard</Link>
@@ -43,7 +39,6 @@ function App() {
               {/*<Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>*/}
               <Link to="/TaskOverview" className="list-group-item list-group-item-action bg-light">TaskOverview</Link>
             </div>
-        </div>
         </div>
         <div className="main">
 
