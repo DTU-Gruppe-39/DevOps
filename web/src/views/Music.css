@@ -1,0 +1,21 @@
+.result-list {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+h6 {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+h5 {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+p {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-size: small;
+    color: #777777;
+}

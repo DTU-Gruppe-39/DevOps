@@ -10,6 +10,7 @@ import Dashboard from "./views/Dashboard";
 import TaskOverview from "./views/TaskOverview";
 import KanbanTest from "./containers/test/dragdropTest";
 import Vision from "./views/Vision";
+import Music from "./views/Music";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
               <Link to="/Vision" className="list-group-item list-group-item-action bg-light">Vision</Link>
               {/*<Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>*/}
               <Link to="/TaskOverview" className="list-group-item list-group-item-action bg-light">TaskOverview</Link>
+              <Link to="/Music" className="list-group-item list-group-item-action bg-light">Music</Link>
             </div>
         </div>
         </div>
@@ -53,6 +55,7 @@ function App() {
             <Route exact path="/Vision" component={Vision}/>
             {/*<Route exact path="/Profile" component={Profile}/>*/}
             <Route exact path="/TaskOverview" component={TaskOverview}/>
+            <Route exact path="/Music" component={Music}/>
             {/*<Route exact path="/TaskOverview" component={KanbanTest}/>*/}
 
 
