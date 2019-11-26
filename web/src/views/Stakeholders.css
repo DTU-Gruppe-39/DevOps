@@ -1,10 +1,19 @@
 
+.stakeholderList {
+    /*margin-left: 25%;*/
+    width: 100%;
+    word-wrap: break-word;
+}
+
 .stakeinput{
     margin: 20px;
+    width: 100%;
+    justify-content: center;
+
 }
+
 .stakeholder-form{
-    margin: 20px;
-    padding-left: 30px;
+    width: 100%;
 }
 
 input{
@@ -16,9 +25,10 @@ li{
 }
 
 table ,td ,th{
-    /*margin: 40px;*/
-    padding-right: 75px;
-    padding-left: 75px;
+    margin: 40px;
+    justify-content: center;
+    table-layout:fixed;
+    width:100%;
 }
 
 th {

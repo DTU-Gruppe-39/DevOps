@@ -31,6 +31,7 @@ public class AuthenticationService {
 
   @GET
   @Path("validate")
+  @Secured({Role.Developer, Role.ProjectManager})
   public User validate() {
       return authenticationController.validate((String) container.getProperty("token"));
   }
