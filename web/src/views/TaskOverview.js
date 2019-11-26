@@ -110,51 +110,28 @@ function TaskOverview() {
                                 <tr>
                                     <th>Task name</th>
                                     <th>Task Description</th>
-                                    <th>TaskId</th>
+                                    {/*<th>TaskId</th>*/}
                                     <th>TaskResponsible</th>
                                     <th>Status</th>
                                     <th>Edit</th>
+                                    <th>Remove</th>
                                 </tr>
                                 {taskStore.taskList.map((task, key) => (
                                     <tr>
                                         <td>{task.name}</td>
                                         <td>{task.description}</td>
-                                        <td>{task.id}</td>
+                                        {/*<td>{task.id}</td>*/}
                                         {/*<td>{task.responsible.name}</td>*/}
                                         <td>{task.responsible}</td>
                                         <td>{task.status}</td>
-                                        <td> <Button variant={"primary"} onClick={editfunc(key, task)}> </Button> </td>
+                                        <td> <Button variant={"primary"} onClick={editfunc(key, task)}>Edit</Button> </td>
+                                        <td><button className="alert-danger" onClick={deleteFunc(task.id, key)}>Delete</button></td>
                                     </tr>),
                                 )}
                             </table>
                         </div>
                     </Col>
                 </Row>
-            <Row className="justify-content-md-center col-lg-12 col-md-12">
-                <Col md="auto">
-                    <div>
-                        <table>
-                            <tr>
-                                <th>Task name</th>
-                                <th>Task Description</th>
-                                <th>TaskResponsible</th>
-                                <th>Status</th>
-                                <th>Remove</th>
-                            </tr>
-                            {taskStore.taskList.map((task, key) => (
-                                <tr>
-                                    <td>{task.name}</td>
-                                    <td>{task.description}</td>
-                                    {/*<td>{task.responsible.name}</td>*/}
-                                    <td>{task.responsible}</td>
-                                    <td>{task.status}</td>
-                                    <td><button className="alert-danger" onClick={deleteFunc(task.id, key)}>Delete</button></td>
-                                </tr>),
-                            )}
-                        </table>
-                    </div>
-                </Col>
-            </Row>
             </div>}
         </Container>
     );
@@ -236,14 +213,6 @@ function TaskOverview() {
                 responsible: '',
                 status: ''
             };
-            // taskStore.inputTask = {
-            //     name: '',
-            //     description: '',
-            //     id: '',
-            //     responsible: {id:"", name:""},
-            //     status: ''
-            // };
-
         };
 
     }
