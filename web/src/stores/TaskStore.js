@@ -19,6 +19,9 @@ class TaskStore {
             )
     }
     viewmode = "List";
+    modalShow = false;
+    modalKey;
+    modalDropdown = false;
     // taskList = [{
     //     Name: 'TaskOverview',
     //     Description: 'Make a list of the tasks, and present it in a table.',
@@ -48,13 +51,27 @@ class TaskStore {
         id: '',
         responsible: "",
         status: ''
-    }
+    };
+    updateTask = {
+        name: '',
+        description: '',
+        id: '',
+        responsible: "",
+        status: ''
+    };
+    currStatus = [{label: "", value: ""}];
+    statusOption = [{label:"Not Started", value:"NotStarted"}, {label: "In Progress", value: "InProgress"}, {label:"Done", value:"Done"}];
+
 }
 
 decorate(TaskStore, {
     viewmode: observable,
     taskList: observable,
-    inputTask: observable
+    inputTask: observable,
+    modalShow: observable,
+    updateTask: observable,
+    modalDropdown: observable,
+    currStatus: observable
 });
 
 export const taskStore = new TaskStore();
