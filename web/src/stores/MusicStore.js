@@ -15,6 +15,10 @@ class MusicStore {
         webplayerLink: ""
     }];
 
+    showToast = false;
+
+    toastName = "";
+
     getSearch(songname) {
         if (songname === "") {
             this.showResult = [];
@@ -39,7 +43,9 @@ class MusicStore {
 decorate(MusicStore, {
     inputMusic: observable,
     searchResult: observable,
-    showResult: observable
+    showResult: observable,
+    showToast: observable,
+    toastName: observable
 });
 
 export const musicStore = new MusicStore();
