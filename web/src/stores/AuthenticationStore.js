@@ -20,7 +20,7 @@ class AuthenticationStore {
         const localurl = "http://localhost:5005/api/authentication/login";
         const serverurl = "https://test-devops69.herokuapp.com/api/authentication/login";
         console.log("Trying logging user in");
-        fetch(localurl, {
+        fetch(serverurl, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
@@ -68,7 +68,7 @@ class AuthenticationStore {
         const localurl = "http://localhost:5005/api/authentication/validate";
         const serverurl = "https://test-devops69.herokuapp.com/api/authentication/validate";
         console.log("Getting User");
-        fetch(localurl, {
+        fetch(serverurl, {
             method: "GET",
             headers: {
                 'Authorization': "Bearer "+this.currentAuthentication.token
