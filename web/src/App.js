@@ -12,20 +12,32 @@ import Vision from "./views/Vision";
 import SecureRoute from "./SecureRoute";
 import Login from "./views/Login";
 import {authenticationStore} from "./stores/AuthenticationStore";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 function App() {
   return (
       <div className="App">
           <div className="topbar">
-              <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+              <nav className="navbar navbar-expand-lg navbar-light">
                   <img src={logo} alt="Company logo" />
-                <button className="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                  <span className="navbar-toggler-icon"></span>
-                </button>
 
+                  <div className="collapse navbar-collapse dropdown-menu-left" id="navbarSupportedContent">
+                  </div>
+
+                  <Navbar.Toggle aria-controls="basic-navbar-nav " />
+                  <span className="navbar-toggler-icon">
+                              <NavDropdown  alignRight id="dropdown-menu-align-right">
+                                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                              </NavDropdown>
+                                  </span>
               </nav>
+
+
+
+
           </div>
         {/*</div>*/}
 
