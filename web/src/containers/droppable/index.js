@@ -1,20 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {taskStore} from "../../stores/TaskStore";
+import {putTask} from "../../stores/Api";
 
 export default class Droppable extends React.Component{
     drop = (e) => {
         e.preventDefault();
         const data = e.dataTransfer.getData('transfer');
         console.log(data + "transfered into " + e.target.id);
-        if(e.target.id.toString() === "drop1") {
-            console.log("Updating status outside");
+        if(e.target.id.toString() === "To-Do") {
             taskStore.taskList.map((task, key) => {
-                console.log(task.id + " task id");
-                console.log(data + " target");
                 if(task.id===data){
-                    taskStore.updateTask.status ="NotStarted"
-                    console.log("Updating status inside");
+                    taskStore.taskList[key].status = "NotStarted";
+                    putTask(taskStore.taskList[key]);
+                    console.log("task status has changed to: " + task.status + "(To-Do)");
+                }
+            })
+        } else if (e.target.id.toString() === "In-Progress") {
+            taskStore.taskList.map((task, key) => {
+                if(task.id===data){
+                    taskStore.taskList[key].status = "InProgress";
+                    putTask(taskStore.taskList[key]);
+                    console.log("task status has changed to: " + task.status + "(In-Progress)");
+                }
+            })
+        } else if (e.target.id.toString() === "Completed") {
+            taskStore.taskList.map((task, key) => {
+                if(task.id===data){
+                    taskStore.taskList[key].status = "Done";
+                    putTask(taskStore.taskList[key]);
+                    console.log("task status has changed to: " + task.status + "(Completed)");
                 }
             })
         }
@@ -39,4 +54,3 @@ Droppable.propTypes = {
     style: PropTypes.object,
     children: PropTypes.node,
 }
-
