@@ -6,7 +6,7 @@ class MusicStore {
     showResult = [];
 
     searchResult = [{
-        id: "",
+        trackId: "",
         songName: "",
         artistName: "",
         image_small_url: "",

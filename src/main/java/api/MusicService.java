@@ -19,7 +19,7 @@ public class MusicService {
 
     @GET
     public List<MusicRequest> getAll() {
-        return null;
+        return musicController.getRequests();
     }
 
     @GET
@@ -35,7 +35,9 @@ public class MusicService {
     }
 
     @POST
-    public void post(MusicRequest musicRequest) {
-
+    public List<MusicRequest> post(Track track) {
+        System.out.println(track);
+        musicController.addRequest(track);
+        return musicController.getRequests();
     }
 }

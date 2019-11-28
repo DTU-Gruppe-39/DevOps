@@ -68,19 +68,19 @@ import Form from "react-bootstrap/Form";
                                         <th>Sang</th>
                                         <th>Kunstner</th>
                                         <th>Tidspunkt</th>
-                                        <th>Upvotes</th>
+                                        {/*<th>Upvotes</th>*/}
                                         <th>Muligheder</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {requestStore.requestList.map((request, key) => (
+                                    {requestStore.showRequestList.map((request, key) => (
                                         <tr>
-                                            <td key={key}>{request.name}</td>
-                                            <td key={key}>{request.artist}</td>
+                                            <td key={key}>{request.track.songName}</td>
+                                            <td key={key}>{request.track.artistName}</td>
                                             <td key={key}>{request.timerequested}</td>
-                                            <td key={key}>{request.upvotes}</td>
+                                            {/*<td key={key}>{request.upvotes}</td>*/}
                                             <td key={key}>
-                                                <a href={request.webplayerLink} target="_blank"><img src={spotifylogo} width="24" height="24" title="Åben i spotify" /></a>
+                                                <a href={request.track.webplayerLink} target="_blank"><img src={spotifylogo} width="24" height="24" title="Åben i spotify" /></a>
                                                 <img src={deletelogo} width="24" height="24" title="Slet fra listen" onClick={() => requestStore.requestList.splice(key, 1)} />
                                             </td>
                                         </tr>),
@@ -109,9 +109,9 @@ import Form from "react-bootstrap/Form";
 
     function itemClicked(key) {
         // alert(musicStore.showResult[key].songName + "\nwas requested");
-        alert("Not implemented yet");
         musicStore.toastName = musicStore.showResult[key].songName;
         musicStore.showToast = true;
+        requestStore.postRequest(musicStore.showResult[key]);
         musicStore.showResult = [];
         musicStore.inputMusic = "";
     }

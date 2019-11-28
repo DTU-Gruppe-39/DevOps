@@ -2,6 +2,7 @@ package controller.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import controller.interfaces.MusicController;
+import data.DTO.MusicRequest;
 import data.DTO.Track;
 import data.localstorage.SpotifySingleton;
 import org.json.JSONArray;
@@ -21,6 +22,16 @@ import java.util.List;
 
 public class MusicControllerImpl implements MusicController {
     SpotifySingleton storage = SpotifySingleton.getInstance();
+    ArrayList<MusicRequest> requests = new ArrayList<>();
+
+    public List<MusicRequest> getRequests() {
+        return requests;
+    }
+
+    public void addRequest(Track track) {
+        requests.add(new MusicRequest(track));
+    }
+
 
     public List<Track> getSearch(String songName) throws IOException {
         if (storage.getClientCredentialsFlowToken() == null)

@@ -1,30 +1,67 @@
 import {decorate, observable} from "mobx";
 
 class RequestStore {
+    constructor(){
+        this.getRequested();
+    }
+    showRequestList = [];
     requestList = [{
-        name: 'bad guy',
-        artist: 'Billie Eilish',
-        timerequested: '19:45',
-        upvotes: 5,
-        webplayerLink: "https://open.spotify.com/track/2Fxmhks0bxGSBdJ92vM42m"
-    }, {
-        name: 'Mad Love',
-        artist: 'MOTi, Vigiland',
-        timerequested: '18:55',
-        upvotes: 2,
-        webplayerLink: "https://open.spotify.com/track/6P7Qezj2LV5kHc2VihAJWp"
-    }, {
-        name: 'Summer Days (feat. Macklemore & Patrick Stump of Fall Out Boy) - Tiësto Remix',
-        artist: 'Martin Garrix, Macklemore, Fall Out Boy, Tiësto',
-        timerequested: '19:11',
-        upvotes: 0,
-        webplayerLink: "https://open.spotify.com/track/1sI9LpIHEEzQwSVnp8oyfD"
+        id: "",
+        track: {
+            trackId: "",
+            songName: "",
+            artistName: "",
+            image_small_url: "",
+            image_medium_url: "",
+            image_large_url: "",
+            webplayerLink: ""
+        },
+        timerequested: ""
     }];
+
+
+    getRequested() {
+        const localurl = "http://localhost:5005/api/music/";
+        const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
+        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        console.log("Getting music requests");
+        fetch(localurl)
+            .then((response) => response.json()
+                .then((jsonresponse) => {
+                    // console.log("GETTING REQUESTS: " + jsonresponse);
+                    this.showRequestList = jsonresponse;
+                    this.requestList = jsonresponse;
+                })
+            )
+    }
+
+    postRequest(track) {
+        const localurl = "http://localhost:5005/api/music/";
+        const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
+        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        console.log("Posting music request");
+        fetch(localurl, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(track)
+        }) .then((response) => response.json()
+            .then((jsonresponse) => {
+                // console.log(jsonresponse);
+                this.showRequestList = jsonresponse;
+                this.requestList = jsonresponse;
+            })
+        )
+    }
+
 }
 
 
 decorate(RequestStore, {
     requestList: observable,
+    showRequestList: observable
 });
 
 export const requestStore = new RequestStore();
