@@ -50,6 +50,7 @@ function App() {
                                 <Link to="/Vision" className="list-group-item list-group-item-action bg-light">Vision</Link>
                                 {/*<Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>*/}
                                 <Link to="/TaskOverview" className="list-group-item list-group-item-action bg-light">TaskOverview</Link>
+                                <Link to="/Music" className="list-group-item list-group-item-action bg-light">Music</Link>
                             </div>
                     </div>
                 )
@@ -62,6 +63,7 @@ function App() {
                 <SecureRoute exact path="/Vision" component={Vision}/>
                 {/*<Route exact path="/Profile" component={Profile}/>*/}
                 <SecureRoute exact path="/TaskOverview" component={TaskOverview}/>
+                <SecureRoute exact path="/Music" component={Music}/>
                 {/*<Route exact path="/TaskOverview" component={KanbanTest}/>*/}
                 <Route exact path="/Login" component={Login}/>
             </Switch>
