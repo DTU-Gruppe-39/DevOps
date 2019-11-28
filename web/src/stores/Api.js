@@ -1,3 +1,5 @@
+import {authenticationStore} from "./AuthenticationStore";
+
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:3000/":""; //Check if dev environment
 
 export const postTask = (task) => {
@@ -16,7 +18,8 @@ const taskPost = async (json, url) =>{
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url
@@ -33,7 +36,8 @@ const taskPut = async (json, url) =>{
          // mode: '',
          headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+             'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
         },
         body: JSON.stringify(json)})
         // then(resp=>resp.json()) + url
@@ -45,7 +49,8 @@ const taskDel = async (json, url) =>{
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: json})
 }
@@ -62,7 +67,8 @@ const stakeholderPost = async (json, url) =>{
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url
@@ -80,7 +86,8 @@ const usecasePost = async (json, url) =>{
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url

@@ -1,14 +1,20 @@
 import {decorate, observable} from "mobx";
+import {authenticationStore} from "../stores/AuthenticationStore";
 
 class StakeholdersStore {
     constructor(){
         this.getStakeholders();
     }
     getStakeholders(){
-        const localurl = "http://localhost:8080/api/task";
+        const localurl = "http://localhost:5005/api/task";
         const serverurl = "https://test-devops69.herokuapp.com/api/stakeholder";
         console.log("Getting stakeholders");
-        fetch(serverurl)
+        fetch(serverurl, {
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            }
+        })
             .then((response)=>response.json()
                 .then((jsonresponse)=>{
                     console.log(jsonresponse);

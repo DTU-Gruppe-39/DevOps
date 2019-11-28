@@ -1,4 +1,5 @@
 import {decorate, observable} from "mobx";
+import {authenticationStore} from "./AuthenticationStore";
 
 
 
@@ -10,7 +11,12 @@ class TaskStore {
         const localurl = "http://localhost:8080/api/task";
         const serverurl = "https://test-devops69.herokuapp.com/api/task";
         console.log("Getting tasks");
-        fetch(serverurl)
+        fetch(serverurl, {
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            }
+        })
             .then((response)=>response.json()
                 .then((jsonresponse)=>{
                     console.log(jsonresponse);
