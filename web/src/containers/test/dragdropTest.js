@@ -51,8 +51,10 @@ export default class containers extends React.Component{
                                 {taskStore.taskList.map((task, key) => {
                                         if (task.status.toString()==="NotStarted") {
                                             return console.log(task.name.toString()),
-                                                <Draggable id={task.id}> <Item><p key={key}><b>{task.name}</b> <br/>
-                                                    {task.description}</p></Item> </Draggable>;
+                                                <Draggable id={task.id}>
+                                                    <Item>
+                                                        <p key={key}><b>{task.name}</b></p><p>--{task.responsible}--</p><p>{task.description}</p>                                                    </Item>
+                                                </Draggable>;
                                         }
                                     }
                                 )}
@@ -65,8 +67,11 @@ export default class containers extends React.Component{
                                 {taskStore.taskList.map((task, key) => {
                                         if (task.status.toString()==="InProgress") {
                                             return console.log(task.name.toString()),
-                                                <Draggable id={task.id}> <Item><p key={key}><b>{task.name}</b> <br/>
-                                                    {task.description}</p></Item> </Draggable>;
+                                                <Draggable id={task.id}>
+                                                    <Item>
+                                                        <p key={key}><b>{task.name}</b></p><p>--{task.responsible}--</p><p>{task.description}</p>
+                                                    </Item>
+                                                </Draggable>;
                                         }
                                     }
                                 )}
@@ -79,8 +84,10 @@ export default class containers extends React.Component{
                                 {taskStore.taskList.map((task, key) => {
                                         if (task.status.toString()==="Done") {
                                             return console.log(task.name.toString()),
-                                                <Draggable id={task.id}> <Item><p key={key}><b>{task.name}</b> <br/>
-                                                    {task.description}</p></Item> </Draggable>;
+                                                <Draggable id={task.id}>
+                                                    <Item>
+                                                        <p key={key}><b>{task.name}</b></p><p>--{task.responsible}--</p><p>{task.description}</p>                                                    </Item>
+                                                </Draggable>;
                                         }
                                     }
                                 )}
