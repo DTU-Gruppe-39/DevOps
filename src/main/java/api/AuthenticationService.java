@@ -31,6 +31,7 @@ public class AuthenticationService {
 
   @GET
   @Path("validate")
+  @Secured({Role.Developer, Role.ProjectManager})
   public User validate() {
       return authenticationController.validate((String) container.getProperty("token"));
   }
@@ -39,13 +40,13 @@ public class AuthenticationService {
   @Path("developer")
   @Secured(Role.Developer)
   public String developerTest() {
-    return "Hello developer";
+    return container.getProperty("id")+" - Hello developer";
   }
 
   @GET
   @Path("project")
   @Secured(Role.ProjectManager)
   public String projectManager() {
-    return "Hello project manager";
+    return container.getProperty("id")+" - Hello project manager";
   }
 }

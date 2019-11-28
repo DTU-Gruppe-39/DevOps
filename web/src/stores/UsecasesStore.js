@@ -1,4 +1,5 @@
 import {decorate, observable} from "mobx";
+import {authenticationStore} from "./AuthenticationStore";
 
 class UsecasesStore {
     constructor(){
@@ -8,7 +9,12 @@ class UsecasesStore {
         const localurl = "http://localhost:8080/api/usecase";
         const serverurl = "https://test-devops69.herokuapp.com/api/usecase";
         console.log("Getting usecases");
-        fetch(serverurl)
+        fetch(serverurl, {
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            }
+        })
             .then((response)=>response.json()
                 .then((jsonresponse)=>{
                     console.log(jsonresponse);

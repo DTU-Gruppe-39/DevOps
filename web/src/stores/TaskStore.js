@@ -1,4 +1,5 @@
 import {decorate, observable} from "mobx";
+import {authenticationStore} from "./AuthenticationStore";
 
 
 
@@ -10,7 +11,12 @@ class TaskStore {
         const localurl = "http://localhost:8080/api/task";
         const serverurl = "https://test-devops69.herokuapp.com/api/task";
         console.log("Getting tasks");
-        fetch(serverurl)
+        fetch(serverurl, {
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            }
+        })
             .then((response)=>response.json()
                 .then((jsonresponse)=>{
                     console.log(jsonresponse);
@@ -19,6 +25,9 @@ class TaskStore {
             )
     }
     viewmode = "List";
+    modalShow = false;
+    modalKey;
+    modalDropdown = false;
     // taskList = [{
     //     Name: 'TaskOverview',
     //     Description: 'Make a list of the tasks, and present it in a table.',
@@ -48,13 +57,27 @@ class TaskStore {
         id: '',
         responsible: "",
         status: ''
-    }
+    };
+    updateTask = {
+        name: '',
+        description: '',
+        id: '',
+        responsible: "",
+        status: ''
+    };
+    currStatus = [{label: "", value: ""}];
+    statusOption = [{label:"Not Started", value:"NotStarted"}, {label: "In Progress", value: "InProgress"}, {label:"Done", value:"Done"}];
+
 }
 
 decorate(TaskStore, {
     viewmode: observable,
     taskList: observable,
-    inputTask: observable
+    inputTask: observable,
+    modalShow: observable,
+    updateTask: observable,
+    modalDropdown: observable,
+    currStatus: observable
 });
 
 export const taskStore = new TaskStore();

@@ -33,11 +33,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
   @Override
   public void filter(ContainerRequestContext container) throws IOException {
-    //For test purposes
-    if (System.getenv("LOGIN").equals("false")) {
-      return;
-    }
-
     //First checks the security set by method level
     Secured secured = resourceInfo.getResourceMethod().getAnnotation(Secured.class);
     if (secured == null)

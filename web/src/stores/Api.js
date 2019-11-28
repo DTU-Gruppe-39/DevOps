@@ -1,8 +1,15 @@
+import {authenticationStore} from "./AuthenticationStore";
+
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:3000/":""; //Check if dev environment
 
 export const postTask = (task) => {
     console.log("This task will be posted: " + JSON.stringify(task));
     return taskPost(task,'https://test-devops69.herokuapp.com')
+}
+
+export const deleteTask = (task) => {
+    console.log("This task will be deleted: " + JSON.stringify(task));
+    return taskDel(task,'https://test-devops69.herokuapp.com')
 }
 
 const taskPost = async (json, url) =>{
@@ -11,12 +18,42 @@ const taskPost = async (json, url) =>{
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url
 }
 
+export const putTask = (task) => {
+    console.log("This task will be posted: " + JSON.stringify(task));
+    return taskPut(task,'https://test-devops69.herokuapp.com')
+}
+
+const taskPut = async (json, url) =>{
+    return await fetch(url + '/api/task',
+        {method:"PUT",
+         // mode: '',
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+             'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+        },
+        body: JSON.stringify(json)})
+        // then(resp=>resp.json()) + url
+    }
+    
+const taskDel = async (json, url) =>{
+    return await fetch(url + '/api/task',
+        {method:"DELETE",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: json})
+}
 
 export const postStakeholder = (stakeholder) => {
     console.log("This task will be posted: " + JSON.stringify(stakeholder))
@@ -30,7 +67,8 @@ const stakeholderPost = async (json, url) =>{
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url
@@ -48,7 +86,8 @@ const usecasePost = async (json, url) =>{
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url

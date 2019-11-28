@@ -6,12 +6,11 @@ import {postStakeholder} from "../stores/Api";
 
     function Stakeholders() {
         return (
-            <div class="container">
-                <div className="row justify-content-center">
-                    <div className="stakeholder-form">
-                        <form className="stakeinput" onSubmit={getOnSubmit()}>
+            <div class="container col-10">
+                <div className="row justify-content-lg-center">
+                        <form className="" onSubmit={getOnSubmit()}>
                             <label>
-                                <input name="name" type="text" placeholder="Name"
+                                <input name="name " type="text" placeholder="Name"
                                        value={stakeHolderStore.inputStakeholder.name}
                                        onChange={(e) => stakeHolderStore.inputStakeholder.name = e.target.value} required/>
                             </label>
@@ -36,8 +35,7 @@ import {postStakeholder} from "../stores/Api";
                             </label>
                             <input type="submit" value="Submit"/>
                         </form>
-                    </div>
-                    <div className="stakeholderList d-flex justify-content-center">
+                    <div className="stakeholderList justify-content-center">
                         <ul>
                             <h3 className="d-flex justify-content-center">Stakeholders</h3>
                             <table>
