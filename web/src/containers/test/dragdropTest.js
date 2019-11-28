@@ -53,46 +53,58 @@ export default class containers extends React.Component{
         return (
             <div className="spacer">
 
-            <Row className="justify-content-center col-11">
+                <Row className="justify-content-center col-11">
 
-                <Wrapper className="col-12">
-                    <Col className="col-4">
-                        <h3><center>To-Do</center></h3>
-                        <Droppable id="drop1" style={droppableStyle}>
+                    <Wrapper className="col-12">
+                        <Col className="col-4">
+                            <h3><center>To-Do</center></h3>
+                            <Droppable id="drop1" style={droppableStyle}>
 
-                                {taskStore.taskList.map((task, key) => (
-                                    // console.log(task.taskStatus.toString())
-                                    // if (task.taskStatus.toString() === "In progress") {
-                                    taskStore.taskList.map((task, key) => (
-                                            console.log(task.name.toString()),
-                                            <Draggable id="item1"> <Item><p key={key}><b>{task.name}</b> <br/>
-                                                    {task.description}</p></Item> </Draggable>
-                                        ),
-                                    )))
-                                    // } else {
-                                    // }
-                                }
+                                {/*status: NotStarted, InProgress, Done*/}
+                                {taskStore.taskList.map((task, key) => {
+                                        if (task.status.toString()==="NotStarted") {
+                                            return console.log(task.name.toString()),
+                                                <Draggable id={task.id}> <Item><p key={key}><b>{task.name}</b> <br/>
+                                                    {task.description}</p></Item> </Draggable>;
+                                        }
+                                    }
+                                )}
+                            </Droppable>
+                        </Col>
 
-                            <Draggable id="item2">
-                                <Item>Dette er en case</Item>
-                            </Draggable>
-                        </Droppable>
-                    </Col>
+                        <Col className="col-4">
+                            <h3><center>In-Progress</center></h3>
+                            <Droppable id="drop2" style={droppableStyle}>
+                                {taskStore.taskList.map((task, key) => {
+                                        if (task.status.toString()==="InProgress") {
+                                            return console.log(task.name.toString()),
+                                                <Draggable id={task.id}> <Item><p key={key}><b>{task.name}</b> <br/>
+                                                    {task.description}</p></Item> </Draggable>;
+                                        }
+                                    }
+                                )}
+                            </Droppable>
+                        </Col>
 
-                    <Col className="col-4">
-                        <h3><center>In-Progress</center></h3>
-                        <Droppable id="drop2" style={droppableStyle}/>
-                    </Col>
+                        <Col className="col-4">
+                            <h3><center>Completed</center></h3>
+                            <Droppable id="drop3" style={droppableStyle}>
+                                {taskStore.taskList.map((task, key) => {
+                                        if (task.status.toString()==="Done") {
+                                            return console.log(task.name.toString()),
+                                                <Draggable id={task.id}> <Item><p key={key}><b>{task.name}</b> <br/>
+                                                    {task.description}</p></Item> </Draggable>;
+                                        }
+                                    }
+                                )}
 
-                    <Col className="col-4">
-                        <h3><center>Completed</center></h3>
-                        <Droppable id="drop3" style={droppableStyle}/>
-                    </Col>
+                            </Droppable>
+                        </Col>
 
 
-                </Wrapper>
+                    </Wrapper>
 
-            </Row>
+                </Row>
             </div>
         )
     }
