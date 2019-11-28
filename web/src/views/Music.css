@@ -1,0 +1,43 @@
+.result-list {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+h6 {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+h5 {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+p {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-size: small;
+    color: #777777;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+input {
+    margin-top: 0px;
+}
+
+.requestList {
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: -100px;
+}
+
+.content {
+    margin-top: 60px;
+}
+
+.table {
+    width: 800px;
+}

@@ -9,6 +9,7 @@ import Usecases from "./views/Usecases";
 import Dashboard from "./views/Dashboard";
 import TaskOverview from "./views/TaskOverview";
 import Vision from "./views/Vision";
+import Music from "./views/Music";
 import SecureRoute from "./SecureRoute";
 import Login from "./views/Login";
 import {authenticationStore} from "./stores/AuthenticationStore";
@@ -34,10 +35,6 @@ function App() {
                               </NavDropdown>
                                   </span>
               </nav>
-
-
-
-
           </div>
         {/*</div>*/}
 
