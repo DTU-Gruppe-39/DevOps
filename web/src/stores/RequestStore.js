@@ -25,7 +25,7 @@ class RequestStore {
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
         const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Getting music requests");
-        fetch(localurl)
+        fetch(testserverurl)
             .then((response) => response.json()
                 .then((jsonresponse) => {
                     // console.log("GETTING REQUESTS: " + jsonresponse);
@@ -40,7 +40,7 @@ class RequestStore {
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
         const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Posting music request");
-        fetch(localurl, {
+        fetch(testserverurl, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

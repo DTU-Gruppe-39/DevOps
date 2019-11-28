@@ -27,7 +27,7 @@ class MusicStore {
             const testserverurl = "https://test-devops69.herokuapp.com/api/music/search/" + songname;
             const serverurl = "https://devops69.herokuapp.com/api/music/search/" + songname;
             console.log("Getting search results");
-            fetch(localurl)
+            fetch(testserverurl)
                 .then((response) => response.json()
                     .then((jsonresponse) => {
                         // console.log(jsonresponse);
