@@ -40,7 +40,7 @@ public class MusicControllerImpl implements MusicController {
         }
 
         Client client = ClientBuilder.newClient();
-        String limit = "20"; //Number of songs that Spotify returns
+        String limit = "10"; //Number of songs that Spotify returns
         WebTarget webTarget = client.target("https://api.spotify.com/v1/search?q=track:" + URLEncoder.encode(songName, "UTF-8") + "*&type=track&market=DK&limit=" + limit + "&offset=0");
 
         Response response = SendClientCredentialsRequest(webTarget);

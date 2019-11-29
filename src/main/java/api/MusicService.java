@@ -4,8 +4,6 @@ import controller.ControllerRegistry;
 import controller.interfaces.MusicController;
 import data.DTO.MusicRequest;
 import data.DTO.Track;
-import org.json.JSONObject;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
