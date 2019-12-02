@@ -131,7 +131,8 @@ const Example = observer(()=> {
                     <Toast onClose={() => {musicStore.showToast = false}} show={musicStore.showToast} delay={3000} autohide style={{
                         position: 'absolute',
                         top: 0,
-                        right: 0,
+                        right: 20,
+                        minWidth: 200
                     }}>
                         <Toast.Header>
                             <strong className="mr-auto">Music request</strong>
