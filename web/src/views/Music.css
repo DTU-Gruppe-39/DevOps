@@ -41,3 +41,7 @@ input {
 .table {
     width: 800px;
 }
+
+table {
+    margin: 0px;
+}
