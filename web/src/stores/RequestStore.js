@@ -56,6 +56,27 @@ class RequestStore {
         )
     }
 
+    deleteRequest(track) {
+        const localurl = "http://localhost:5005/api/music/";
+        const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
+        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        console.log("Deleting music request");
+        fetch(testserverurl, {
+            method: "DELETE",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(track)
+        }) .then((response) => response.json()
+            .then((jsonresponse) => {
+                // console.log(jsonresponse);
+                this.showRequestList = jsonresponse;
+                this.requestList = jsonresponse;
+            })
+        )
+    }
+
 }
 
 

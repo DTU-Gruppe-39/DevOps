@@ -81,7 +81,7 @@ import Form from "react-bootstrap/Form";
                                             {/*<td key={key}>{request.upvotes}</td>*/}
                                             <td key={key}>
                                                 <a href={request.track.webplayerLink} target="_blank"><img src={spotifylogo} width="24" height="24" title="Åben i spotify" /></a>
-                                                <img src={deletelogo} width="24" height="24" title="Slet fra listen" onClick={() => requestStore.requestList.splice(key, 1)} />
+                                                <img src={deletelogo} width="24" height="24" title="Slet fra listen" onClick={() => requestStore.deleteRequest(request.track)} />
                                             </td>
                                         </tr>),
                                     )}

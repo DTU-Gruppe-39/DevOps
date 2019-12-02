@@ -38,4 +38,10 @@ public class MusicService {
         musicController.addRequest(track);
         return musicController.getRequests();
     }
+
+    @DELETE
+    public List<MusicRequest> delete(Track track) {
+        musicController.deleteRequest(track);
+        return musicController.getRequests();
+    }
 }

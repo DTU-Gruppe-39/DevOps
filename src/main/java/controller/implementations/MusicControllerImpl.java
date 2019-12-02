@@ -29,7 +29,26 @@ public class MusicControllerImpl implements MusicController {
     }
 
     public void addRequest(Track track) {
-        requests.add(new MusicRequest(track));
+        boolean contains = false;
+        for (MusicRequest request : requests) {
+            if (track.getTrackId().equals(request.getTrack().getTrackId())) {
+                contains = true;
+                break;
+            }
+        }
+
+        if (!contains) {
+            requests.add(new MusicRequest(track));
+        }
+    }
+
+    public void deleteRequest(Track track) {
+        for (int i = 0; i < requests.size(); i++) {
+            if (track.getTrackId().equals(requests.get(i).getTrack().getTrackId())) {
+                requests.remove(i);
+                break;
+            }
+        }
     }
 
 
