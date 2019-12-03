@@ -5,6 +5,7 @@ import data.DTO.Stakeholder;
 import data.database.implementations.StakeholderDocumentImpl;
 import data.database.interfaces.StakeholderDocumentI;
 
+import javax.ws.rs.BadRequestException;
 import java.util.List;
 
 public class StakeholderControllerImpl implements StakeholderController {
@@ -12,7 +13,10 @@ public class StakeholderControllerImpl implements StakeholderController {
 
     @Override
     public void add(Stakeholder stakeholder) {
-        stakeholderDocument.add(stakeholder);
+        if (!(stakeholder.getName().equals("")))
+            stakeholderDocument.add(stakeholder);
+        else
+            throw new BadRequestException("Stakeholder entity is wrong");
     }
 
     @Override

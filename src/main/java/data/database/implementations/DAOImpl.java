@@ -105,23 +105,20 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
     collection.deleteOne(eq("_id",new ObjectId(documentId)));
   }
 
-  public User validateLogin(LoginDetails loginDetails) {
+  public LoginDetails validateLogin(String username) {
     objectToReturn = null;
+    Document loginDocument = collection.find(and(eq("username",username))).first();
     try {
-      objectToReturn = new User();
+      objectToReturn = new LoginDetails();
     } catch (Exception e) {
       System.out.println("Could not define subclass of superclass"+e);
     }
-    Document loginDocument = collection.find(and(eq("username",loginDetails.getUsername()),eq("password",loginDetails.getPassword()))).first();
-
-    MongoCollection<Document> userCollection = db.getCollection("user");
-    Document userDocument = userCollection.find(eq("_id",(ObjectId) loginDocument.get("user_reference_id"))).first();
     Map<String, Object> map = new HashMap<>();
-    for (Map.Entry<String, Object> element : userDocument.entrySet()) {
+    for (Map.Entry<String, Object> element : loginDocument.entrySet()) {
       map.put(element.getKey(), element.getValue());
     }
     objectToReturn.toObject(map);
-    return (User) objectToReturn;
+    return (LoginDetails) objectToReturn;
   }
 
   public void addUser (User user, LoginDetails loginDetails) {

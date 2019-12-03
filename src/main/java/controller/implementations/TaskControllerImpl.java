@@ -5,6 +5,7 @@ import data.DTO.Task;
 import data.database.implementations.TaskDocumentImpl;
 import data.database.interfaces.TaskDocumentI;
 
+import javax.ws.rs.BadRequestException;
 import java.util.List;
 
 /**
@@ -25,7 +26,10 @@ public class TaskControllerImpl implements TaskController {
 
   @Override
   public void add(Task task) {
-    taskDocument.add(task);
+    if (!(task.getName().equals("")))
+      taskDocument.add(task);
+    else
+      throw new BadRequestException("Taskname is not declared");
   }
 
   @Override

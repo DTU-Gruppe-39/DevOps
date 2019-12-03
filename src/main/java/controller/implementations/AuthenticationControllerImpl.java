@@ -8,8 +8,10 @@ import data.DTO.LoginDetails;
 import data.DTO.User;
 import data.database.implementations.LoginDocumentImpl;
 import data.database.interfaces.LoginDocumentI;
+import util.Hashing;
 import util.JWTutil;
 
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotAuthorizedException;
 
 /**
@@ -22,9 +24,8 @@ public class AuthenticationControllerImpl implements AuthenticationController {
   @Override
   public String login(LoginDetails loginDetails) {
     User user = validateLoginDetails(loginDetails);
-    if (user != null) {
+    if (user != null)
       return JWTutil.generateToken(user);
-    }
     else
       throw new NotAuthorizedException("Login failed, wrong username or password");
   }
@@ -36,7 +37,11 @@ public class AuthenticationControllerImpl implements AuthenticationController {
 
   private User validateLoginDetails (LoginDetails loginDetails) {
     try {
-      return loginDocument.validateLogin(loginDetails);
+      LoginDetails databaseLogin = loginDocument.validateLogin(loginDetails.getUsername());
+      if (Hashing.verifyHash(loginDetails.getPassword(),databaseLogin.getPassword()))
+        return userController.get(databaseLogin.getUser_reference_id());
+      else
+        throw new ForbiddenException("Username or password wrong");
     } catch (MongoException mongoException) {
       throw new NotAuthorizedException("Wrong username or password");
     }
