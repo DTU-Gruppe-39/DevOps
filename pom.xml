@@ -88,7 +88,7 @@
                     <name>env.RUNTESTS</name>
                 </property>
             </activation>
-            <id>tests</id>
+            <id>runtests</id>
             <build>
                 <plugins>
                     <!-- for unit tests -->
