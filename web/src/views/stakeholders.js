@@ -2,12 +2,61 @@ import React from "react";
 import {observer} from "mobx-react";
 import "./Stakeholders.css";
 import {stakeHolderStore} from "../stores/StakeholdersStore";
-import {postStakeholder} from "../stores/Api";
+import {deleteStakeholder, deleteTask, postStakeholder, putStakeholder, putTask} from "../stores/Api";
+import {Button, Modal} from "react-bootstrap";
+import {taskStore} from "../stores/TaskStore";
+import Select from "react-select";
+import Col from "react-bootstrap/Col";
 
     function Stakeholders() {
         return (
             <div class="container col-10">
                 <div className="row justify-content-lg-center">
+                    <Modal show={stakeHolderStore.modalShow} size={"lg"}>
+                        <Modal.Header>
+                            <Modal.Title> Editing stakeholder </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div>
+                                <label>
+                                    <input name="name " type="text" placeholder="Name"
+                                           value={stakeHolderStore.updateStakeholder.name}
+                                           onChange={(e) => stakeHolderStore.updateStakeholder.name = e.target.value} required/>
+                                </label>
+                                <label>
+                                    <input name="contactperson" type="text" placeholder="Contact person"
+                                           value={stakeHolderStore.updateStakeholder.contact_person}
+                                           onChange={(e) => stakeHolderStore.updateStakeholder.contact_person = e.target.value}
+                                           required/>
+                                </label>
+                                <label>
+                                    <input name="email" type="email" placeholder="Email"
+                                           value={stakeHolderStore.updateStakeholder.email}
+                                           onChange={(e) => stakeHolderStore.updateStakeholder.email = e.target.value} required/>
+                                </label>
+                                <label>
+                                    Direct stakeholder:
+                                    <input
+                                        name="direct"
+                                        type="checkbox"
+                                        checked={stakeHolderStore.updateStakeholder.stakeholder_type}
+                                        onChange={(e) => {stakeHolderStore.updateStakeholder.stakeholder_type ^= true}}/>
+                                </label>
+
+                            </div>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button variant={"secondary"} onClick={updateStakeholderFunc(false)}>
+                                Discard changes
+                            </Button>
+                            <Button variant={"primary"} onClick={updateStakeholderFunc(true)}>
+                                Save changes
+                            </Button>
+                        </Modal.Footer>
+
+                    </Modal>
+
                         <form className="" onSubmit={getOnSubmit()}>
                             <label>
                                 <input name="name " type="text" placeholder="Name"
@@ -44,6 +93,8 @@ import {postStakeholder} from "../stores/Api";
                                     <th>Contact Person</th>
                                     <th>Email</th>
                                     <th>Direct Stakeholder</th>
+                                    <th>Edit</th>
+                                    <th>Remove</th>
                                 </tr>
                                 {stakeHolderStore.stakeholderList.map((stakeholder, key) => (
                                     <tr>
@@ -51,6 +102,8 @@ import {postStakeholder} from "../stores/Api";
                                         <td key={key}>{stakeholder.contact_person}</td>
                                         <td key={key}>{stakeholder.email}</td>
                                         <td key={key}>{(stakeholder.stakeholder_type ? "Direct stakeholder" : "Indirect stakeholder")}</td>
+                                        <td> <Button variant={"primary"} onClick={editfunc(key, stakeholder)}>Edit</Button> </td>
+                                        <td> <Button variant={"danger"}  onClick={delFunc(stakeholder.id, key)}>Delete</Button> </td>
                                     </tr>),
                                 )}
                             </table>
@@ -62,11 +115,57 @@ import {postStakeholder} from "../stores/Api";
         );
     }
 
+function updateStakeholderFunc(save) {
+    return (e) => {
+        e.preventDefault();
+        if(save === true){
+            // taskStore.updateTask.status = taskStore.currStatus.value;
+            // taskStore.updateTask.status = taskStore.currStatus.value;
+
+            stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].name = stakeHolderStore.updateStakeholder.name;
+            stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].contact_person = stakeHolderStore.updateStakeholder.contact_person;
+            stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].email = stakeHolderStore.updateStakeholder.email;
+            stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].stakeholder_type = stakeHolderStore.updateStakeholder.stakeholder_type;
+            putStakeholder(stakeHolderStore.stakeholderList[stakeHolderStore.modalKey]);
+
+        }
+        stakeHolderStore.updateStakeholder = {
+            name: '',
+            contact_person: '',
+            email: '',
+            stakeholder_type: true
+        };
+        stakeHolderStore.modalKey = 0;
+        stakeHolderStore.modalShow = false;
+    }
+}
+
+function editfunc(key, stake) {
+    return (e) => {
+        e.preventDefault();
+       // change to use stakeholders
+        stakeHolderStore.updateStakeholder.name = stake.name;
+        stakeHolderStore.updateStakeholder.contact_person = stake.contact_person;
+        stakeHolderStore.updateStakeholder.email = stake.email;
+        stakeHolderStore.updateStakeholder.stakeholder_type = stake.stakeholder_type;
+        stakeHolderStore.modalKey = key;
+        stakeHolderStore.modalShow = true;
+    };
+}
+function delFunc(stake, key) {
+    return (e) => {
+        e.preventDefault();
+        deleteStakeholder(stake);
+        stakeHolderStore.stakeholderList.splice(key,1);
+
+    };
+}
+
     function getOnSubmit() {
         return (e) => {
             e.preventDefault();
             stakeHolderStore.stakeholderList.push(stakeHolderStore.inputStakeholder);
-            postStakeholder(stakeHolderStore.inputStakeholder);
+            postStakeholder(stakeHolderStore.inputStakeholder).then();
             stakeHolderStore.inputStakeholder = {
                 name: '',
                 contact_person: '',

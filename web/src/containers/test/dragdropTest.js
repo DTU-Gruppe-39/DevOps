@@ -40,20 +40,18 @@ export default class containers extends React.Component{
         return (
             <div className="spacer">
 
-                <Row className="justify-content-center col-11">
-
                     <Wrapper className="col-12">
                         <Col className="col-4">
                             <h3><center>To-Do</center></h3>
                             <Droppable id="To-Do" style={droppableStyle}>
-
                                 {/*status: NotStarted, InProgress, Done*/}
                                 {taskStore.taskList.map((task, key) => {
                                         if (task.status.toString()==="NotStarted") {
                                             return console.log(task.name.toString()),
                                                 <Draggable id={task.id}>
                                                     <Item>
-                                                        <p key={key}><b>{task.name}</b></p><p>--{task.responsible}--</p><p>{task.description}</p>                                                    </Item>
+                                                        <p key={key}><b>{task.name}</b></p><p>--{task.responsible}--</p><p>{task.description}</p>
+                                                    </Item>
                                                 </Draggable>;
                                         }
                                     }
@@ -86,19 +84,15 @@ export default class containers extends React.Component{
                                             return console.log(task.name.toString()),
                                                 <Draggable id={task.id}>
                                                     <Item>
-                                                        <p key={key}><b>{task.name}</b></p><p>--{task.responsible}--</p><p>{task.description}</p>                                                    </Item>
+                                                        <p key={key}><b>{task.name}</b></p><p>--{task.responsible}--</p><p>{task.description}</p>
+                                                    </Item>
                                                 </Draggable>;
                                         }
                                     }
                                 )}
-
                             </Droppable>
                         </Col>
-
-
                     </Wrapper>
-
-                </Row>
             </div>
         )
     }

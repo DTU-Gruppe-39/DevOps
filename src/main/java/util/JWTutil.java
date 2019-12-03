@@ -30,9 +30,6 @@ public class JWTutil {
               .parseClaimsJws(jwt);
       return jws.getBody();
     }
-    catch (IllegalArgumentException e) {
-      throw new NotAuthorizedException("Illegal arugment");
-    }
     catch (UnsupportedJwtException e) {
       throw new NotAuthorizedException("Token not supported");
     }
@@ -43,7 +40,10 @@ public class JWTutil {
       throw new NotAuthorizedException("The token signature is invalid ");
     }
     catch (ExpiredJwtException e) {
-      throw new NotAuthorizedException("");
+      throw new NotAuthorizedException("Token expired");
+    }
+    catch (IllegalArgumentException e) {
+      throw new NotAuthorizedException("Illegal arugment");
     }
   }
 

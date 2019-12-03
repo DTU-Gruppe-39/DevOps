@@ -7,6 +7,7 @@ import data.database.implementations.LoginDocumentImpl;
 import data.database.implementations.UserDocumentImpl;
 import data.database.interfaces.LoginDocumentI;
 import data.database.interfaces.UserDocumentI;
+import util.Hashing;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class UserControllerImpl implements UserController {
 
   @Override
   public void add(User user, LoginDetails loginDetails) {
+    loginDetails.setPassword(Hashing.hashPassword(loginDetails.getPassword()));
     userDocument.addUser(user, loginDetails);
   }
 
