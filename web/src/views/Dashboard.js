@@ -12,7 +12,7 @@ import "./Dashboard.css"
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-10">
-                            <ProgressBar now={progressStore.progress} label={`${progressStore.progress}%`} style={{height: 40}} />
+                            <ProgressBar max={100} min={0} now={progressStore.progress} label={`${progressStore.progress}%`} style={{height: 40}} />
                         </div>
                     </div>
                     <div className="progress-input">
@@ -24,6 +24,9 @@ import "./Dashboard.css"
                                                    type="number" placeholder="Update progress"
                                                    onFocus={() => (progressStore.progress !== 0) ? progressStore.inputProgress = progressStore.progress : null}
                                                    value={progressStore.inputProgress}
+                                                   min={0}
+                                                   max={100}
+                                                   style={{width: 175}}
                                                    onChange={(e) => progressStore.inputProgress = e.target.value} required/>
                                     </label>
                                     <input type="submit" value="Save"/>
@@ -40,6 +43,11 @@ import "./Dashboard.css"
     function getOnSubmit() {
         return (e) => {
             e.preventDefault();
+            if (progressStore.inputProgress < 0) {
+                progressStore.inputProgress = 0;
+            } else if (progressStore.inputProgress > 100) {
+                progressStore.inputProgress = 100;
+            }
             progressStore.progress = progressStore.inputProgress;
             progressStore.inputProgress = "";
 
