@@ -23,23 +23,36 @@ class StakeholdersStore {
             )
     }
     stakeholderList = [{
+        id: '',
         name: '',
         contact_person: '',
         email: '',
         stakeholder_type: true
     }];
     inputStakeholder = {
+        id: '',
         name: '',
         contact_person: '',
         email: '',
         stakeholder_type: true
-    }
+    };
+    updateStakeholder = {
+        id: '',
+        name: '',
+        contact_person: '',
+        email: '',
+        stakeholder_type: true
+    };
+    modalShow = false;
+    modalKey;
+    modalDropdown = false;
 }
 
 
 decorate(StakeholdersStore, {
     stakeholderList: observable,
-    inputStakeholder: observable
+    inputStakeholder: observable,
+    updateStakeholder:observable
 });
 
 export const stakeHolderStore = new StakeholdersStore();
