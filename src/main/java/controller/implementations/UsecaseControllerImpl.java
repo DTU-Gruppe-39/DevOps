@@ -5,6 +5,7 @@ import data.DTO.Usecase;
 import data.database.implementations.UsecaseDocumentImpl;
 import data.database.interfaces.UsecaseDocumentI;
 
+import javax.ws.rs.BadRequestException;
 import java.util.List;
 
 public class UsecaseControllerImpl implements UsecaseController {
@@ -23,7 +24,10 @@ public class UsecaseControllerImpl implements UsecaseController {
 
     @Override
     public void add(Usecase usecase) {
-        usecaseDocument.add(usecase);
+        if (!(usecase.userStory.equals("")))
+            usecaseDocument.add(usecase);
+        else
+            throw new BadRequestException("Userstory is not declared");
     }
 
     @Override
