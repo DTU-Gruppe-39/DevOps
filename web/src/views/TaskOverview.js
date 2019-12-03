@@ -125,7 +125,7 @@ function TaskOverview() {
                                         <td>{task.responsible}</td>
                                         <td>{task.status}</td>
                                         <td> <Button variant={"primary"} onClick={editfunc(key, task)}>Edit</Button> </td>
-                                        <td><button variant={"danger"} onClick={deleteFunc(task.id, key)}>Delete</button></td>
+                                        <td><Button variant={"danger"} onClick={deleteFunc(task.id, key)}>Delete</Button></td>
                                     </tr>),
                                 )}
                             </table>

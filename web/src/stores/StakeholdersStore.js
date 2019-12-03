@@ -52,7 +52,10 @@ class StakeholdersStore {
 decorate(StakeholdersStore, {
     stakeholderList: observable,
     inputStakeholder: observable,
-    updateStakeholder:observable
+    updateStakeholder:observable,
+    modalDropdown:observable,
+    modalKey:observable,
+    modalShow:observable
 });
 
 export const stakeHolderStore = new StakeholdersStore();

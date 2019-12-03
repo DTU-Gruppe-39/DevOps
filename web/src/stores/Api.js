@@ -109,6 +109,41 @@ const stakeholderDel = async (json, url) =>{
             body: json})
 };
 
+export const putUsecase = (usecase) => {
+    console.log("This usecase will be updated: " + JSON.stringify(usecase));
+    return usecasePut(usecase,'https://test-devops69.herokuapp.com')
+};
+
+const usecasePut = async (json, url) =>{
+    return await fetch(url + '/api/usecase',
+        {method:"PUT",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: JSON.stringify(json)})
+    // then(resp=>resp.json()) + url
+};
+
+export const deleteUsecase = (usecase) => {
+    console.log("This usecase will be deleted: " + JSON.stringify(usecase));
+    return usecaseDel(usecase,'https://test-devops69.herokuapp.com')
+};
+
+const usecaseDel = async (json, url) =>{
+    return await fetch(url + '/api/usecase',
+        {method:"DELETE",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: json})
+};
+
 export const postUsecase = (usecase) => {
     console.log("This task will be posted: " + JSON.stringify(usecase))
     // return post(task,"http://localhost:3000")

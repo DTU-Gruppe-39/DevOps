@@ -33,13 +33,28 @@ class UsecasesStore {
         userStory: '',
         priority: '',
         responsible: ''
-    }
+    };
+
+    updateUsecases = {
+        id: null,
+        userStory: '',
+        priority: '',
+        responsible: ''
+    };
+
+    modalShow = false;
+    modalKey;
+    modalDropdown = false;
 }
 
 
 decorate(UsecasesStore, {
     usecasesList: observable,
-    inputUsecases: observable
+    inputUsecases: observable,
+    updateUsecases:observable,
+    modalDropdown:observable,
+    modalKey:observable,
+    modalShow:observable
 });
 
 export const usecasesStore = new UsecasesStore();

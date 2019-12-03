@@ -2,11 +2,9 @@ import React from "react";
 import {observer} from "mobx-react";
 import "./Stakeholders.css";
 import {stakeHolderStore} from "../stores/StakeholdersStore";
-import {deleteStakeholder, deleteTask, postStakeholder, putStakeholder, putTask} from "../stores/Api";
+import {deleteStakeholder, postStakeholder, putStakeholder} from "../stores/Api";
 import {Button, Modal} from "react-bootstrap";
-import {taskStore} from "../stores/TaskStore";
-import Select from "react-select";
-import Col from "react-bootstrap/Col";
+
 
     function Stakeholders() {
         return (
