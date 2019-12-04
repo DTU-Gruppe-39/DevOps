@@ -47,10 +47,6 @@ public class JWTutil {
     }
   }
 
-  public static String getUserId (Claims claims) {
-    return (String) claims.get("id");
-  }
-
   public static String getUserId (String jwt) {
     Claims claims = parseToken(jwt);
     return (String) claims.get("id");
