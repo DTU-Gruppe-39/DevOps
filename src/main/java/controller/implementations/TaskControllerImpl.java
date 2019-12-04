@@ -6,6 +6,7 @@ import data.database.implementations.TaskDocumentImpl;
 import data.database.interfaces.TaskDocumentI;
 
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
@@ -21,7 +22,12 @@ public class TaskControllerImpl implements TaskController {
 
   @Override
   public Task get(String id) {
-    return (Task) taskDocument.get(id);
+    try {
+      return (Task) taskDocument.get(id);
+    }
+    catch (NullPointerException nullPointerException) {
+      throw new NotFoundException("Could not find task");
+    }
   }
 
   @Override
@@ -34,7 +40,12 @@ public class TaskControllerImpl implements TaskController {
 
   @Override
   public void update(String id, Task replaceTask) {
-    taskDocument.update(id, replaceTask);
+    try {
+      taskDocument.update(id, replaceTask);
+    }
+    catch (NullPointerException nullPointerException) {
+      throw new NotFoundException("Could not find task to update");
+    }
   }
 
   @Override

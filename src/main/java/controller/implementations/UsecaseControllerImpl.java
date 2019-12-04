@@ -6,6 +6,7 @@ import data.database.implementations.UsecaseDocumentImpl;
 import data.database.interfaces.UsecaseDocumentI;
 
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 public class UsecaseControllerImpl implements UsecaseController {
@@ -19,12 +20,17 @@ public class UsecaseControllerImpl implements UsecaseController {
 
     @Override
     public Usecase get(String id) {
-        return (Usecase) usecaseDocument.get(id);
+        try {
+            return (Usecase) usecaseDocument.get(id);
+        }
+        catch (NullPointerException nullPointerException) {
+            throw new NotFoundException("Could not find usecase");
+        }
     }
 
     @Override
     public void add(Usecase usecase) {
-        if (!(usecase.userStory.equals("")))
+        if (!(usecase.getUserStory().equals("")))
             usecaseDocument.add(usecase);
         else
             throw new BadRequestException("Userstory is not declared");
@@ -32,7 +38,12 @@ public class UsecaseControllerImpl implements UsecaseController {
 
     @Override
     public void update(String id, Usecase replaceUsecase) {
-        usecaseDocument.update(id, replaceUsecase);
+        try {
+            usecaseDocument.update(id, replaceUsecase);
+        }
+        catch (NullPointerException nullPointerException) {
+            throw new NotFoundException("Could not find usecase to update");
+        }
     }
 
     @Override
