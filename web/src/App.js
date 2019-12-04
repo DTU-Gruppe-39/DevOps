@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './Ionic_Logo.png';
+import profile from './profile.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Route, Link, Switch} from "react-router-dom";
 import {observer} from "mobx-react";
@@ -11,10 +12,12 @@ import TaskOverview from "./views/TaskOverview";
 import Vision from "./views/Vision";
 import Music from "./views/Music";
 import SecureRoute from "./SecureRoute";
-import Login from "./views/Login";
 import {authenticationStore} from "./stores/AuthenticationStore";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import {Redirect} from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import {taskStore} from "./stores/TaskStore";
+import {Button, Modal} from "react-bootstrap";
+import Select from "react-select";
 
 function App() {
   return (
@@ -25,15 +28,30 @@ function App() {
 
                   <div className="collapse navbar-collapse dropdown-menu-left" id="navbarSupportedContent">
                   </div>
+                  {
+                      authenticationStore.currentAuthentication.isAuthenticated === true &&
+                      (
+                          <Dropdown onSelect={function(eventKey) {
+                              if (eventKey == 1) {
+                                  profileMenu();
+                              }
+                              if (eventKey == 2) {
+                                  logoutMenu();
+                              }
+                            }
+                          }>
+                              <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                                  <text style={{color: 'white'}}>Profile</text>
+                              </Dropdown.Toggle>
 
-                  <Navbar.Toggle aria-controls="basic-navbar-nav " />
-                  <span className="navbar-toggler-icon">
-                              <NavDropdown  alignRight id="dropdown-menu-align-right">
-                                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                              </NavDropdown>
-                                  </span>
+                              <Dropdown.Menu>
+                                  <Dropdown.Item eventKey={1}>Profile</Dropdown.Item>
+                                  <Dropdown.Divider/>
+                                  <Dropdown.Item eventKey={2}>Logout</Dropdown.Item>
+                              </Dropdown.Menu>
+                          </Dropdown>
+                      )
+                  }
               </nav>
           </div>
         {/*</div>*/}
@@ -65,13 +83,79 @@ function App() {
                 <SecureRoute exact path="/TaskOverview" component={TaskOverview}/>
                 <SecureRoute exact path="/Music" component={Music}/>
                 {/*<Route exact path="/TaskOverview" component={KanbanTest}/>*/}
-                <Route exact path="/Login" component={Login}/>
             </Switch>
+            {authenticationStore.currentAuthentication.isAuthenticated ?
+                <Redirect to="/Dashboard"/>
+                :
+                <form className="loginForm" onSubmit={getOnSubmit()}>
+                    <label>
+                        Username:
+                        <input name="email" type="email" placeholder="Email"
+                               value={authenticationStore.inputLogin.username}
+                               onChange={(e) => authenticationStore.inputLogin.username = e.target.value} required/>
+                    </label>
+                    <label>
+                        Password:
+                        <input
+                            name="password" type="password" placeholder="Password"
+                            value={authenticationStore.inputLogin.password}
+                            onChange={(e) => {authenticationStore.inputLogin.password = e.target.value}} required/>
+                    </label>
+                    <input type="submit" value="Submit"/>
+                </form>
+            }
+            <Modal show={false} size={"lg"}>
+                <Modal.Header>
+                    <Modal.Title> Profile</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>
+                        Hej
+                    </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+
+                </Modal.Footer>
+
+            </Modal>
         </div>
         {/*<header className="App-header">*/}
         {/*</header>*/}
+
       </div>
   );
+}
+function getOnSubmit() {
+    return (e) => {
+        e.preventDefault();
+        authenticationStore.login();
+        authenticationStore.inputLogin = {
+            username: "",
+            password: ""
+        };
+    };
+}
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+        style={{textDecorationColor: 'white'}}
+        href=""
+        ref={ref}
+        onClick={e => {
+            e.preventDefault();
+            onClick(e);
+        }}>
+        <img src={profile} height="42" width="42"/>
+        {children}
+    </a>
+));
+
+function profileMenu() {
+
+}
+function logoutMenu() {
+    authenticationStore.logout();
+    return <Redirect to="/"/>
 }
 export default observer(App);
 

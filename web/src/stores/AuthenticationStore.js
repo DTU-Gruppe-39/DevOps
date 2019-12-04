@@ -86,7 +86,7 @@ class AuthenticationStore {
 
     logout() {
         this.removeToken();
-        this.setIsAuthenticated(false);
+        this.currentAuthentication.isAuthenticated = false;
         this.removeUser();
     }
 }
