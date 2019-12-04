@@ -6,6 +6,7 @@ import data.database.implementations.StakeholderDocumentImpl;
 import data.database.interfaces.StakeholderDocumentI;
 
 import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 public class StakeholderControllerImpl implements StakeholderController {
@@ -21,7 +22,12 @@ public class StakeholderControllerImpl implements StakeholderController {
 
     @Override
     public void update(String id, Stakeholder replaceStakeholder) {
-        stakeholderDocument.update(id, replaceStakeholder);
+        try {
+            stakeholderDocument.update(id, replaceStakeholder);
+        }
+        catch (NullPointerException nullPointerException) {
+            throw new NotFoundException("Could not find stakeholder to update");
+        }
     }
 
     @Override
@@ -36,7 +42,12 @@ public class StakeholderControllerImpl implements StakeholderController {
 
     @Override
     public Stakeholder get(String id) {
-        return (Stakeholder) stakeholderDocument.get(id);
+        try {
+            return (Stakeholder) stakeholderDocument.get(id);
+        }
+        catch (NullPointerException nullPointerException) {
+            throw new NotFoundException("Could not find stakeholder");
+        }
     }
 
 }

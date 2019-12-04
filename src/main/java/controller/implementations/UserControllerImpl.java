@@ -9,6 +9,7 @@ import data.database.interfaces.LoginDocumentI;
 import data.database.interfaces.UserDocumentI;
 import util.Hashing;
 
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**
@@ -25,7 +26,12 @@ public class UserControllerImpl implements UserController {
 
   @Override
   public User get(String id) {
-    return (User) userDocument.get(id);
+    try{
+      return (User) userDocument.get(id);
+    }
+    catch (NullPointerException nullPointerException) {
+      throw new NotFoundException("Could not find user");
+    }
   }
 
   @Override

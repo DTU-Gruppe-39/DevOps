@@ -11,7 +11,7 @@ import data.database.interfaces.LoginDocumentI;
 import util.Hashing;
 import util.JWTutil;
 
-import javax.ws.rs.ForbiddenException;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.NotAuthorizedException;
 
 /**
@@ -38,12 +38,20 @@ public class AuthenticationControllerImpl implements AuthenticationController {
   private User validateLoginDetails (LoginDetails loginDetails) {
     try {
       LoginDetails databaseLogin = loginDocument.validateLogin(loginDetails.getUsername());
-      if (Hashing.verifyHash(loginDetails.getPassword(),databaseLogin.getPassword()))
-        return userController.get(databaseLogin.getUser_reference_id());
+      if (databaseLogin.getPassword() != null || databaseLogin.getUsername() != null) {
+        if (Hashing.verifyHash(loginDetails.getPassword(), databaseLogin.getPassword()))
+          return userController.get(databaseLogin.getUser_reference_id());
+        else
+          throw new NotAuthorizedException("Login failed, wrong username or password");
+      }
       else
-        throw new ForbiddenException("Username or password wrong");
-    } catch (MongoException mongoException) {
-      throw new NotAuthorizedException("Wrong username or password");
+        throw new NotAuthorizedException("Login failed, wrong username or password");
+    }
+    catch (NullPointerException nullPointerException) {
+      throw new NotAuthorizedException("Login failed, wrong username or password");
+    }
+    catch (MongoException mongoException ) {
+      throw new InternalServerErrorException("Database failed");
     }
   }
 }

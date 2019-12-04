@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Usecase extends DocumentObject {
-    public String id;
-    public String userStory;
-    public String priority;
-    public String responsible;
+    private String id;
+    private String userStory;
+    private String priority;
+    private String responsible;
 
     public Usecase(){
 

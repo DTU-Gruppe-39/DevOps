@@ -7,7 +7,7 @@ import data.DTO.DocumentObject;
  */
 public interface DocumentI {
   void add(DocumentObject documentObject);
-  void update(String documentId, DocumentObject documentObject);
-  DocumentObject get(String documentId);
+  void update(String documentId, DocumentObject documentObject) throws NullPointerException;
+  DocumentObject get(String documentId) throws NullPointerException;
   void delete(String documentId);
 }
