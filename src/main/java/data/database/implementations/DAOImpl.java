@@ -1,7 +1,5 @@
 package data.database.implementations;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import data.DTO.DocumentObject;
@@ -34,13 +32,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   private DocumentObject objectToReturn;
   ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
   Class<T> type = (Class<T>) superClass.getActualTypeArguments()[0];
-  private MongoClient mongoClient;
-
-  private MongoDatabase getDatabase() {
-    mongoClient = MongoClients.create("mongodb+srv://"+ username +":" +password + "@devops69-1bknv.mongodb.net/admin?retryWrites=true&w=majority");
-    MongoDatabase database = mongoClient.getDatabase("devops");
-    return database;
-  }
 
   public DAOImpl(String collectionReference) {
     this.collection = db.getCollection(collectionReference);
