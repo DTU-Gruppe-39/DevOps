@@ -45,6 +45,7 @@ public class UserService {
   @PUT
   @Secured({Role.Developer, Role.ProjectManager})
   public void putUser(User user) {
+    throw new InternalServerErrorException("Not implemented yet");
   }
 
   @DELETE
