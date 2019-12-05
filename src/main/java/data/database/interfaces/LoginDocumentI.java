@@ -8,4 +8,5 @@ import data.DTO.LoginDetails;
 public interface LoginDocumentI {
   LoginDetails validateLogin(String username) throws NullPointerException;
   void deleteLogin(String documentId);
+  void updateLogin(String userId, LoginDetails updatedLoginDetails) throws NullPointerException;
 }

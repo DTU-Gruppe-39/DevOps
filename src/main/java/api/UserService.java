@@ -2,6 +2,7 @@ package api;
 
 import controller.ControllerRegistry;
 import controller.interfaces.UserController;
+import data.DTO.LoginDetails;
 import data.DTO.NewUser;
 import data.DTO.Role;
 import data.DTO.User;
@@ -45,6 +46,13 @@ public class UserService {
   @PUT
   @Secured({Role.Developer, Role.ProjectManager})
   public void putUser(User user) {
+    throw new InternalServerErrorException("Not implemented yet");
+  }
+
+  @PUT
+  @Secured({Role.Developer, Role.ProjectManager})
+  @Path("login")
+  public void putLogin(LoginDetails loginDetails) {
     throw new InternalServerErrorException("Not implemented yet");
   }
 

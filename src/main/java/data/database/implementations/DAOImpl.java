@@ -130,4 +130,15 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   public void deleteLogin(String userid) {
     collection.deleteOne(eq("user_reference_id", new ObjectId(userid)));
   }
+
+  public void updateLogin(String userId, LoginDetails updatedLoginDetails) {
+    Document document = new Document(updatedLoginDetails.toMap());
+    MongoCollection<Document> loginCollection = db.getCollection("login");
+    loginCollection.replaceOne(eq("user_reference_id", new ObjectId(userId)),document);
+  }
+
+  public void updateUser (String id, User updatedUser) {
+    Document document = new Document(updatedUser.toMap());
+    collection.replaceOne(eq("_id", new ObjectId(id)),document);
+  }
 }
