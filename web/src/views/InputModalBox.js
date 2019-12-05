@@ -36,6 +36,7 @@ function InputModalBox() {
                         <Select options={userStore.userSelect} value={taskStore.inputTask.responsible} onChange={(e) => taskStore.inputTask.responsible = e} required/>
                     </li>
                     <li>
+                        {/*might want to remove this and set it to NotStarted as default*/}
                         <b> Status </b>
                         <Select options={taskStore.statusOption} value={taskStore.currStatus} onChange={(e) => taskStore.currStatus = e} required>
                         </Select>
