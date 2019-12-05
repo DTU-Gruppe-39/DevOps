@@ -8,21 +8,21 @@ import java.util.Map;
 public class Usecase extends DocumentObject {
     private String id;
     private String userStory;
-    private String priority;
+    private int priority;
     private String responsible;
 
     public Usecase(){
 
     }
 
-    public Usecase(String id, String userStory, String priority, String responsible){
+    public Usecase(String id, String userStory, int priority, String responsible){
         this.id = id;
         this.userStory = userStory;
         this.priority = priority;
         this.responsible = responsible;
     }
 
-    public Usecase(String userStory, String priority, String responsible){
+    public Usecase(String userStory, int priority, String responsible){
         this.id = null;
         this.userStory = userStory;
         this.priority = priority;
@@ -42,7 +42,7 @@ public class Usecase extends DocumentObject {
     public void toObject(Map<String, Object> mapOfObject) {
         this.id = ((ObjectId) mapOfObject.get("_id")).toString();
         this.userStory = (String) mapOfObject.get("userStory");
-        this.priority = (String) mapOfObject.get("priority");
+        this.priority = Integer.parseInt(String.valueOf(mapOfObject.get("priority")));
         this.responsible = ((ObjectId) mapOfObject.get("responsible")).toString();
     }
 
@@ -62,11 +62,11 @@ public class Usecase extends DocumentObject {
         this.userStory = userStory;
     }
 
-    public String getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 

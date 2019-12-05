@@ -23,7 +23,7 @@ class UsecaseControllerImplTest {
     usecaseController.add(getTestUsecase());
     Usecase usecase = usecaseController.get(getIdFromTestUsecase());
     assertTrue(usecase.getUserStory().equals(getTestUsecase().getUserStory()) &&
-            usecase.getPriority().equals(getTestUsecase().getPriority()) &&
+            usecase.getPriority() == 1 &&
             usecase.getResponsible().equals("test@gmail.com"));
   }
 
@@ -42,7 +42,7 @@ class UsecaseControllerImplTest {
     usecaseController.update(id, getTestUpdateUsecase());
     Usecase usecase = usecaseController.get(id);
     assertTrue(usecase.getUserStory().equals(getTestUpdateUsecase().getUserStory()) &&
-            usecase.getPriority().equals(getTestUpdateUsecase().getPriority()) &&
+            usecase.getPriority() == 2 &&
             usecase.getResponsible().equals("test@gmail.com"));
   }
 
@@ -64,7 +64,7 @@ class UsecaseControllerImplTest {
     Usecase usecase = new Usecase();
     usecase.setUserStory("Userstory for test purposes");
     usecase.setResponsible("5dcd8c382fb23360ee7b3a10");
-    usecase.setPriority("1");
+    usecase.setPriority(1);
     return usecase;
   }
 
@@ -72,14 +72,14 @@ class UsecaseControllerImplTest {
     Usecase usecase = new Usecase();
     usecase.setUserStory("Userstory for test purposes - updated");
     usecase.setResponsible("5dcd8c382fb23360ee7b3a10");
-    usecase.setPriority("2");
+    usecase.setPriority(2);
     return usecase;
   }
 
   public String getIdFromTestUsecase() {
     for (Usecase usecase :usecaseController.getAll()) {
       if (usecase.getUserStory().equals(getTestUsecase().getUserStory()) &&
-              usecase.getPriority().equals(getTestUsecase().getPriority()) &&
+              usecase.getPriority() == 1 &&
               usecase.getResponsible().equals("test@gmail.com"))
         return usecase.getId();
     }
@@ -89,7 +89,7 @@ class UsecaseControllerImplTest {
   public String getIdFromTestUpdatedUsecase() {
     for (Usecase usecase :usecaseController.getAll()) {
       if (usecase.getUserStory().equals(getTestUpdateUsecase().getUserStory()) &&
-              usecase.getPriority().equals(getTestUpdateUsecase().getPriority()) &&
+              usecase.getPriority() == 2 &&
               usecase.getResponsible().equals("test@gmail.com"))
         return usecase.getId();
     }
