@@ -19,12 +19,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import {taskStore} from "./stores/TaskStore";
-import {Button, Modal} from "react-bootstrap";
-import Select from "react-select";
 import frontImage from "./Best-Project-Management-Software-1024x512.png";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 function App() {
     return (
