@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {usecasesStore} from "../stores/UsecasesStore";
 import api, {deleteUsecase, postUsecase, putUsecase} from "../stores/Api";
@@ -7,6 +7,9 @@ import {Button, Modal} from "react-bootstrap";
 
 
 function Usecases() {
+    useEffect(()=>{
+        usecasesStore.getUsecases();
+    },[]);
     return(
         <div className="container">
             <div class="row justify-content-center">

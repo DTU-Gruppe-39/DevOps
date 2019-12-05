@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {musicStore} from "../stores/MusicStore";
 import {requestStore} from "../stores/RequestStore";
@@ -14,6 +14,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
     function Music() {
+        useEffect(()=>{
+            requestStore.getRequested();
+        },[]);
         return (
             <div className="music">
                 <Example />
