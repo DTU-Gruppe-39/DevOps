@@ -28,6 +28,8 @@ class TaskStore {
     modalShow = false;
     modalKey;
     modalDropdown = false;
+    inputModalShow = false;
+    //inputModalDropdown = false;
     // taskList = [{
     //     Name: 'TaskOverview',
     //     Description: 'Make a list of the tasks, and present it in a table.',
@@ -77,7 +79,8 @@ decorate(TaskStore, {
     modalShow: observable,
     updateTask: observable,
     modalDropdown: observable,
-    currStatus: observable
+    currStatus: observable,
+    inputModalShow: observable,
 });
 
 export const taskStore = new TaskStore();
