@@ -71,6 +71,14 @@ class UserControllerTest {
 
   @Test
   @Order(6)
+  public void testGetAllUsers () {
+    assertNotNull(userController.getAll());
+    //Default test user + test user should be in database
+    assertTrue(userController.getAll().size() > 1);
+  }
+
+  @Test
+  @Order(7)
   public void testDeleteUser () {
     userController.delete(getIdFromTestUser2());
     assertTrue(getIdFromTestUser2() == null);

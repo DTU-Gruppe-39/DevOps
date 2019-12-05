@@ -1,6 +1,8 @@
 package data.DTO;
 
-import java.util.List;
+import org.bson.types.ObjectId;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,21 +11,17 @@ import java.util.Map;
 public class Project extends DocumentObject {
   private String id;
   private String name;
-  private User projectleader;
-  private List<User> developers;
-  private List<Stakeholder> stakeholder;
-  private List<Task> tasks;
+  private int progress;
+  private String vision;
 
   public Project() {
   }
 
-  public Project(String id, String name, User projectleader, List<User> developers, List<Stakeholder> stakeholder, List<Task> tasks) {
+  public Project(String id, String name, int progress, String vision) {
     this.id = id;
     this.name = name;
-    this.projectleader = projectleader;
-    this.developers = developers;
-    this.stakeholder = stakeholder;
-    this.tasks = tasks;
+    this.progress = progress;
+    this.vision = vision;
   }
 
   public String getName() {
@@ -34,45 +32,21 @@ public class Project extends DocumentObject {
     this.name = name;
   }
 
-  public User getProjectleader() {
-    return projectleader;
-  }
-
-  public void setProjectleader(User projectleader) {
-    this.projectleader = projectleader;
-  }
-
-  public List<User> getDevelopers() {
-    return developers;
-  }
-
-  public void setDevelopers(List<User> developers) {
-    this.developers = developers;
-  }
-
-  public List<Stakeholder> getStakeholder() {
-    return stakeholder;
-  }
-
-  public void setStakeholder(List<Stakeholder> stakeholder) {
-    this.stakeholder = stakeholder;
-  }
-
-  public List<Task> getTasks() {
-    return tasks;
-  }
-
-  public void setTasks(List<Task> tasks) {
-    this.tasks = tasks;
-  }
-
   @Override
   public Map<String, Object> toMap() {
-    return null;
+    Map<String, Object> mapToReturn = new HashMap<>();
+    mapToReturn.put("name", getName());
+    mapToReturn.put("progress",getProgress());
+    mapToReturn.put("vision", getVision());
+    return mapToReturn;
   }
 
   @Override
   public void toObject(Map<String, Object> mapOfObject) {
+    this.id = ((ObjectId) mapOfObject.get("_id")).toString();
+    this.name = (String) mapOfObject.get("name");
+    this.progress  = Integer.parseInt(String.valueOf(mapOfObject.get("progress")));
+    this.vision = (String) mapOfObject.get("vision");
   }
 
   public String getId() {
@@ -81,5 +55,21 @@ public class Project extends DocumentObject {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public int getProgress() {
+    return progress;
+  }
+
+  public void setProgress(int progress) {
+    this.progress = progress;
+  }
+
+  public String getVision() {
+    return vision;
+  }
+
+  public void setVision(String vision) {
+    this.vision = vision;
   }
 }

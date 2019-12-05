@@ -2,7 +2,6 @@ package controller;
 
 import controller.implementations.*;
 import controller.interfaces.*;
-import data.DTO.Stakeholder;
 
 
 /**
@@ -15,6 +14,7 @@ public class ControllerRegistry {
   private static UsecaseController usecaseController;
   private static UserController userController;
   private static MusicController musicController;
+  private static ProjectController projectController;
 
 
   public static AuthenticationController getAuthenticationController () {
@@ -47,6 +47,11 @@ public class ControllerRegistry {
   public static MusicController getMusicController () {
     if (musicController == null) musicController = new MusicControllerImpl();
     return musicController;
+  }
+
+  public static ProjectController getProjectController () {
+    if (projectController == null) projectController = new ProjectControllerImpl();
+    return projectController;
   }
 }
 

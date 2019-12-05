@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by magnus
@@ -49,6 +48,13 @@ class StakeholderControllerImplTest {
 
   @Test
   @Order(4)
+  public void testGetAllStakeholders () {
+    assertNotNull(stakeholderController.getAll());
+    assertTrue(stakeholderController.getAll().size() > 0);
+  }
+
+  @Test
+  @Order(5)
   public void testDeleteStakeholder () {
     stakeholderController.delete(getIdFromTestUpdatedStakeholder());
     assertTrue(getIdFromTestUpdatedStakeholder() == null);
