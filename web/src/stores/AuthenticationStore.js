@@ -6,7 +6,7 @@ class AuthenticationStore {
     }
     currentAuthentication = {
         token: '',
-        isAuthenticated: false,
+        isAuthenticated: Boolean(false),
         user: {
             email: "",
             role: ""
@@ -28,35 +28,45 @@ class AuthenticationStore {
             },
             body: JSON.stringify(this.inputLogin)
         })
-            .then((response)=>response.text()
-                .then((response)=>{
-                    console.log("Login success")
-                    console.log(response)
-                    this.setToken(response)
-
-                    this.getAuthentication()
-                })
-                .catch(function () {
-                    console.log(response.status)
-                    console.log(response)
-                    console.log("Error while logging in")
-                })
+            .then(function (response) {
+                    if (response.ok) {
+                        console.log("Login success")
+                        response.text().then(function (jwt) {
+                            console.log(jwt);
+                            authenticationStore.setToken(jwt);
+                            authenticationStore.getAuthentication();
+                        })
+                    }
+                    else
+                        console.log(response.status+": Error while logging in");
+                }
             )
     }
     getAuthentication (){
         this.getToken();
-        this.getUser();
     }
     getToken() {
-        console.log(localStorage.getItem("secureToken"))
-        this.currentAuthentication.token = localStorage.getItem("secureToken");
+        if (!(localStorage.getItem("secureToken") === null)) {
+            console.log(localStorage.getItem("secureToken"))
+            this.currentAuthentication.token = localStorage.getItem("secureToken");
+            this.getUser();
+        }
+        else
+            console.log("Token is null")
     }
     setToken(token) {
         localStorage.setItem("secureToken", token);
     }
     removeToken(){
         localStorage.removeItem("secureToken");
-        this.currentAuthentication = '';
+        this.currentAuthentication = {
+            token: '',
+            isAuthenticated: Boolean(false),
+            user: {
+                email: "",
+                role: ""
+            }
+        };
     }
     removeUser() {
         this.currentAuthentication.user = {
@@ -73,20 +83,21 @@ class AuthenticationStore {
             headers: {
                 'Authorization': "Bearer "+this.currentAuthentication.token
             }
-        }).then((response)=>response.json()
-                .then((jsonresponse)=>{
-                    console.log(jsonresponse);
-                    this.currentAuthentication.user = jsonresponse;
-                    this.currentAuthentication.isAuthenticated = true;
-                }).catch(function () {
-                    console.log("Validating failed: "+response.status);
-                })
-            )
+        }).then(function (response) {
+                console.log(response.status);
+                if (response.ok) {
+                    response.json().then(function (user) {
+                        console.log(user);
+                        authenticationStore.currentAuthentication.user = user;
+                        authenticationStore.currentAuthentication.isAuthenticated = Boolean(true);
+                    })} else
+                    console.log(response.status + ": error while getting user")
+            })
     }
 
     logout() {
         this.removeToken();
-        this.currentAuthentication.isAuthenticated = false;
+        authenticationStore.currentAuthentication.isAuthenticated = Boolean(false);
         this.removeUser();
     }
 }

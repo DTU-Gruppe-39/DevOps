@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.26f51723.chunk.css",
-    "main.js": "/static/js/main.6d045b68.chunk.js",
-    "main.js.map": "/static/js/main.6d045b68.chunk.js.map",
+    "main.css": "/static/css/main.08d23e3d.chunk.css",
+    "main.js": "/static/js/main.ebf68b3e.chunk.js",
+    "main.js.map": "/static/js/main.ebf68b3e.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.0b761a9c.js",
     "runtime~main.js.map": "/static/js/runtime~main.0b761a9c.js.map",
     "static/css/2.22a7d4ef.chunk.css": "/static/css/2.22a7d4ef.chunk.css",
-    "static/js/2.08c6a4ce.chunk.js": "/static/js/2.08c6a4ce.chunk.js",
-    "static/js/2.08c6a4ce.chunk.js.map": "/static/js/2.08c6a4ce.chunk.js.map",
+    "static/js/2.e80d1a4e.chunk.js": "/static/js/2.e80d1a4e.chunk.js",
+    "static/js/2.e80d1a4e.chunk.js.map": "/static/js/2.e80d1a4e.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.2b5321ad6d1fb45fbcb052e3bc1fe3a9.js": "/precache-manifest.2b5321ad6d1fb45fbcb052e3bc1fe3a9.js",
+    "precache-manifest.1c5300e781f8c3320354be2164feccd1.js": "/precache-manifest.1c5300e781f8c3320354be2164feccd1.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.22a7d4ef.chunk.css.map": "/static/css/2.22a7d4ef.chunk.css.map",
-    "static/css/main.26f51723.chunk.css.map": "/static/css/main.26f51723.chunk.css.map",
+    "static/css/main.08d23e3d.chunk.css.map": "/static/css/main.08d23e3d.chunk.css.map",
+    "static/media/Best-Project-Management-Software-1024x512.png": "/static/media/Best-Project-Management-Software-1024x512.456abcf3.png",
     "static/media/profile.svg": "/static/media/profile.7dc2ac74.svg",
     "static/media/spotify-2-logo-png-transparent.png": "/static/media/spotify-2-logo-png-transparent.6c613680.png"
   }

@@ -9,6 +9,7 @@ import data.database.interfaces.LoginDocumentI;
 import data.database.interfaces.UserDocumentI;
 import util.Hashing;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
@@ -36,8 +37,12 @@ public class UserControllerImpl implements UserController {
 
   @Override
   public void add(User user, LoginDetails loginDetails) {
-    loginDetails.setPassword(Hashing.hashPassword(loginDetails.getPassword()));
-    userDocument.addUser(user, loginDetails);
+    if (!emailAlreadyExits(loginDetails.getUsername()) || !emailAlreadyExits(user.getEmail())) {
+      loginDetails.setPassword(Hashing.hashPassword(loginDetails.getPassword()));
+      userDocument.addUser(user, loginDetails);
+    }
+    else
+      throw new BadRequestException("Username/email exist");
   }
 
   @Override
@@ -50,21 +55,45 @@ public class UserControllerImpl implements UserController {
   public void updateLogin(String userId, LoginDetails updatedLoginDetails) {
     updatedLoginDetails.setPassword(Hashing.hashPassword(updatedLoginDetails.getPassword()));
     updatedLoginDetails.setUser_reference_id(userId);
-    try {
-      loginDocument.updateLogin(userId, updatedLoginDetails);
+    if (!emailAlreadyExits(updatedLoginDetails.getUsername(),userId)) {
+      try {
+        loginDocument.updateLogin(userId, updatedLoginDetails);
+      }
+      catch (NullPointerException e) {
+        throw new NotFoundException("That id does not exist in the database");
+      }
     }
-    catch (NullPointerException e) {
-      throw new NotFoundException("That id does not exist in the database");
-    }
+    else
+      throw new BadRequestException("Email/username already exits");
   }
 
   @Override
   public void updateUser(String id, User updatedUser) {
-    try {
-      userDocument.updateUser(id, updatedUser);
+    if (!emailAlreadyExits(updatedUser.getEmail(), id)) {
+      try {
+        userDocument.updateUser(id, updatedUser);
+      }
+      catch (NullPointerException e) {
+        throw new NotFoundException("That id does not exist in the database");
+      }
     }
-    catch (NullPointerException e) {
-      throw new NotFoundException("That id does not exist in the database");
+    else
+      throw new BadRequestException("Email already exits");
+  }
+
+  private boolean emailAlreadyExits(String emailToCheck) {
+    for (User user : getAll()) {
+      if (user.getEmail().equals(emailToCheck))
+        return true;
     }
+    return false;
+  }
+
+  private boolean emailAlreadyExits(String emailToCheck, String userId) {
+    for (User user : getAll()) {
+      if (user.getEmail().equals(emailToCheck) && !(user.getId().equals(userId)))
+        return true;
+    }
+    return false;
   }
 }

@@ -1,4 +1,5 @@
 import {decorate, observable} from "mobx";
+import {authenticationStore} from "./AuthenticationStore";
 
 class MusicStore {
     inputMusic = "";
@@ -27,7 +28,12 @@ class MusicStore {
             const testserverurl = "https://test-devops69.herokuapp.com/api/music/search/" + songname;
             const serverurl = "https://devops69.herokuapp.com/api/music/search/" + songname;
             console.log("Getting search results");
-            fetch(testserverurl)
+            fetch(testserverurl, {
+                method: "GET",
+                headers: {
+                    'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+                }
+            })
                 .then((response) => response.json()
                     .then((jsonresponse) => {
                         // console.log(jsonresponse);

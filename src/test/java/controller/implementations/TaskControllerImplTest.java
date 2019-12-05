@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by magnus
@@ -26,13 +25,16 @@ class TaskControllerImplTest {
     Task task = taskController.get(getIdFromTestTask());
     assertTrue(task.getName().equals(getTestTask().getName()) &&
             task.getStatus().equals(getTestTask().getStatus()) &&
-            task.getDescription().equals(getTestTask().getDescription()));
+            task.getDescription().equals(getTestTask().getDescription()) &&
+            task.getResponsible().equals("test@gmail.com"));
   }
 
   @Test
   @Order(2)
   public void testGetTestTask () {
-    assertEquals(getTestTask().getName(),taskController.get(getIdFromTestTask()).getName());
+    Task task = taskController.get(getIdFromTestTask());
+    assertEquals(getTestTask().getName(),task.getName());
+    assertEquals("test@gmail.com",task.getResponsible());
   }
 
   @Test
@@ -48,6 +50,14 @@ class TaskControllerImplTest {
 
   @Test
   @Order(4)
+  public void testGetAllTask () {
+    assertNotNull(taskController.getAll());
+    assertTrue(taskController.getAll().size() > 0);
+  }
+
+
+  @Test
+  @Order(5)
   public void testDeleteTask () {
     taskController.delete(getIdFromTestUpdatedTask());
     assertTrue(getIdFromTestUpdatedTask() == null);
@@ -57,7 +67,7 @@ class TaskControllerImplTest {
     Task task = new Task();
     task.setName("Test Task");
     task.setDescription("This is a test task. Will be removed soon");
-    task.setResponsible("Test");
+    task.setResponsible("5dcd8c382fb23360ee7b3a10");
     task.setStatus(Status.NotStarted);
     return task;
   }
@@ -66,7 +76,7 @@ class TaskControllerImplTest {
     Task task = new Task();
     task.setName("Test Task - updated");
     task.setDescription("This is a test task. Will be removed soon");
-    task.setResponsible("Test");
+    task.setResponsible("5dcd8c382fb23360ee7b3a10");
     task.setStatus(Status.InProgress);
     return task;
   }
@@ -75,7 +85,8 @@ class TaskControllerImplTest {
     for (Task task : taskController.getAll()) {
       if (task.getName().equals(getTestTask().getName()) &&
               task.getStatus().equals(getTestTask().getStatus()) &&
-              task.getDescription().equals(getTestTask().getDescription()))
+              task.getDescription().equals(getTestTask().getDescription()) &&
+              task.getResponsible().equals("test@gmail.com"))
         return task.getId();
     }
     return null;
@@ -85,7 +96,8 @@ class TaskControllerImplTest {
     for (Task task : taskController.getAll()) {
       if (task.getName().equals(getTestUpdatedTask().getName()) &&
               task.getStatus().equals(getTestUpdatedTask().getStatus()) &&
-              task.getDescription().equals(getTestUpdatedTask().getDescription()))
+              task.getDescription().equals(getTestUpdatedTask().getDescription()) &&
+              task.getResponsible().equals("test@gmail.com"))
         return task.getId();
     }
     return null;
