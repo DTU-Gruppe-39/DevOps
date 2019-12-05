@@ -59,7 +59,14 @@ class AuthenticationStore {
     }
     removeToken(){
         localStorage.removeItem("secureToken");
-        this.currentAuthentication = '';
+        this.currentAuthentication = {
+            token: '',
+            isAuthenticated: Boolean(false),
+            user: {
+                email: "",
+                role: ""
+            }
+        };
     }
     removeUser() {
         this.currentAuthentication.user = {
@@ -83,8 +90,7 @@ class AuthenticationStore {
                         console.log(user);
                         authenticationStore.currentAuthentication.user = user;
                         authenticationStore.currentAuthentication.isAuthenticated = Boolean(true);
-                    })
-                } else
+                    })} else
                     console.log(response.status + ": error while getting user")
             })
     }
