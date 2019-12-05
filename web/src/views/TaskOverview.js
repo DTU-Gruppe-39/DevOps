@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./TaskOverview.css"
 import Container from 'react-bootstrap/Container'
 import Row from "react-bootstrap/Row";
@@ -12,8 +12,9 @@ import api, {postTask, putTask, deleteTask} from "../stores/Api";
 
 
 function TaskOverview() {
-
-
+    useEffect(()=>{
+        taskStore.getTasks();
+    },[]);
     return(
         <Container>
             <div className="spacer"/>
@@ -51,8 +52,7 @@ function TaskOverview() {
             </div>
             <h3 className="d-flex justify-content-center">Tasks</h3>
             {taskStore.viewmode === "Kanban" &&<div id={"KanbanView"}>
-                <KanbanTest>
-                </KanbanTest>
+                <KanbanTest />
             </div>}
             {taskStore.viewmode === "List" && <div id={"ListView"}>
                 <Row className="justify-content-md-center col-lg-12 col-md-12">

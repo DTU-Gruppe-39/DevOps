@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import "./Stakeholders.css";
 import {stakeHolderStore} from "../stores/StakeholdersStore";
@@ -7,6 +7,9 @@ import {Button, Modal} from "react-bootstrap";
 
 
     function Stakeholders() {
+        useEffect(()=>{
+            stakeHolderStore.getStakeholders();
+        },[]);
         return (
             <div class="container col-10">
                 <div className="row justify-content-lg-center">
