@@ -6,7 +6,7 @@ class AuthenticationStore {
     }
     currentAuthentication = {
         token: '',
-        isAuthenticated: false,
+        isAuthenticated: Boolean(false),
         user: {
             email: "",
             role: ""
@@ -82,7 +82,7 @@ class AuthenticationStore {
                     response.json().then(function (user) {
                         console.log(user);
                         authenticationStore.currentAuthentication.user = user;
-                        authenticationStore.currentAuthentication.isAuthenticated = true;
+                        authenticationStore.currentAuthentication.isAuthenticated = Boolean(true);
                     })
                 } else
                     console.log(response.status + ": error while getting user")
@@ -91,7 +91,7 @@ class AuthenticationStore {
 
     logout() {
         this.removeToken();
-        this.currentAuthentication.isAuthenticated = false;
+        authenticationStore.currentAuthentication.isAuthenticated = Boolean(false);
         this.removeUser();
     }
 }
