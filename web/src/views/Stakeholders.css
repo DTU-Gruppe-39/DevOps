@@ -25,10 +25,11 @@ li{
 }
 
 table ,td ,th{
-    margin: 40px;
+    margin: 50px;
     justify-content: center;
     table-layout:fixed;
     width:100%;
+    padding-right: 0px;
 }
 
 th {

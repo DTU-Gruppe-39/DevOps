@@ -1,9 +1,7 @@
 import {decorate, observable} from "mobx";
+import {authenticationStore} from "./AuthenticationStore";
 
 class RequestStore {
-    constructor(){
-        this.getRequested();
-    }
     showRequestList = [];
     requestList = [{
         id: "",
@@ -21,11 +19,16 @@ class RequestStore {
 
 
     getRequested() {
-        const localurl = "http://localhost:5005/api/music/";
+        // const localurl = "http://localhost:5005/api/music/";
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
-        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        // const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Getting music requests");
-        fetch(testserverurl)
+        fetch(testserverurl, {
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            }
+        })
             .then((response) => response.json()
                 .then((jsonresponse) => {
                     // console.log("GETTING REQUESTS: " + jsonresponse);
@@ -36,9 +39,9 @@ class RequestStore {
     }
 
     postRequest(track) {
-        const localurl = "http://localhost:5005/api/music/";
+        // const localurl = "http://localhost:5005/api/music/";
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
-        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        // const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Posting music request");
         fetch(testserverurl, {
             method: "POST",
@@ -57,9 +60,9 @@ class RequestStore {
     }
 
     deleteRequest(track) {
-        const localurl = "http://localhost:5005/api/music/";
+        // const localurl = "http://localhost:5005/api/music/";
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
-        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        // const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Deleting music request");
         fetch(testserverurl, {
             method: "DELETE",

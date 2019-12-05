@@ -1,7 +1,10 @@
 package controller.implementations;
 
+import controller.ControllerRegistry;
 import controller.interfaces.UsecaseController;
+import controller.interfaces.UserController;
 import data.DTO.Usecase;
+import data.DTO.User;
 import data.database.implementations.UsecaseDocumentImpl;
 import data.database.interfaces.UsecaseDocumentI;
 
@@ -12,16 +15,25 @@ import java.util.List;
 public class UsecaseControllerImpl implements UsecaseController {
 
     private UsecaseDocumentI usecaseDocument = new UsecaseDocumentImpl();
+    private UserController userController = ControllerRegistry.getUserController();
 
     @Override
     public List<Usecase> getAll() {
-        return usecaseDocument.getAll();
+        List<Usecase> usecases = usecaseDocument.getAll();
+        for (Usecase usecase : usecases) {
+            User user = userController.get(usecase.getResponsible());
+            usecase.setResponsible(user.getEmail());
+        }
+        return usecases;
     }
 
     @Override
     public Usecase get(String id) {
         try {
-            return (Usecase) usecaseDocument.get(id);
+            Usecase usecase = (Usecase) usecaseDocument.get(id);
+            User user = userController.get(usecase.getResponsible());
+            usecase.setResponsible(user.getEmail());
+            return usecase;
         }
         catch (NullPointerException nullPointerException) {
             throw new NotFoundException("Could not find usecase");

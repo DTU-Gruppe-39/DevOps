@@ -13,4 +13,6 @@ public interface UserController {
   User get(String id);
   void add(User element, LoginDetails loginDetails);
   void delete(String id);
+  void updateLogin (String userId, LoginDetails updatedLoginDetails);
+  void updateUser (String id, User user);
 }

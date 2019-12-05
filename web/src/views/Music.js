@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {musicStore} from "../stores/MusicStore";
 import {requestStore} from "../stores/RequestStore";
@@ -14,6 +14,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
     function Music() {
+        useEffect(()=>{
+            requestStore.getRequested();
+        },[]);
         return (
             <div className="music">
                 <Example />
@@ -80,8 +83,8 @@ import Form from "react-bootstrap/Form";
                                             <td key={key}>{request.timerequested}</td>
                                             {/*<td key={key}>{request.upvotes}</td>*/}
                                             <td key={key}>
-                                                <a href={request.track.webplayerLink} target="_blank"><img src={spotifylogo} width="24" height="24" title="Åben i spotify" /></a>
-                                                <img src={deletelogo} width="24" height="24" title="Slet fra listen" onClick={() => requestStore.deleteRequest(request.track)} />
+                                                <a href={request.track.webplayerLink} target="_blank" rel="noopener noreferrer"><img src={spotifylogo} alt="Spotify link" width="24" height="24" title="Åben i spotify" /></a>
+                                                <img src={deletelogo} alt="delete song" width="24" height="24" title="Slet fra listen" onClick={() => requestStore.deleteRequest(request.track)} />
                                             </td>
                                         </tr>),
                                     )}
