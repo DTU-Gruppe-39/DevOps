@@ -6,12 +6,12 @@ import "./Dashboard.css"
     function Dashboard() {
         return(
             <div className="dashboard-progress">
-                <div class="container">
+                <div className="container">
                     <div className="row justify-content-center">
                         <h1>Project progress</h1>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-10">
+                    <div className="row justify-content-center">
+                        <div className="col-10">
                             <ProgressBar max={100} min={0} now={progressStore.progress} label={`${progressStore.progress}%`} style={{height: 40}} />
                         </div>
                     </div>

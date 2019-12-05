@@ -8,7 +8,7 @@ import Select from "react-select"
 import {Button, Modal} from "react-bootstrap";
 import {taskStore} from "../stores/TaskStore";
 import KanbanTest from "../containers/test/dragdropTest";
-import api, {postTask, putTask, deleteTask} from "../stores/Api";
+import {postTask, putTask, deleteTask} from "../stores/Api";
 
 
 function TaskOverview() {

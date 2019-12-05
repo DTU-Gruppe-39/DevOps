@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './Ionic_Logo.png';
 import profile from './profile.svg';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Route, Link, Switch} from "react-router-dom";
+import {Link, Switch} from "react-router-dom";
 import {observer} from "mobx-react";
 import './App.css';
 import Stakeholders from "./views/stakeholders";
@@ -15,9 +15,10 @@ import SecureRoute from "./SecureRoute";
 import {authenticationStore} from "./stores/AuthenticationStore";
 import {Redirect} from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
-import {taskStore} from "./stores/TaskStore";
-import {Button, Modal} from "react-bootstrap";
-import Select from "react-select";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 function App() {
   return (
@@ -32,16 +33,16 @@ function App() {
                       authenticationStore.currentAuthentication.isAuthenticated === true &&
                       (
                           <Dropdown onSelect={function(eventKey) {
-                              if (eventKey == 1) {
+                              if (Number(eventKey) === 1) {
                                   profileMenu();
                               }
-                              if (eventKey == 2) {
+                              if (Number(eventKey) === 2) {
                                   logoutMenu();
                               }
                             }
                           }>
                               <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                                  <text style={{color: 'white'}}>Profile</text>
+                                  <p style={{color: 'white', 'fontSize': '16px', 'marginTop': '10px'}}>Profile</p>
                               </Dropdown.Toggle>
 
                               <Dropdown.Menu>
@@ -137,7 +138,7 @@ function getOnSubmit() {
     };
 }
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
+    <Button variant="link"
         style={{textDecorationColor: 'white'}}
         href=""
         ref={ref}
@@ -145,9 +146,15 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
             e.preventDefault();
             onClick(e);
         }}>
-        <img src={profile} height="42" width="42"/>
-        {children}
-    </a>
+        <Row>
+        <Col style={{padding: '0px'}}>
+            <img src={profile} alt="Profile" height="42" width="42"/>
+        </Col>
+        <Col style={{padding: '0px'}}>
+            {children}
+        </Col>
+        </Row>
+    </Button>
 ));
 
 function profileMenu() {

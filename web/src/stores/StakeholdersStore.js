@@ -3,7 +3,7 @@ import {authenticationStore} from "../stores/AuthenticationStore";
 
 class StakeholdersStore {
     getStakeholders(){
-        const localurl = "http://localhost:5005/api/task";
+        // const localurl = "http://localhost:5005/api/task";
         const serverurl = "https://test-devops69.herokuapp.com/api/stakeholder";
         console.log("Getting stakeholders");
         fetch(serverurl, {

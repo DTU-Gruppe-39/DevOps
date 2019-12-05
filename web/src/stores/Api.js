@@ -1,6 +1,6 @@
 import {authenticationStore} from "./AuthenticationStore";
 
-const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:3000/":""; //Check if dev environment
+// const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:3000/":""; //Check if dev environment
 
 export const postTask = (task) => {
     console.log("This task will be posted: " + JSON.stringify(task));
