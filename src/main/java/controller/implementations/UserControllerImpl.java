@@ -9,6 +9,7 @@ import data.database.interfaces.LoginDocumentI;
 import data.database.interfaces.UserDocumentI;
 import util.Hashing;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import java.util.List;
 
@@ -36,8 +37,12 @@ public class UserControllerImpl implements UserController {
 
   @Override
   public void add(User user, LoginDetails loginDetails) {
-    loginDetails.setPassword(Hashing.hashPassword(loginDetails.getPassword()));
-    userDocument.addUser(user, loginDetails);
+    if (!emailAlreadyExits(loginDetails.getUsername()) || !emailAlreadyExits(user.getEmail())) {
+      loginDetails.setPassword(Hashing.hashPassword(loginDetails.getPassword()));
+      userDocument.addUser(user, loginDetails);
+    }
+    else
+      throw new BadRequestException("Username/email exist");
   }
 
   @Override
@@ -66,5 +71,13 @@ public class UserControllerImpl implements UserController {
     catch (NullPointerException e) {
       throw new NotFoundException("That id does not exist in the database");
     }
+  }
+
+  private boolean emailAlreadyExits(String emailToCheck) {
+    for (User user : getAll()) {
+      if (user.getEmail().equals(emailToCheck))
+        return true;
+    }
+    return false;
   }
 }
