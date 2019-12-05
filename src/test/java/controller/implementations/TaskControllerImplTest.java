@@ -40,7 +40,7 @@ class TaskControllerImplTest {
   public void testUpdateTask () {
     String id = getIdFromTestTask();
     taskController.update(id, getTestUpdatedTask());
-    Task task = getTestUpdatedTask();
+    Task task = taskController.get(id);
     assertTrue(task.getName().equals(getTestUpdatedTask().getName()) &&
             task.getStatus().equals(getTestUpdatedTask().getStatus()) &&
             task.getDescription().equals(getTestUpdatedTask().getDescription()));

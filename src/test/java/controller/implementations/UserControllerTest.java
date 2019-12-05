@@ -3,12 +3,16 @@ package controller.implementations;
 import controller.ControllerRegistry;
 import controller.interfaces.UserController;
 import data.DTO.LoginDetails;
+import data.DTO.NewUser;
 import data.DTO.Role;
 import data.DTO.User;
+import data.database.implementations.LoginDocumentImpl;
+import data.database.interfaces.LoginDocumentI;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import util.Hashing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserControllerTest {
   UserController userController = ControllerRegistry.getUserController();
+  LoginDocumentI loginDocumentI = new LoginDocumentImpl();
 
   @Test
   @Order(1)
@@ -28,7 +33,10 @@ class UserControllerTest {
   @Test
   @Order(2)
   public void testAddUser () {
-    userController.add(getTestUser2(), getTestLoginDetails());
+    NewUser newUser = new NewUser();
+    newUser.setUser(getTestUser2());
+    newUser.setLoginDetails(getTestLoginDetails());
+    userController.add(newUser.getUser(),newUser.getLoginDetails());
     User user = userController.get(getIdFromTestUser2());
     assertTrue(user.getEmail().equals(getTestUser2().getEmail()) && user.getRole().equals(getTestUser2().getRole()));
   }
@@ -43,11 +51,26 @@ class UserControllerTest {
   @Test
   @Order(4)
   public void testUpdateUser () {
-    //Not implemented yet
+    String id = getIdFromTestUser2();
+    userController.updateUser(id,getTestUser2());
+    User user = userController.get(id);
+    assertTrue(user.getEmail().equals(getTestUser2().getEmail()) && user.getRole().equals(getTestUser2().getRole()));
   }
 
   @Test
   @Order(5)
+  public void testUpdateLogin () {
+    String userid = getIdFromTestUser2();
+    LoginDetails loginDetailsUpdating = getTestLoginDetails2();
+    userController.updateLogin(userid, loginDetailsUpdating);
+    LoginDetails loginDetails = loginDocumentI.validateLogin(getTestLoginDetails2().getUsername());
+    assertEquals(getTestLoginDetails2().getUsername(), loginDetails.getUsername());
+    assertTrue(Hashing.verifyHash(getTestLoginDetails2().getPassword(), loginDetails.getPassword()));
+    assertEquals(getTestLoginDetails2().getUser_reference_id(), loginDetails.getUser_reference_id());
+  }
+
+  @Test
+  @Order(6)
   public void testDeleteUser () {
     userController.delete(getIdFromTestUser2());
     assertTrue(getIdFromTestUser2() == null);
@@ -72,6 +95,14 @@ class UserControllerTest {
     LoginDetails loginDetails = new LoginDetails();
     loginDetails.setUsername("test2@gmail.com");
     loginDetails.setPassword("123");
+    return loginDetails;
+  }
+
+  public LoginDetails getTestLoginDetails2() {
+    LoginDetails loginDetails = new LoginDetails();
+    loginDetails.setUsername("test2@gmail.com");
+    loginDetails.setPassword("12345");
+    loginDetails.setUser_reference_id(getIdFromTestUser2());
     return loginDetails;
   }
 

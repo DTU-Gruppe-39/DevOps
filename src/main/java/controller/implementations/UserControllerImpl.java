@@ -45,4 +45,26 @@ public class UserControllerImpl implements UserController {
     userDocument.delete(id);
     loginDocument.deleteLogin(id);
   }
+
+  @Override
+  public void updateLogin(String userId, LoginDetails updatedLoginDetails) {
+    updatedLoginDetails.setPassword(Hashing.hashPassword(updatedLoginDetails.getPassword()));
+    updatedLoginDetails.setUser_reference_id(userId);
+    try {
+      loginDocument.updateLogin(userId, updatedLoginDetails);
+    }
+    catch (NullPointerException e) {
+      throw new NotFoundException("That id does not exist in the database");
+    }
+  }
+
+  @Override
+  public void updateUser(String id, User updatedUser) {
+    try {
+      userDocument.updateUser(id, updatedUser);
+    }
+    catch (NullPointerException e) {
+      throw new NotFoundException("That id does not exist in the database");
+    }
+  }
 }

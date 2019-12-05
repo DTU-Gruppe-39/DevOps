@@ -40,7 +40,7 @@ class StakeholderControllerImplTest {
   public void testUpdateStakeholder () {
     String id = getIdFromTestStakeholder();
     stakeholderController.update(id, getTestUpdatedStakeholder());
-    Stakeholder stakeholder = getTestUpdatedStakeholder();
+    Stakeholder stakeholder = stakeholderController.get(id);
     assertTrue(stakeholder.getName().equals(getTestUpdatedStakeholder().getName()) &&
             stakeholder.getEmail().equals(getTestUpdatedStakeholder().getEmail()) &&
             stakeholder.getContact_person().equals(getTestUpdatedStakeholder().getContact_person()) &&
