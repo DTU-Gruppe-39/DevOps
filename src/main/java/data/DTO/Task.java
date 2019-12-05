@@ -48,7 +48,7 @@ public class Task extends DocumentObject {
     Map<String, Object> mapToReturn = new HashMap<>();
     mapToReturn.put("name", getName());
     mapToReturn.put("description",getDescription());
-    mapToReturn.put("responsible_user_id", getResponsible());
+    mapToReturn.put("responsible", new ObjectId(getResponsible()));
     mapToReturn.put("status",getStatus().toString());
     return mapToReturn;
   }
@@ -58,7 +58,7 @@ public class Task extends DocumentObject {
     this.id = ((ObjectId) mapOfObject.get("_id")).toString();
     this.name = (String) mapOfObject.get("name");
     this.description = (String) mapOfObject.get("description");
-    this.responsible = (String) mapOfObject.get("responsible_user_id");
+    this.responsible = ((ObjectId) mapOfObject.get("responsible")).toString();
     this.status = Status.valueOf((String) mapOfObject.get("status"));
   }
 

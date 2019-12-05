@@ -1,7 +1,10 @@
 package controller.implementations;
 
+import controller.ControllerRegistry;
 import controller.interfaces.TaskController;
+import controller.interfaces.UserController;
 import data.DTO.Task;
+import data.DTO.User;
 import data.database.implementations.TaskDocumentImpl;
 import data.database.interfaces.TaskDocumentI;
 
@@ -14,16 +17,25 @@ import java.util.List;
  */
 public class TaskControllerImpl implements TaskController {
   private TaskDocumentI taskDocument = new TaskDocumentImpl();
+  private UserController userController = ControllerRegistry.getUserController();
 
   @Override
   public List<Task> getAll() {
-    return taskDocument.getAll();
+    List<Task> tasks = taskDocument.getAll();
+    for (Task task : tasks) {
+      User user = userController.get(task.getResponsible());
+      task.setResponsible(user.getEmail());
+    }
+    return tasks;
   }
 
   @Override
   public Task get(String id) {
     try {
-      return (Task) taskDocument.get(id);
+      Task task = (Task) taskDocument.get(id);
+      User user = userController.get(task.getResponsible());
+      task.setResponsible(user.getEmail());
+      return task;
     }
     catch (NullPointerException nullPointerException) {
       throw new NotFoundException("Could not find task");

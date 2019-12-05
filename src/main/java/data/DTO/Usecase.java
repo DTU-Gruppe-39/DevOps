@@ -34,7 +34,7 @@ public class Usecase extends DocumentObject {
         Map<String, Object> mapToReturn = new HashMap<>();
         mapToReturn.put("userStory", getUserStory());
         mapToReturn.put("priority",getPriority());
-        mapToReturn.put("responsible", getResponsible());
+        mapToReturn.put("responsible", new ObjectId(getResponsible()));
         return mapToReturn;
     }
 
@@ -43,7 +43,7 @@ public class Usecase extends DocumentObject {
         this.id = ((ObjectId) mapOfObject.get("_id")).toString();
         this.userStory = (String) mapOfObject.get("userStory");
         this.priority = (String) mapOfObject.get("priority");
-        this.responsible = (String) mapOfObject.get("responsible");
+        this.responsible = ((ObjectId) mapOfObject.get("responsible")).toString();
     }
 
     public String getId() {
