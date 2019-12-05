@@ -20,10 +20,12 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import frontImage from "./Best-Project-Management-Software-1024x512.png";
+import ListGroup from "react-bootstrap/ListGroup";
+import Tab from "react-bootstrap/Tab";
 
 function App() {
     return (
-        <div className="App ">
+        <div className="App">
             <div className="topbar">
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <img src={logo} alt="Company logo" />
@@ -71,6 +73,46 @@ function App() {
                             {/*<Link to="/Profile" className="list-group-item list-group-item-action bg-light">Profile</Link>*/}
                             <Link to="/TaskOverview" className="list-group-item list-group-item-action bg-light">TaskOverview</Link>
                             <Link to="/Music" className="list-group-item list-group-item-action bg-light">Music</Link>
+                        </div>
+                        <div className="projects-list" style={{marginTop: '80px'}}>
+                            <h4 style={{paddingLeft: '10px'}}>Projects</h4>
+                            <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
+                                <Row>
+                                    <Col>
+                                        <ListGroup style={{maxHeight: '200px', overflow: 'scroll'}}>
+                                            {/*{projectStore.projects.map((project, key)=> (*/}
+                                            {/*    <ListGroup.Item action onClick={()=>alert("test")}>*/}
+                                            {/*        Link 1*/}
+                                            {/*    </ListGroup.Item>*/}
+                                            {/*))}*/}
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 1
+                                            </ListGroup.Item>
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 2
+                                            </ListGroup.Item>
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 1
+                                            </ListGroup.Item>
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 2
+                                            </ListGroup.Item>
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 1
+                                            </ListGroup.Item>
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 2
+                                            </ListGroup.Item>
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 1
+                                            </ListGroup.Item>
+                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
+                                                Link 2
+                                            </ListGroup.Item>
+                                        </ListGroup>
+                                    </Col>
+                                </Row>
+                            </Tab.Container>
                         </div>
                     </div>
                 )
@@ -120,7 +162,7 @@ function App() {
                         <Col className="frontimage">
 
                             <Row>
-                            <img  className="col-9" src={frontImage}/>
+                            <img className="col-9" src={frontImage} alt="Project management software" />
                         </Row>
                         </Col>
                     </div>
