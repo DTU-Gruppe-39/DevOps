@@ -1,6 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.26f51723.chunk.css",
+    "main.css": "/static/css/main.08d23e3d.chunk.css",
+    "main.js": "/static/js/main.ebf68b3e.chunk.js",
+    "main.js.map": "/static/js/main.ebf68b3e.chunk.js.map",
     "main.js": "/static/js/main.8fc83511.chunk.js",
     "main.js.map": "/static/js/main.8fc83511.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.0b761a9c.js",
@@ -10,9 +12,19 @@
     "static/js/2.c4979e67.chunk.js.map": "/static/js/2.c4979e67.chunk.js.map",
     "index.html": "/index.html",
     "precache-manifest.8c5773b143e2d4b161036b1e24d2310b.js": "/precache-manifest.8c5773b143e2d4b161036b1e24d2310b.js",
+    "main.js": "/static/js/main.f70b6ec3.chunk.js",
+    "main.js.map": "/static/js/main.f70b6ec3.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.0b761a9c.js",
+    "runtime~main.js.map": "/static/js/runtime~main.0b761a9c.js.map",
+    "static/css/2.22a7d4ef.chunk.css": "/static/css/2.22a7d4ef.chunk.css",
+    "static/js/2.e80d1a4e.chunk.js": "/static/js/2.e80d1a4e.chunk.js",
+    "static/js/2.e80d1a4e.chunk.js.map": "/static/js/2.e80d1a4e.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.1c5300e781f8c3320354be2164feccd1.js": "/precache-manifest.1c5300e781f8c3320354be2164feccd1.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.22a7d4ef.chunk.css.map": "/static/css/2.22a7d4ef.chunk.css.map",
-    "static/css/main.26f51723.chunk.css.map": "/static/css/main.26f51723.chunk.css.map",
+    "static/css/main.08d23e3d.chunk.css.map": "/static/css/main.08d23e3d.chunk.css.map",
+    "static/media/Best-Project-Management-Software-1024x512.png": "/static/media/Best-Project-Management-Software-1024x512.456abcf3.png",
     "static/media/profile.svg": "/static/media/profile.7dc2ac74.svg",
     "static/media/spotify-2-logo-png-transparent.png": "/static/media/spotify-2-logo-png-transparent.6c613680.png"
   }

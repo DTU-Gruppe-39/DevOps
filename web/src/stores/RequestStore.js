@@ -1,9 +1,7 @@
 import {decorate, observable} from "mobx";
+import {authenticationStore} from "./AuthenticationStore";
 
 class RequestStore {
-    constructor(){
-        this.getRequested();
-    }
     showRequestList = [];
     requestList = [{
         id: "",
@@ -25,7 +23,12 @@ class RequestStore {
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
         // const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Getting music requests");
-        fetch(testserverurl)
+        fetch(testserverurl, {
+            method: "GET",
+            headers: {
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            }
+        })
             .then((response) => response.json()
                 .then((jsonresponse) => {
                     // console.log("GETTING REQUESTS: " + jsonresponse);

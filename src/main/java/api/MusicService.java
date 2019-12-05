@@ -3,6 +3,7 @@ package api;
 import controller.ControllerRegistry;
 import controller.interfaces.MusicController;
 import data.DTO.MusicRequest;
+import data.DTO.Role;
 import data.DTO.Track;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,12 +17,14 @@ public class MusicService {
     MusicController musicController = ControllerRegistry.getMusicController();
 
     @GET
+    @Secured({Role.ProjectManager, Role.Developer})
     public List<MusicRequest> getAll() {
         return musicController.getRequests();
     }
 
     @GET
     @Path("search/{songname}")
+    @Secured({Role.ProjectManager, Role.Developer})
     public List<Track> getSearch(@PathParam("songname") String songname) {
         try {
 //            System.out.println("Songname: " + songname);
@@ -33,6 +36,7 @@ public class MusicService {
     }
 
     @POST
+    @Secured({Role.ProjectManager, Role.Developer})
     public List<MusicRequest> post(Track track) {
         System.out.println(track);
         musicController.addRequest(track);
@@ -40,6 +44,7 @@ public class MusicService {
     }
 
     @DELETE
+    @Secured({Role.ProjectManager, Role.Developer})
     public List<MusicRequest> delete(Track track) {
         musicController.deleteRequest(track);
         return musicController.getRequests();
