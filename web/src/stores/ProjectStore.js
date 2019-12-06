@@ -36,6 +36,9 @@ class ProjectStore {
                 response.json().then(function (projects) {
                     console.log(projects);
                     projectStore.listOfProjects = projects;
+                    if (projectStore.listOfProjects.length > 0) {
+                        projectStore.currentProject = projectStore.listOfProjects[0];
+                    }
                 })}
             else
                 console.log(response.status + ": error while getting project")
