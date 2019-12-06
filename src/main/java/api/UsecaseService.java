@@ -35,7 +35,7 @@ public class UsecaseService {
     }
 
     @DELETE
-    @Secured({Role.Developer, Role.ProjectManager})
+    @Secured({Role.ProjectManager})
     public void deleteUsecase(String id) {
         usecaseController.delete(projectId, id);
     }

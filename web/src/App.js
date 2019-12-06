@@ -179,10 +179,10 @@ function App() {
                                     <br/>
                                     <Modal.Footer className="col-9 justify-content-center d-flex">
                                         <Button className="" variant={"secondary"} onClick={modalShow(false)}>
-                                            Discard changes
+                                            Cancel
                                         </Button>
                                         <Button variant={"primary"} onClick={signUp()}>
-                                            Save changes
+                                            Sign Up
                                         </Button>
                                     </Modal.Footer>
                                 </center>
@@ -220,33 +220,16 @@ function App() {
                             <div className="justify-content-center">
                                 <li>
                                     <center><b> Email </b> <br/>
-                                        <input name="email" type="text" placeholder="Email"
-                                               value={authenticationStore.currentAuthentication.user.email}
-                                               onChange={(e) => userStore.inputUser.email = e.target.value} required/>
+                                    <h7>{authenticationStore.currentAuthentication.user.email}</h7>
                                     </center>
                                 </li>
-                                <br/>
-                                <li>
-                                    <b> Project you are project manager in </b> <br/>
-                                    <ul >
-                                        <li>project1</li>
-                                    </ul>
-                                    <input name="role" type="text" placeholder="Role"
-                                           value={authenticationStore.currentAuthentication.user.role}
-                                           onChange={(e) => userStore.inputUser.role = e.target.value}
-                                           required/>
-                                </li>
-                                <br/>
                             </div>
                         </Modal.Body>
 
                         <br/>
                         <Modal.Footer className="col-9 justify-content-center d-flex">
                             <Button className="justify-content-center d-flex" variant={"secondary"}  onClick={() => userStore.profileModal = false}>
-                                Discard changes
-                            </Button>
-                            <Button variant={"primary"}>
-                                Save changes
+                                Cancel
                             </Button>
                         </Modal.Footer>
                     </center>

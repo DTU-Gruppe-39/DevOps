@@ -37,21 +37,24 @@ class StakeholdersStore {
         name: '',
         contact_person: '',
         email: '',
-        stakeholder_type: true
+        stakeholder_type: true,
+        projectId: ''
     }];
     inputStakeholder = {
         id: '',
         name: '',
         contact_person: '',
         email: '',
-        stakeholder_type: true
+        stakeholder_type: true,
+        projectId: ''
     };
     updateStakeholder = {
         id: '',
         name: '',
         contact_person: '',
         email: '',
-        stakeholder_type: true
+        stakeholder_type: true,
+        projectId: ''
     };
     modalShow = false;
     modalKey;

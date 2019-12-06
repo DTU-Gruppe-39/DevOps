@@ -7,6 +7,7 @@ import {Button, Modal} from "react-bootstrap";
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
 import addCircle from "../add_circle-24px.svg";
+import {projectStore} from "../stores/ProjectStore";
 
 
 
@@ -154,6 +155,7 @@ function updateStakeholderFunc(save) {
             stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].contact_person = stakeHolderStore.updateStakeholder.contact_person;
             stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].email = stakeHolderStore.updateStakeholder.email;
             stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].stakeholder_type = stakeHolderStore.updateStakeholder.stakeholder_type;
+            stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].projectId = projectStore.currentProject.id;
             putStakeholder(stakeHolderStore.stakeholderList[stakeHolderStore.modalKey]).then(function (response) {
                 if (response.ok){
                     stakeHolderStore.getStakeholders();
@@ -171,7 +173,8 @@ function updateStakeholderFunc(save) {
             name: '',
             contact_person: '',
             email: '',
-            stakeholder_type: true
+            stakeholder_type: true,
+            projectId: ''
         };
         stakeHolderStore.modalKey = 0;
         stakeHolderStore.modalShow = false;
@@ -184,6 +187,7 @@ function inputStakeholderFunc(save) {
         if(save === true){
             // stakeHolderStore.inputStakeholder.id = 1;
             // might not want to push to the list
+            stakeHolderStore.inputStakeholder.projectId = projectStore.currentProject.id;
             stakeHolderStore.stakeholderList.push(stakeHolderStore.inputStakeholder);
             postStakeholder(stakeHolderStore.inputStakeholder).then(function (response) {
                 if (response.ok){
@@ -203,7 +207,8 @@ function inputStakeholderFunc(save) {
             name: '',
             contact_person: '',
             email: '',
-            stakeholder_type: true
+            stakeholder_type: true,
+            projectId: ''
         };
         stakeHolderStore.inputModalShow = false;
     }

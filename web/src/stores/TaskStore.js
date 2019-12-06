@@ -53,7 +53,8 @@ class TaskStore {
         id: "",
         // TODO taskworkers should be worker objects or contain the id for the worker with the name
         responsible: "",
-        status: ''
+        status: '',
+        projectId: ''
     }];
     // inputTask = {
     //     Name: '',
@@ -67,14 +68,16 @@ class TaskStore {
         description: '',
         id: '',
         responsible: "",
-        status: ''
+        status: '',
+        projectId: ''
     };
     updateTask = {
         name: '',
         description: '',
         id: '',
         responsible: "",
-        status: ''
+        status: '',
+        projectId: ''
     };
     currStatus = [{label: "", value: ""}];
     statusOption = [{label:"Not Started", value:"NotStarted"}, {label: "In Progress", value: "InProgress"}, {label:"Done", value:"Done"}];

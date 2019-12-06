@@ -6,6 +6,7 @@ import React from "react";
 import {postTask} from "../stores/Api";
 import Modal from "react-bootstrap/Modal";
 import {observer} from "mobx-react";
+import {projectStore} from "../stores/ProjectStore";
 
 
 function InputModalBox() {
@@ -66,6 +67,7 @@ function InputModalBox() {
                 taskStore.inputTask.status = taskStore.currStatus.value;
                 taskStore.inputTask.responsible = taskStore.inputTask.responsible.value;
                 taskStore.inputTask.id = 1;
+                taskStore.inputTask.projectId = projectStore.currentProject.id;
                 taskStore.taskList.push(taskStore.inputTask);
                 postTask(taskStore.inputTask).then(function (response) {
                     if (response.ok){
@@ -84,7 +86,8 @@ function InputModalBox() {
                 description: '',
                 id: '',
                 responsible: '',
-                status: ''
+                status: '',
+                projectId: ''
             };
             taskStore.inputModalShow = false;
         }

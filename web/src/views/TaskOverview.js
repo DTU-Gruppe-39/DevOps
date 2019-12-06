@@ -14,6 +14,7 @@ import {putTask, deleteTask} from "../stores/Api";
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
 import addCircle from "../add_circle-24px.svg";
+import {projectStore} from "../stores/ProjectStore";
 
 
 function TaskOverview() {
@@ -155,6 +156,7 @@ function TaskOverview() {
                     taskStore.taskList[taskStore.modalKey].description = taskStore.updateTask.description;
                     taskStore.taskList[taskStore.modalKey].responsible = taskStore.updateTask.responsible;
                     taskStore.taskList[taskStore.modalKey].status = taskStore.updateTask.status;
+                    taskStore.taskList[taskStore.modalKey].projectId = projectStore.currentProject.id;
                     putTask(taskStore.taskList[taskStore.modalKey]).then(function (response) {
                         if(response.ok){
                             taskStore.getTasks();
@@ -171,7 +173,8 @@ function TaskOverview() {
                     description: '',
                     id: '',
                     responsible: '',
-                    status: ''
+                    status: '',
+                    projectId: ''
                 };
                 taskStore.modalKey = 0;
                 taskStore.modalShow = false;
@@ -189,6 +192,7 @@ function TaskOverview() {
                 taskStore.updateTask.name = task.name;
                 taskStore.updateTask.responsible = task.responsible;
                 taskStore.updateTask.status = task.status;
+                taskStore.updateTask.projectId = projectStore.currentProject.id;
                 taskStore.modalKey = key;
                 // sometimes crashes !!
                 // userStore.currUser.label = userStore.userList[key].email;
