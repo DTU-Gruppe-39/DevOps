@@ -48,6 +48,7 @@ class UserStore {
     };
     // currStatus = [{label: "", value: ""}];
     userSelect = [];
+    modal = false;
     //currUser = [{label: "", value: ""}];
 
 }
@@ -58,6 +59,7 @@ decorate(UserStore, {
     updateUser: observable,
     userSelect: observable,
     currUser: observable,
+    modal:observable
 });
 
 export const userStore = new UserStore();

@@ -23,6 +23,10 @@ import frontImage from "./Best-Project-Management-Software-1024x512.png";
 import ListGroup from "react-bootstrap/ListGroup";
 import Tab from "react-bootstrap/Tab";
 import Select from "react-select";
+import {userStore} from "./stores/UserStore";
+import {userPost} from "./stores/Api";
+import {stakeHolderStore} from "./stores/StakeholdersStore";
+
 
 function App() {
     return (
@@ -31,23 +35,23 @@ function App() {
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <img src={logo} alt="Company logo" />
 
-                  <div className="collapse navbar-collapse dropdown-menu-left" id="navbarSupportedContent">
-                  </div>
-                  {
-                      authenticationStore.currentAuthentication.isAuthenticated === true &&
-                      (
-                          <Dropdown onSelect={function(eventKey) {
-                              if (Number(eventKey) === 1) {
-                                  profileMenu();
-                              }
-                              if (Number(eventKey) === 2) {
-                                  logoutMenu();
-                              }
+                    <div className="collapse navbar-collapse dropdown-menu-left" id="navbarSupportedContent">
+                    </div>
+                    {
+                        authenticationStore.currentAuthentication.isAuthenticated === true &&
+                        (
+                            <Dropdown onSelect={function(eventKey) {
+                                if (Number(eventKey) === 1) {
+                                    profileMenu();
+                                }
+                                if (Number(eventKey) === 2) {
+                                    logoutMenu();
+                                }
                             }
-                          }>
-                              <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                                  <p style={{color: 'white', 'fontSize': '16px', 'marginTop': '10px'}}>Profile</p>
-                              </Dropdown.Toggle>
+                            }>
+                                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+                                    <p style={{color: 'white', 'fontSize': '16px', 'marginTop': '10px'}}>Profile</p>
+                                </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item eventKey={1}>Profile</Dropdown.Item>
@@ -132,7 +136,7 @@ function App() {
                 {authenticationStore.currentAuthentication.isAuthenticated ?
                     <Redirect to="/Dashboard"/>
                     :
-                    <div className="">
+                    <div className="overflow-hidden">
                         <h4 className="title justify-content-center d-flex ">Projektstyringsværktøj</h4>
                         <p className="titleText justify-content-center d-flex">
                             En applikation der hjælper dig med at få et overblik over dine projekter og opgaver
@@ -161,52 +165,48 @@ function App() {
                             <p className="justify-content-center d-flex">OR</p>
                             <hr/>
                             <br/>
-                            <Button className="btn btn-primary d-flex justify-content-center col-11"> Sign up</Button>
+                            <Button className="btn btn-primary d-flex justify-content-center col-11" onClick={modalShow(true)}> Sign up</Button>
 
-                            <Modal show={false} size={"lg"}>
-                                <Modal.Header>
-                                    <Modal.Title> Editing task </Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <div>
-                                        <li>
-                                            <b> Name </b>
-                                            <input name="name" type="text" placeholder="Name"
-                                                   onChange={(e) => e.target.value} required/>
-                                        </li>
-                                        <li>
-                                            <b> Description </b>
-                                            <input name="description" type="text" placeholder="Description"
-                                                   onChange={(e) => e.target.value}
-                                                   required/>
-                                        </li>
+                            <Modal className=""  show={userStore.modal} size={"col-6"}>
+                                <center>
+                                    <Modal.Header className="col-6 justify-content-center d-flex">
+                                        <Modal.Title> <center> Register </center></Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div className="justify-content-center">
+                                            <li>
+                                                <center><b> Email </b> <br/>
+                                                    <input name="email" type="text" placeholder="Email"
+                                                           onChange={(e) => userStore.inputUser.email = e.target.value} required/>
+                                                </center>
+                                            </li>
+                                            <br/>
+                                            <li>
+                                                <b> Password </b> <br/>
+                                                <input name="password" type="password" placeholder="Password"
+                                                    // onChange={(e) => userStore.inputUser.role = e.target.value}
+                                                       required/>
+                                            </li>
+                                            <br/>
+                                            <li>
+                                                <b> Confirm password </b> <br/>
+                                                <input name="password" type="password" placeholder="Confirm password"
+                                                    // onChange={(e) => userStore.inputUser.role = e.target.value}
+                                                       required/>
+                                            </li>
+                                        </div>
+                                    </Modal.Body>
 
-                                        <li>
-                                            <b> Responsible </b>
-                                            <input name="responsible" type="text" placeholder="Task Responsible name"
-                                                // value={taskStore.inputTask.responsible.name}
-                                                   onChange={(e) =>  e.target.value}
-                                                // onChange={(e) => taskStore.inputTask.responsible.name = e.target.value}
-                                                   required/>
-                                        </li>
-                                        <li>
-                                            <b> Status </b>
-                                            <Select options
-                                                    onChange={(e) =>  e} required>
-                                            </Select>
-                                        </li>
-
-                                    </div>
-                                </Modal.Body>
-
-                                <Modal.Footer>
-                                    <Button variant={"secondary"}>
-                                        Discard changes
-                                    </Button>
-                                    <Button variant={"primary"}>
-                                        Save changes
-                                    </Button>
-                                </Modal.Footer>
+                                    <br/>
+                                    <Modal.Footer className="col-5">
+                                        <Button className="justify-content-center d-flex" variant={"secondary"} onClick={modalShow(false)}>
+                                            Discard changes
+                                        </Button>
+                                        <Button variant={"primary"}>
+                                            Save changes
+                                        </Button>
+                                    </Modal.Footer>
+                                </center>
 
                             </Modal>
 
@@ -256,20 +256,20 @@ function getOnSubmit() {
 }
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <Button variant="link"
-        style={{textDecorationColor: 'white'}}
-        href=""
-        ref={ref}
-        onClick={e => {
-            e.preventDefault();
-            onClick(e);
-        }}>
+            style={{textDecorationColor: 'white'}}
+            href=""
+            ref={ref}
+            onClick={e => {
+                e.preventDefault();
+                onClick(e);
+            }}>
         <Row>
-        <Col style={{padding: '0px'}}>
-            <img src={profile} alt="Profile" height="42" width="42"/>
-        </Col>
-        <Col style={{padding: '0px'}}>
-            {children}
-        </Col>
+            <Col style={{padding: '0px'}}>
+                <img src={profile} alt="Profile" height="42" width="42"/>
+            </Col>
+            <Col style={{padding: '0px'}}>
+                {children}
+            </Col>
         </Row>
     </Button>
 ));
@@ -281,5 +281,33 @@ function logoutMenu() {
     authenticationStore.logout();
     return <Redirect to="/"/>
 }
+
+function modalShow(mode) {
+    return(e) => {
+        e.preventDefault();
+        if(mode){
+            userStore.modal = true;
+        } else {
+            userStore.modal = false;
+        }
+    }
+}
+
+
+function getSignup() {
+    return (e) => {
+        e.preventDefault();
+        userStore.userList.push(userStore.inputUser);
+        userPost(userStore.inputUser).then();
+        userStore.inputUser = {
+            email: "",
+            id: '',
+            role: ""
+        };
+
+    };
+}
+
+
 export default observer(App);
 
