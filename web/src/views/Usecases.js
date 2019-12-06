@@ -7,6 +7,8 @@ import {Button, Modal} from "react-bootstrap";
 import {taskStore} from "../stores/TaskStore";
 import Select from "react-select";
 import {userStore} from "../stores/UserStore";
+import editPencil from "../edit-24px.svg";
+import deletelogo from "../baseline_close_black_48dp.png";
 
 
 function Usecases() {
@@ -98,8 +100,7 @@ function Usecases() {
                                 <th>User story</th>
                                 <th>Priority (1-5)</th>
                                 <th>Responsible</th>
-                                <th>Edit</th>
-                                <th>Remove</th>
+                                <th>Options</th>
                             </tr>
                             {usecasesStore.usecasesList.map((usecase, key) => (
                                 <tr>
@@ -108,8 +109,12 @@ function Usecases() {
                                     <td key={key}>{usecase.userStory}</td>
                                     <td key={key}>{usecase.priority}</td>
                                     <td key={key}>{(usecase.responsible)}</td>
-                                    <td> <Button variant={"primary"} onClick={editfunc(key, usecase)}>Edit</Button> </td>
-                                    <td><Button variant={"danger"} onClick={deleteFunc(usecase.id, key)}>Delete</Button></td>
+                                    {/*<td> <Button variant={"primary"} onClick={editfunc(key, usecase)}>Edit</Button> </td>*/}
+                                    {/*<td><Button variant={"danger"} onClick={deleteFunc(usecase.id, key)}>Delete</Button></td>*/}
+                                    <td> <img src={editPencil} alt="Edit usecase" width="24" height="24" title="Edit usecase" onClick={editfunc(key, usecase)} />
+                                        {/*<td> <Button variant={"danger"}  onClick={delFunc(stakeholder.id, key)}>Delete</Button> </td>*/}
+                                        <img src={deletelogo} alt="delete usecase" width="24" height="24" title="Slet fra listen" onClick={deleteFunc(usecase.id, key)} />
+                                    </td>
                                 </tr>),
                             )}
                         </table>

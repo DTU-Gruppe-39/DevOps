@@ -2,9 +2,11 @@ import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import "./Stakeholders.css";
 import {stakeHolderStore} from "../stores/StakeholdersStore";
-import {deleteStakeholder, postStakeholder, postTask, putStakeholder} from "../stores/Api";
+import {deleteStakeholder, postStakeholder, putStakeholder} from "../stores/Api";
 import {Button, Modal} from "react-bootstrap";
-import {taskStore} from "../stores/TaskStore";
+import editPencil from "../edit-24px.svg";
+import deletelogo from "../baseline_close_black_48dp.png";
+
 
 
     function Stakeholders() {
@@ -109,8 +111,7 @@ import {taskStore} from "../stores/TaskStore";
                                     <th>Contact Person</th>
                                     <th>Email</th>
                                     <th>Direct Stakeholder</th>
-                                    <th>Edit</th>
-                                    <th>Remove</th>
+                                    <th>Options</th>
                                 </tr>
                                 {stakeHolderStore.stakeholderList.map((stakeholder, key) => (
                                     <tr>
@@ -118,8 +119,11 @@ import {taskStore} from "../stores/TaskStore";
                                         <td key={key}>{stakeholder.contact_person}</td>
                                         <td key={key}>{stakeholder.email}</td>
                                         <td key={key}>{(stakeholder.stakeholder_type ? "Direct stakeholder" : "Indirect stakeholder")}</td>
-                                        <td> <Button variant={"primary"} onClick={editfunc(key, stakeholder)}>Edit</Button> </td>
-                                        <td> <Button variant={"danger"}  onClick={delFunc(stakeholder.id, key)}>Delete</Button> </td>
+                                        {/*<td> <Button variant={"primary"} onClick={editfunc(key, stakeholder)}>Edit</Button> </td>*/}
+                                        <td> <img src={editPencil} alt="Edit stakeholder" width="24" height="24" title="Edit stakeholder" onClick={editfunc(key, stakeholder)} />
+                                        {/*<td> <Button variant={"danger"}  onClick={delFunc(stakeholder.id, key)}>Delete</Button> </td>*/}
+                                        <img src={deletelogo} alt="delete stakeholder" width="24" height="24" title="Slet fra listen" onClick={delFunc(stakeholder.id, key)} />
+                                        </td>
                                     </tr>),
                                 )}
                             </table>

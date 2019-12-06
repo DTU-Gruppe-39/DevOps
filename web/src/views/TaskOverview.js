@@ -11,6 +11,8 @@ import {userStore} from "../stores/UserStore"
 import KanbanTest from "../containers/test/dragdropTest";
 import InputModalBox from "./InputModalBox";
 import {putTask, deleteTask} from "../stores/Api";
+import editPencil from "../edit-24px.svg";
+import deletelogo from "../baseline_close_black_48dp.png";
 
 
 function TaskOverview() {
@@ -86,8 +88,7 @@ function TaskOverview() {
                                     <th>Task Description</th>
                                     <th>TaskResponsible</th>
                                     <th>Status</th>
-                                    <th>Edit</th>
-                                    <th>Remove</th>
+                                    <th>Options</th>
                                 </tr>
                                 {taskStore.taskList.map((task, key) => (
                                     <tr>
@@ -95,8 +96,12 @@ function TaskOverview() {
                                         <td>{task.description}</td>
                                         <td>{task.responsible}</td>
                                         <td>{task.status}</td>
-                                        <td> <Button variant={"primary"} onClick={editfunc(key, task)}>Edit</Button> </td>
-                                        <td><Button variant={"danger"} onClick={deleteFunc(task.id, key)}>Delete</Button></td>
+                                        {/*<td> <Button variant={"primary"} onClick={editfunc(key, task)}>Edit</Button> </td>*/}
+                                        {/*<td><Button variant={"danger"} onClick={deleteFunc(task.id, key)}>Delete</Button></td>*/}
+                                        <td> <img src={editPencil} alt="Edit task" width="24" height="24" title="Edit task" onClick={editfunc(key, task)} />
+                                            {/*<td> <Button variant={"danger"}  onClick={delFunc(stakeholder.id, key)}>Delete</Button> </td>*/}
+                                            <img src={deletelogo} alt="delete task" width="24" height="24" title="Slet fra listen" onClick={deleteFunc(task.id, key)} />
+                                        </td>
                                     </tr>),
                                 )}
                             </table>
