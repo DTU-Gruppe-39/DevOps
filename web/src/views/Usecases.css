@@ -7,6 +7,17 @@
     padding-left: 30px;
 }
 
+.addButton{
+    /*Here is the trick*/
+    position: fixed;
+    /*width: 50px;*/
+    /*height: 40px;*/
+    /*alignItems: center;*/
+    justify-content: center;
+    right: 5%;
+    bottom: 5%;
+}
+
 input{
     margin: 10px;
 }
@@ -17,7 +28,7 @@ li{
 
 table ,td ,th{
     /*margin: 40px;*/
-    padding-right: 55px;
+    padding-right: 0px;
     padding-left: 75px;
     padding-bottom: 10px;
 }

@@ -16,6 +16,17 @@
     width: 100%;
 }
 
+.addButton{
+/*Here is the trick*/
+position: fixed;
+/*width: 50px;*/
+/*height: 40px;*/
+/*alignItems: center;*/
+justify-content: center;
+right: 5%;
+bottom: 5%;
+}
+
 input{
     margin: 10px;
 }
@@ -25,10 +36,11 @@ li{
 }
 
 table ,td ,th{
-    margin: 40px;
+    margin: 50px;
     justify-content: center;
     table-layout:fixed;
     width:100%;
+    padding-right: 0px;
 }
 
 th {

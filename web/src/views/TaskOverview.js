@@ -7,8 +7,13 @@ import {observer} from "mobx-react";
 import Select from "react-select"
 import {Button, Modal} from "react-bootstrap";
 import {taskStore} from "../stores/TaskStore";
+import {userStore} from "../stores/UserStore"
 import KanbanTest from "../containers/test/dragdropTest";
-import api, {postTask, putTask, deleteTask} from "../stores/Api";
+import InputModalBox from "./InputModalBox";
+import {putTask, deleteTask} from "../stores/Api";
+import editPencil from "../edit-24px.svg";
+import deletelogo from "../baseline_close_black_48dp.png";
+import addCircle from "../add_circle-24px.svg";
 
 
 function TaskOverview() {
@@ -19,38 +24,18 @@ function TaskOverview() {
         <Container>
             <div className="spacer"/>
 
+            <div className="row justify-content-lg-center">
+                <InputModalBox/>
+            </div>
+            <h3 className="d-flex justify-content-center">Tasks</h3>
             <div className="btn-group " id="overview" role="group">
                 <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("List")}>List</button>
                 <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("Kanban")}>Kanban</button>
             </div>
+            <img className="addButton justify-content-center" src={addCircle} alt="Add task" width="48" height="48" title="Add task" onClick={showInputBox()}/>
+            <br/>
+            <br/>
 
-            <div className="row justify-content-lg-center">
-                <form className="taskrowinput" onSubmit={getOnSubmit()}>
-                    <label>
-                        <input name="name" type="text" placeholder="Name"
-                               value={taskStore.inputTask.name}
-                               onChange={(e) => taskStore.inputTask.name = e.target.value} required/>
-                    </label>
-                    <label>
-                        <input name="description" type="text" placeholder="Description"
-                               value={taskStore.inputTask.description}
-                               onChange={(e) => taskStore.inputTask.description = e.target.value}
-                               required/>
-                    </label>
-
-                    <label>
-                        <input name="responsible" type="text" placeholder="Task Responsible name"
-                               value={taskStore.inputTask.responsible}
-                            // value={taskStore.inputTask.responsible.name}
-                               onChange={(e) => taskStore.inputTask.responsible = e.target.value}
-                            // onChange={(e) => taskStore.inputTask.responsible.name = e.target.value}
-                               required/>
-                    </label>
-
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
-            <h3 className="d-flex justify-content-center">Tasks</h3>
             {taskStore.viewmode === "Kanban" &&<div id={"KanbanView"}>
                 <KanbanTest />
             </div>}
@@ -63,35 +48,29 @@ function TaskOverview() {
                             </Modal.Header>
                             <Modal.Body>
                                 <div>
-                                        <li>
-                                            <b> Name </b>
-                                            <input name="name" type="text" placeholder="Name"
-                                                   value={taskStore.updateTask.name}
-                                                   onChange={(e) => taskStore.updateTask.name = e.target.value} required/>
-                                        </li>
-                                        <li>
-                                            <b> Description </b>
-                                            <input name="description" type="text" placeholder="Description"
-                                                   value={taskStore.updateTask.description}
-                                                   onChange={(e) => taskStore.updateTask.description = e.target.value}
-                                                   required/>
-                                        </li>
+                                    <li>
+                                        <b> Name </b>
+                                        <input name="name" type="text" placeholder="Name"
+                                               value={taskStore.updateTask.name}
+                                               onChange={(e) => taskStore.updateTask.name = e.target.value} required/>
+                                    </li>
+                                    <li>
+                                        <b> Description </b>
+                                        <input name="description" type="text" placeholder="Description"
+                                               value={taskStore.updateTask.description}
+                                               onChange={(e) => taskStore.updateTask.description = e.target.value}
+                                               required/>
+                                    </li>
+                                    <li>
+                                        <b> Responsible </b>
+                                        <Select options={userStore.userSelect} value={taskStore.updateTask.responsible} onChange={(e) => taskStore.updateTask.responsible = e} required/>
+                                    </li>
+                                    <li>
+                                        <b> Status </b>
+                                        <Select options={taskStore.statusOption} value={taskStore.currStatus} onChange={(e) => taskStore.currStatus = e} required={true}>
+                                        </Select>
+                                    </li>
 
-                                        <li>
-                                            <b> Responsible </b>
-                                            <input name="responsible" type="text" placeholder="Task Responsible name"
-                                                   value={taskStore.updateTask.responsible}
-                                                // value={taskStore.inputTask.responsible.name}
-                                                   onChange={(e) => taskStore.updateTask.responsible = e.target.value}
-                                                // onChange={(e) => taskStore.inputTask.responsible.name = e.target.value}
-                                                   required/>
-                                        </li>
-                                        <li>
-                                            <b> Status </b>
-                                            <Select options={taskStore.statusOption} value={taskStore.currStatus} onChange={(e) => taskStore.currStatus = e} required>
-                                            </Select>
-                                        </li>
-                                    
                                 </div>
                             </Modal.Body>
 
@@ -110,22 +89,22 @@ function TaskOverview() {
                                 <tr>
                                     <th>Task name</th>
                                     <th>Task Description</th>
-                                    {/*<th>TaskId</th>*/}
                                     <th>TaskResponsible</th>
                                     <th>Status</th>
-                                    <th>Edit</th>
-                                    <th>Remove</th>
+                                    <th>Options</th>
                                 </tr>
                                 {taskStore.taskList.map((task, key) => (
                                     <tr>
                                         <td>{task.name}</td>
                                         <td>{task.description}</td>
-                                        {/*<td>{task.id}</td>*/}
-                                        {/*<td>{task.responsible.name}</td>*/}
                                         <td>{task.responsible}</td>
                                         <td>{task.status}</td>
-                                        <td> <Button variant={"primary"} onClick={editfunc(key, task)}>Edit</Button> </td>
-                                        <td><Button variant={"danger"} onClick={deleteFunc(task.id, key)}>Delete</Button></td>
+                                        {/*<td> <Button variant={"primary"} onClick={editfunc(key, task)}>Edit</Button> </td>*/}
+                                        {/*<td><Button variant={"danger"} onClick={deleteFunc(task.id, key)}>Delete</Button></td>*/}
+                                        <td> <img src={editPencil} alt="Edit task" width="24" height="24" title="Edit task" onClick={editfunc(key, task)} />
+                                            {/*<td> <Button variant={"danger"}  onClick={delFunc(stakeholder.id, key)}>Delete</Button> </td>*/}
+                                            <img src={deletelogo} alt="delete task" width="24" height="24" title="Slet fra listen" onClick={deleteFunc(task.id, key)} />
+                                        </td>
                                     </tr>),
                                 )}
                             </table>
@@ -145,6 +124,15 @@ function TaskOverview() {
         };
     }
 
+    function showInputBox() {
+        return (e) => {
+            e.preventDefault();
+            taskStore.inputModalShow = true;
+            // userStore.currUser.label="";
+            // userStore.currUser.value="";
+
+        }
+    }
 
     function clickFunc(mode) {
         return (e) => {
@@ -154,21 +142,30 @@ function TaskOverview() {
         };
     }
 
-
     function updateTaskFunc(save) {
         return (e) => {
             e.preventDefault();
-            if(save === true){
-                // taskStore.updateTask.status = taskStore.currStatus.value;
-                taskStore.updateTask.status = taskStore.currStatus.value;
-                taskStore.taskList[taskStore.modalKey].name = taskStore.updateTask.name;
-                taskStore.taskList[taskStore.modalKey].id = taskStore.updateTask.id;
-                taskStore.taskList[taskStore.modalKey].description = taskStore.updateTask.description;
-                taskStore.taskList[taskStore.modalKey].responsible = taskStore.updateTask.responsible;
-                taskStore.taskList[taskStore.modalKey].status = taskStore.updateTask.status;
-                putTask(taskStore.taskList[taskStore.modalKey]);
+                if(save === true){
+                    // taskStore.updateTask.status = taskStore.currStatus.value;
 
-            }
+                    taskStore.updateTask.status = taskStore.currStatus.value;
+                    taskStore.updateTask.responsible = taskStore.updateTask.responsible.value;
+                    taskStore.taskList[taskStore.modalKey].name = taskStore.updateTask.name;
+                    taskStore.taskList[taskStore.modalKey].id = taskStore.updateTask.id;
+                    taskStore.taskList[taskStore.modalKey].description = taskStore.updateTask.description;
+                    taskStore.taskList[taskStore.modalKey].responsible = taskStore.updateTask.responsible;
+                    taskStore.taskList[taskStore.modalKey].status = taskStore.updateTask.status;
+                    putTask(taskStore.taskList[taskStore.modalKey]).then(function (response) {
+                        if(response.ok){
+                            taskStore.getTasks();
+                        }
+                        else{
+                            // alerts the status code and the associated text
+                            // fx Status Code: 200       Status: OK
+                            alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
+                        }
+                    });
+                }
                 taskStore.updateTask = {
                     name: '',
                     description: '',
@@ -178,6 +175,8 @@ function TaskOverview() {
                 };
                 taskStore.modalKey = 0;
                 taskStore.modalShow = false;
+
+
         }
     }
 
@@ -185,38 +184,20 @@ function TaskOverview() {
         return (e) => {
             e.preventDefault();
             // can maybe do this with updateTask = task
-            taskStore.updateTask.description = task.description;
-            taskStore.updateTask.id = task.id;
-            taskStore.updateTask.name = task.name;
-            taskStore.updateTask.responsible = task.responsible;
-            taskStore.updateTask.status = task.status;
-            taskStore.modalKey = key;
-            taskStore.currStatus.value = task.status;
-            taskStore.currStatus.label = task.status;
-            taskStore.modalShow = true;
+                taskStore.updateTask.description = task.description;
+                taskStore.updateTask.id = task.id;
+                taskStore.updateTask.name = task.name;
+                taskStore.updateTask.responsible = task.responsible;
+                taskStore.updateTask.status = task.status;
+                taskStore.modalKey = key;
+                // sometimes crashes !!
+                // userStore.currUser.label = userStore.userList[key].email;
+                // userStore.currUser.value = userStore.userList[key].id;
+                taskStore.currStatus.value = task.status;
+                taskStore.currStatus.label = task.status;
+                taskStore.modalShow = true;
         }
     }
-
-    function getOnSubmit() {
-        return (e) => {
-            e.preventDefault();
-            taskStore.inputTask.status = 'NotStarted';
-            taskStore.inputTask.id = (taskStore.taskList.length + 1) + '';
-            // taskStore.inputTask.responsible.id = (taskStore.taskList.length + 2) + '';
-
-            taskStore.taskList.push(taskStore.inputTask);
-            postTask(taskStore.inputTask);
-            taskStore.inputTask = {
-                name: '',
-                description: '',
-                id: '',
-                responsible: '',
-                status: ''
-            };
-        };
-
-    }
-
 }
 
 export default observer(TaskOverview);

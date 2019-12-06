@@ -1,6 +1,6 @@
 import {authenticationStore} from "./AuthenticationStore";
 
-const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:3000/":""; //Check if dev environment
+// const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:3000/":""; //Check if dev environment
 
 export const postTask = (task) => {
     console.log("This task will be posted: " + JSON.stringify(task));
@@ -11,6 +11,8 @@ export const deleteTask = (task) => {
     console.log("This task will be deleted: " + JSON.stringify(task));
     return taskDel(task,'https://test-devops69.herokuapp.com')
 };
+
+
 
 const taskPost = async (json, url) =>{
     return await fetch(url + '/api/task',
@@ -161,4 +163,33 @@ const usecasePost = async (json, url) =>{
             },
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url
+};
+
+export const postUser = (user) => {
+    console.log(JSON.stringify(user));
+    return userPost(user,'https://test-devops69.herokuapp.com')
+};
+
+const userPost = async (json, url) =>{
+    return await fetch(url + '/api/user',
+        {method:"POST",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                // 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: JSON.stringify(json)})
+};
+
+export const getCurrentUser = async (json, url) =>{
+    return await fetch(url + '/api/user/current',
+        {method:"GET",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: JSON.stringify(json)})
 };

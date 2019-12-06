@@ -3,7 +3,7 @@ import {authenticationStore} from "./AuthenticationStore";
 
 class UsecasesStore {
     getUsecases(){
-        const localurl = "http://localhost:8080/api/usecase";
+        // const localurl = "http://localhost:8080/api/usecase";
         const serverurl = "https://test-devops69.herokuapp.com/api/usecase";
         console.log("Getting usecases");
         fetch(serverurl, {
@@ -11,14 +11,20 @@ class UsecasesStore {
             headers: {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
-        })
-            .then((response)=>response.json()
-                .then((jsonresponse)=>{
-                    console.log(jsonresponse);
-                    this.usecasesList = jsonresponse;
-                })
-            )
+        }) // add exception handling
+            .then(function (response) {
+                if (response.ok){
+                    response.json().then(function (jsonresponse) {
+                        //console.log(jsonresponse);
+                        usecasesStore.usecasesList = jsonresponse;
+                    })
+                }
+                else {
+                    alert("Status code: " + response.status + "\n " + response.statusText);
+                }
+            })
     }
+
     usecasesList = [{
         id: "",
         userStory: '',
@@ -42,6 +48,7 @@ class UsecasesStore {
     modalShow = false;
     modalKey;
     modalDropdown = false;
+    inputModalShow = false;
 }
 
 
@@ -51,7 +58,8 @@ decorate(UsecasesStore, {
     updateUsecases:observable,
     modalDropdown:observable,
     modalKey:observable,
-    modalShow:observable
+    modalShow:observable,
+    inputModalShow:observable
 });
 
 export const usecasesStore = new UsecasesStore();

@@ -3,7 +3,7 @@ import {authenticationStore} from "./AuthenticationStore";
 
 class TaskStore {
     getTasks(){
-        const localurl = "http://localhost:8080/api/task";
+        // const localurl = "http://localhost:8080/api/task";
         const serverurl = "https://test-devops69.herokuapp.com/api/task";
         console.log("Getting tasks");
         fetch(serverurl, {
@@ -12,17 +12,32 @@ class TaskStore {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
         })
-            .then((response)=>response.json()
-                .then((jsonresponse)=>{
-                    console.log(jsonresponse);
-                    this.taskList = jsonresponse;
-                })
-            )
+            .then(function (response) {
+                if (response.ok){
+                    response.json().then(function (jsonresponse) {
+                        // console.log(jsonresponse)
+                        taskStore.taskList = jsonresponse;
+                    })
+                }
+                else {
+                    alert("Status code: " + response.status + "\n " + response.statusText)
+                }
+            })
     }
+
+// .then((response)=>response.json()
+// .then((jsonresponse)=>{
+//     console.log(jsonresponse);
+//     this.taskList = jsonresponse;
+// })
+// )
     viewmode = "List";
     modalShow = false;
     modalKey;
     modalDropdown = false;
+    inputModalShow = false;
+
+    //inputModalDropdown = false;
     // taskList = [{
     //     Name: 'TaskOverview',
     //     Description: 'Make a list of the tasks, and present it in a table.',
@@ -72,7 +87,8 @@ decorate(TaskStore, {
     modalShow: observable,
     updateTask: observable,
     modalDropdown: observable,
-    currStatus: observable
+    currStatus: observable,
+    inputModalShow: observable,
 });
 
 export const taskStore = new TaskStore();

@@ -19,9 +19,9 @@ class RequestStore {
 
 
     getRequested() {
-        const localurl = "http://localhost:5005/api/music/";
+        // const localurl = "http://localhost:5005/api/music/";
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
-        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        // const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Getting music requests");
         fetch(testserverurl, {
             method: "GET",
@@ -29,19 +29,24 @@ class RequestStore {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
         })
-            .then((response) => response.json()
-                .then((jsonresponse) => {
-                    // console.log("GETTING REQUESTS: " + jsonresponse);
-                    this.showRequestList = jsonresponse;
-                    this.requestList = jsonresponse;
-                })
-            )
+            .then(function (response) {
+                if (response.ok){
+                    response.json().then(function (jsonresponse) {
+                        requestStore.showRequestList = jsonresponse;
+                        requestStore.requestList = jsonresponse;
+                    })
+                }
+                else{
+                    // alerts on bad status codes !=2xx
+                    alert("Status code: "+ response.status + "\n Status: " +  response.statusText)
+                }
+            });
     }
 
     postRequest(track) {
-        const localurl = "http://localhost:5005/api/music/";
+        // const localurl = "http://localhost:5005/api/music/";
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
-        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        // const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Posting music request");
         fetch(testserverurl, {
             method: "POST",
@@ -50,19 +55,25 @@ class RequestStore {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(track)
-        }) .then((response) => response.json()
-            .then((jsonresponse) => {
-                // console.log(jsonresponse);
-                this.showRequestList = jsonresponse;
-                this.requestList = jsonresponse;
-            })
-        )
+        }).then(function (response) {
+            if (response.ok){
+                response.json().then(function (jsonresponse) {
+                    requestStore.showRequestList = jsonresponse;
+                    requestStore.requestList = jsonresponse;
+                })
+            }
+            else{
+                // alerts on bad status codes !=2xx
+                alert("Status code: "+ response.status + "\n Status: " +  response.statusText)
+            }
+        });
     }
 
+
     deleteRequest(track) {
-        const localurl = "http://localhost:5005/api/music/";
+        // const localurl = "http://localhost:5005/api/music/";
         const testserverurl = "https://test-devops69.herokuapp.com/api/music/";
-        const serverurl = "https://devops69.herokuapp.com/api/music/";
+        // const serverurl = "https://devops69.herokuapp.com/api/music/";
         console.log("Deleting music request");
         fetch(testserverurl, {
             method: "DELETE",
@@ -71,13 +82,18 @@ class RequestStore {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(track)
-        }) .then((response) => response.json()
-            .then((jsonresponse) => {
-                // console.log(jsonresponse);
-                this.showRequestList = jsonresponse;
-                this.requestList = jsonresponse;
-            })
-        )
+        }) .then(function (response) {
+            if (response.ok){
+                response.json().then(function (jsonresponse) {
+                    requestStore.showRequestList = jsonresponse;
+                    requestStore.requestList = jsonresponse;
+                })
+            }
+            else{
+                // alerts on bad status codes !=2xx
+                alert("Status code: "+ response.status + "\n Status: " +  response.statusText)
+            }
+        });
     }
 
 }
