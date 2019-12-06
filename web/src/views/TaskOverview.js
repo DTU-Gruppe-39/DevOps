@@ -23,16 +23,18 @@ function TaskOverview() {
         <Container>
             <div className="spacer"/>
 
-            <div className="btn-group " id="overview" role="group">
-                <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("List")}>List</button>
-                <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("Kanban")}>Kanban</button>
-            </div>
-
             <div className="row justify-content-lg-center">
-                <Button variant={"primary"} onClick={showInputBox()}>Add</Button>
                 <InputModalBox/>
             </div>
             <h3 className="d-flex justify-content-center">Tasks</h3>
+            <div className="btn-group " id="overview" role="group">
+                <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("List")}>List</button>
+                <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("Kanban")}>Kanban</button>
+                <button type="button overviewBtn" className="btn btn-secondary" onClick={showInputBox()}> Add task</button>
+            </div>
+            <br/>
+            <br/>
+
             {taskStore.viewmode === "Kanban" &&<div id={"KanbanView"}>
                 <KanbanTest />
             </div>}
@@ -155,6 +157,11 @@ function TaskOverview() {
                     putTask(taskStore.taskList[taskStore.modalKey]).then(function (response) {
                         if(response.ok){
                             taskStore.getTasks();
+                        }
+                        else{
+                            // alerts the status code and the associated text
+                            // fx Status Code: 200       Status: OK
+                            alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
                         }
                     });
                 }

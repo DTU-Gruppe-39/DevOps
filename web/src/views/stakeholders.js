@@ -16,7 +16,6 @@ import deletelogo from "../baseline_close_black_48dp.png";
         return (
             <div class="container col-10">
                 <div className="row justify-content-lg-center">
-                    <Button variant={"primary"} onClick={showInputBox()}>Add</Button>
                     <Modal show={stakeHolderStore.inputModalShow} size={"lg"}>
                         <Modal.Header>
                             <Modal.Title> Creating stakeholder </Modal.Title>
@@ -104,7 +103,13 @@ import deletelogo from "../baseline_close_black_48dp.png";
                     </Modal>
                     <div className="stakeholderList justify-content-center">
                         <ul>
+                            <br/>
                             <h3 className="d-flex justify-content-center">Stakeholders</h3>
+
+                            <br/>
+                            <Button className="addButton justify-content-center" variant={"primary"} onClick={showInputBox()}>Add stakeholder</Button>
+
+                            <br/>
                             <table>
                                 <tr>
                                     <th>Name</th>
@@ -151,6 +156,11 @@ function updateStakeholderFunc(save) {
                     stakeHolderStore.getStakeholders();
                 }
                 // exception handling
+                else{
+                    // alerts the status code and the associated text
+                    // fx Status Code: 200       Status: OK
+                    alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
+                }
             });
 
         }
@@ -177,6 +187,11 @@ function inputStakeholderFunc(save) {
                     stakeHolderStore.getStakeholders();
                 }
                 // exception handling
+                else{
+                    // alerts the status code and the associated text
+                    // fx Status Code: 200       Status: OK
+                    alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
+                }
             });
 
         }

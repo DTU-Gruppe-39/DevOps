@@ -16,6 +16,11 @@
     width: 100%;
 }
 
+.addButton{
+    width: 100%;
+    justify-content: center;
+}
+
 input{
     margin: 10px;
 }
