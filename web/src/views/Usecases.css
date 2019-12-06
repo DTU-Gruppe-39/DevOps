@@ -8,8 +8,14 @@
 }
 
 .addButton{
-    width: 100%;
+    /*Here is the trick*/
+    position: fixed;
+    /*width: 50px;*/
+    /*height: 40px;*/
+    /*alignItems: center;*/
     justify-content: center;
+    right: 5%;
+    bottom: 5%;
 }
 
 input{

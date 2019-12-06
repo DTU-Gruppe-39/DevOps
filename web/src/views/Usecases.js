@@ -6,6 +6,7 @@ import "./Usecases.css";
 import {Button, Modal} from "react-bootstrap";
 import Select from "react-select";
 import {userStore} from "../stores/UserStore";
+import addCircle from "../add_circle-24px.svg"
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
 
@@ -93,8 +94,8 @@ function Usecases() {
                     <ul>
                         <h3 className="d-flex justify-content-center">Usecases</h3>
                         <br/>
-                        <Button className="addButton justify-content-center" variant={"primary"} onClick={showInputBox()}> Add usecase </Button>
-
+                        {/*<Button className="addButton justify-content-center" variant={"primary"} onClick={showInputBox()}> Add usecase </Button>*/}
+                        <img className="addButton justify-content-center" src={addCircle} alt="Add usecase" width="48" height="48" title="Add usecase" onClick={showInputBox()}/>
                         <table>
                             <tr>
                                 <th>ID</th>

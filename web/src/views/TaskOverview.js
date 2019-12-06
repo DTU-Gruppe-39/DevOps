@@ -13,6 +13,7 @@ import InputModalBox from "./InputModalBox";
 import {putTask, deleteTask} from "../stores/Api";
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
+import addCircle from "../add_circle-24px.svg";
 
 
 function TaskOverview() {
@@ -30,8 +31,8 @@ function TaskOverview() {
             <div className="btn-group " id="overview" role="group">
                 <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("List")}>List</button>
                 <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("Kanban")}>Kanban</button>
-                <button type="button overviewBtn" className="btn btn-secondary" onClick={showInputBox()}> Add task</button>
             </div>
+            <img className="addButton justify-content-center" src={addCircle} alt="Add task" width="48" height="48" title="Add task" onClick={showInputBox()}/>
             <br/>
             <br/>
 

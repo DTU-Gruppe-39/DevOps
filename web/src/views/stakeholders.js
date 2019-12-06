@@ -6,6 +6,7 @@ import {deleteStakeholder, postStakeholder, putStakeholder} from "../stores/Api"
 import {Button, Modal} from "react-bootstrap";
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
+import addCircle from "../add_circle-24px.svg";
 
 
 
@@ -107,7 +108,9 @@ import deletelogo from "../baseline_close_black_48dp.png";
                             <h3 className="d-flex justify-content-center">Stakeholders</h3>
 
                             <br/>
-                            <Button className="addButton justify-content-center" variant={"primary"} onClick={showInputBox()}>Add stakeholder</Button>
+
+                            {/*<Button className="addButton justify-content-end" variant={"primary"} onClick={showInputBox()}>Add stakeholder</Button>*/}
+                            <img className="addButton justify-content-center" src={addCircle} alt="Add stakeholder" width="48" height="48" title="Add stakeholder" onClick={showInputBox()}/>
 
                             <br/>
                             <table>

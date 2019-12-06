@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {taskStore} from "../../stores/TaskStore";
 import {putTask} from "../../stores/Api";
+import {userStore} from "../../stores/UserStore";
 
 export default class Droppable extends React.Component{
     drop = (e) => {
@@ -12,7 +13,19 @@ export default class Droppable extends React.Component{
             taskStore.taskList.map((task, key) => {
                 if(task.id===data){
                     taskStore.taskList[key].status = "NotStarted";
-                    putTask(taskStore.taskList[key]);
+                    userStore.userList.map((user, ukey) => {
+                        if(user.email === taskStore.taskList[key].responsible){
+                            taskStore.taskList[key].responsible = user.id;
+                        }
+                    });
+                    putTask(taskStore.taskList[key]).then(function (response) {
+                        if (response.ok){
+                            taskStore.getTasks();
+                        }
+                        else {
+                            alert("Status code: " + response.status + "\n Status: " + response.statusText);
+                        }
+                    });
                     console.log("task status has changed to: " + task.status + "(To-Do)");
                 }
             })
@@ -20,7 +33,19 @@ export default class Droppable extends React.Component{
             taskStore.taskList.map((task, key) => {
                 if(task.id===data){
                     taskStore.taskList[key].status = "InProgress";
-                    putTask(taskStore.taskList[key]);
+                    userStore.userList.map((user, ukey) => {
+                        if(user.email === taskStore.taskList[key].responsible){
+                            taskStore.taskList[key].responsible = user.id;
+                        }
+                    });
+                    putTask(taskStore.taskList[key]).then(function (response) {
+                        if (response.ok){
+                            taskStore.getTasks();
+                        }
+                        else {
+                            alert("Status code: " + response.status + "\n Status: " + response.statusText);
+                        }
+                    });
                     console.log("task status has changed to: " + task.status + "(In-Progress)");
                 }
             })
@@ -28,17 +53,29 @@ export default class Droppable extends React.Component{
             taskStore.taskList.map((task, key) => {
                 if(task.id===data){
                     taskStore.taskList[key].status = "Done";
-                    putTask(taskStore.taskList[key]);
+                    userStore.userList.map((user, ukey) => {
+                       if(user.email === taskStore.taskList[key].responsible){
+                           taskStore.taskList[key].responsible = user.id;
+                       }
+                    });
+                    putTask(taskStore.taskList[key]).then(function (response) {
+                        if (response.ok){
+                            taskStore.getTasks();
+                        }
+                        else {
+                            alert("Status code: " + response.status + "\n Status: " + response.statusText);
+                        }
+                    });
                     console.log("task status has changed to: " + task.status + "(Completed)");
                 }
             })
         }
         e.target.appendChild(document.getElementById(data));
-    }
+    };
 
     allowDrop = (e) => {
         e.preventDefault();
-    }
+    };
 
     render(){
         return (
@@ -53,4 +90,4 @@ Droppable.propTypes = {
     id: PropTypes.string,
     style: PropTypes.object,
     children: PropTypes.node,
-}
+};

@@ -24,6 +24,7 @@ class TaskStore {
     modalKey;
     modalDropdown = false;
     inputModalShow = false;
+
     //inputModalDropdown = false;
     // taskList = [{
     //     Name: 'TaskOverview',
