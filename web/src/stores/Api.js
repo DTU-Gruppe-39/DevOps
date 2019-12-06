@@ -162,3 +162,27 @@ const usecasePost = async (json, url) =>{
             body: JSON.stringify(json)})
     // then(resp=>resp.json()) + url
 };
+
+export const userPost = async (json, url) =>{
+    return await fetch(url + '/api/user',
+        {method:"POST",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: JSON.stringify(json)})
+};
+
+export const getCurrentUser = async (json, url) =>{
+    return await fetch(url + '/api/user/current',
+        {method:"GET",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: JSON.stringify(json)})
+};
