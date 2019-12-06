@@ -321,8 +321,7 @@ function addProject(save) {
             id: "",
             name: "",
             progress: 0,
-            vision: "",
-            isProjectManager: false
+            vision: ""
         };
         projectStore.modalShow = false;
 
