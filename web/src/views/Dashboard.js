@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {ProgressBar} from "react-bootstrap";
 import "./Dashboard.css"
 import {projectStore} from "../stores/ProjectStore";
     function Dashboard() {
+        useEffect(()=>{
+            projectStore.getProject();
+        },[])
         return(
             <div className="dashboard-progress">
                 <div className="container">
