@@ -11,13 +11,21 @@ class ProjectStore {
         isProjectManager: false
     };
 
+    inputProject = {
+        id: "",
+        name: "",
+        progress: 0,
+        vision: "",
+        isProjectManager: false
+    };
+
     listOfProjects = [{
         id: "",
         name: "",
         progress: 0,
         vision: ""
     }];
-
+    modalShow = false;
     inputProgress = "";
     inputVision = "";
 
@@ -54,7 +62,9 @@ decorate(ProjectStore, {
     currentProject: observable,
     listOfProjects: observable,
     inputProgress: observable,
-    inputVision: observable
+    inputVision: observable,
+    inputProject: observable,
+    modalShow: observable
 });
 
 export const projectStore = new ProjectStore();
