@@ -7,7 +7,8 @@ class ProjectStore {
         id: "",
         name: "",
         progress: 0,
-        vision: ""
+        vision: "",
+        isProjectManager: ""
     };
 
     listOfProjects = [{
@@ -32,9 +33,9 @@ class ProjectStore {
         }).then(function (response) {
             console.log(response.status);
             if (response.ok) {
-                response.json().then(function (project) {
-                    console.log(project);
-                    projectStore.currentProject = project;
+                response.json().then(function (projects) {
+                    console.log(projects);
+                    projectStore.listOfProjects = projects;
                 })}
             else
                 console.log(response.status + ": error while getting project")

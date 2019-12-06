@@ -14,13 +14,15 @@ public class Stakeholder extends DocumentObject {
   private String contact_person;
   private String email;
   private Boolean stakeholder_type;
+  private String projectId;
 
-  public Stakeholder(String id, String name, String contact_person, String email, Boolean stakeholder_type) {
+  public Stakeholder(String id, String name, String contact_person, String email, Boolean stakeholder_type, String projectId) {
     this.id = id;
     this.name = name;
     this.contact_person = contact_person;
     this.email = email;
     this.stakeholder_type = stakeholder_type;
+    this.projectId = projectId;
   }
 
   public Stakeholder() {
@@ -65,6 +67,7 @@ public class Stakeholder extends DocumentObject {
     mapToReturn.put("contact_person", getContact_person());
     mapToReturn.put("email", getEmail());
     mapToReturn.put("stakeholder_type", getStakeholder_type());
+    mapToReturn.put("projectId", new ObjectId(getProjectId()));
     return mapToReturn;
   }
 
@@ -75,6 +78,7 @@ public class Stakeholder extends DocumentObject {
     this.contact_person = (String) mapOfObject.get("contact_person");
     this.email = (String) mapOfObject.get("email");
     this.stakeholder_type = (Boolean) mapOfObject.get("stakeholder_type");
+    this.projectId = ((ObjectId) mapOfObject.get("projectId")).toString();
   }
 
   public String getId() {
@@ -83,5 +87,13 @@ public class Stakeholder extends DocumentObject {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public String getProjectId() {
+    return projectId;
+  }
+
+  public void setProjectId(String projectId) {
+    this.projectId = projectId;
   }
 }

@@ -8,5 +8,5 @@ import java.util.List;
  * Created by magnus
  */
 public interface CollectionI<T extends DocumentObject> {
-  List<T> getAll();
+  List<T> getAll(String projectId);
 }

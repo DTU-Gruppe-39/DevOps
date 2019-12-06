@@ -20,13 +20,10 @@ import java.util.Map;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
-
 /**
  * Created by magnus
  */
 public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, CollectionI {
-  private final static String username = System.getenv("devopsusername");
-  private final static String password = System.getenv("devopspassword");
   private static MongoDatabase db = new MongoConnector().getDb();
   MongoCollection<Document> collection;
   private DocumentObject objectToReturn;
@@ -43,10 +40,10 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   }
 
   @Override
-  public List getAll() {
+  public List getAll(String projectId) {
     objectToReturn = null;
     List<T> listOfObjectsToReturn = new ArrayList<>();
-    for (Document document : collection.find()) {
+    for (Document document : collection.find(eq("projectId",new ObjectId(projectId)))) {
       try {
         objectToReturn = getInstance();
       } catch (Exception e) {
@@ -69,15 +66,16 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   }
 
   @Override
-  public void update(String documentId, DocumentObject documentObject) {
+  public void update(String projectId, String documentId, DocumentObject documentObject) {
     Document document = new Document(documentObject.toMap());
-    collection.replaceOne(eq("_id", new ObjectId(documentId)),document);
+    collection.replaceOne(and(eq("_id", new ObjectId(documentId)),eq("projectId", new ObjectId(projectId))),document);
   }
 
   @Override
-  public DocumentObject get(String documentId) {
+  public DocumentObject get(String projectId, String documentId) {
     objectToReturn = null;
-    Document document = collection.find(eq("_id", new ObjectId(documentId))).first();
+    System.out.println("projectid: "+projectId+" , Documentid: "+documentId);
+    Document document = collection.find(and(eq("_id", new ObjectId(documentId)),eq("projectId",new ObjectId(projectId)))).first();
     try {
       objectToReturn = getInstance();
     } catch (Exception e) {
@@ -92,13 +90,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
   }
 
   @Override
-  public void delete(String documentId) {
-    collection.deleteOne(eq("_id",new ObjectId(documentId)));
+  public void delete(String projectId, String documentId) {
+    collection.deleteOne(and(eq("_id",new ObjectId(documentId)),eq("projectId",new ObjectId(projectId))));
   }
 
   public LoginDetails validateLogin(String username) {
     objectToReturn = null;
-    Document loginDocument = collection.find(and(eq("username",username))).first();
+    Document loginDocument = collection.find(eq("username",username)).first();
     try {
       objectToReturn = new LoginDetails();
     } catch (Exception e) {
@@ -141,4 +139,49 @@ public abstract class DAOImpl <T extends DocumentObject> implements DocumentI, C
     Document document = new Document(updatedUser.toMap());
     collection.replaceOne(eq("_id", new ObjectId(id)),document);
   }
+
+  public List getAll() {
+    objectToReturn = null;
+    List<T> listOfObjectsToReturn = new ArrayList<>();
+    for (Document document : collection.find()) {
+      try {
+        objectToReturn = getInstance();
+      } catch (Exception e) {
+        System.out.println("Could not define subclass of superclass"+e);
+      }
+      Map<String, Object> map = new HashMap<>();
+      for (Map.Entry<String, Object> element : document.entrySet()) {
+        map.put(element.getKey(), element.getValue());
+      }
+      objectToReturn.toObject(map);
+      listOfObjectsToReturn.add((T) objectToReturn);
+    }
+    return listOfObjectsToReturn;
+  }
+
+  public void delete(String documentId) {
+    collection.deleteOne(eq("_id",new ObjectId(documentId)));
+  }
+
+  public DocumentObject get(String documentId) {
+    objectToReturn = null;
+    Document document = collection.find(eq("_id", new ObjectId(documentId))).first();
+    try {
+      objectToReturn = getInstance();
+    } catch (Exception e) {
+      System.out.println("Could not define subclass of superclass"+e);
+    }
+    Map<String, Object> map = new HashMap<>();
+    for (Map.Entry<String, Object> element : document.entrySet()) {
+      map.put(element.getKey(), element.getValue());
+    }
+    objectToReturn.toObject(map);
+    return objectToReturn;
+  }
+
+  public void update(String documentId, DocumentObject documentObject) {
+    Document document = new Document(documentObject.toMap());
+    collection.replaceOne(eq("_id", new ObjectId(documentId)),document);
+  }
+
 }

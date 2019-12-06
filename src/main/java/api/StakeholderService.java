@@ -9,13 +9,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("stakeholder")
+@Path("project/{projectId}/stakeholder")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class StakeholderService {
-    //MongoDatabase database = new data.database.MongoConnector().getDb();
-    //MongoCollection<Document> stakeholderCollection = database.getCollection("stakeholder");
     private StakeholderController stakeholderController = ControllerRegistry.getStakeholderController();
+    @PathParam("projectId") String projectId;
 
     @POST
     @Secured({Role.Developer, Role.ProjectManager})
@@ -26,18 +25,18 @@ public class StakeholderService {
     @GET
     @Secured({Role.Developer, Role.ProjectManager})
     public List<Stakeholder> getStakeholder() {
-        return stakeholderController.getAll();
+        return stakeholderController.getAll(projectId);
     }
 
     @PUT
     @Secured({Role.Developer, Role.ProjectManager})
     public void putStakeholder(Stakeholder updatedStakeholder) {
-        stakeholderController.update(updatedStakeholder.getId(), updatedStakeholder);
+        stakeholderController.update(projectId, updatedStakeholder.getId(), updatedStakeholder);
     }
 
     @DELETE
     @Secured({Role.Developer, Role.ProjectManager})
     public void deleteStakeholder(String id) {
-        stakeholderController.delete(id);
+        stakeholderController.delete(projectId, id);
     }
 }

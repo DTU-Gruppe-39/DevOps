@@ -16,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StakeholderControllerImplTest {
   StakeholderController stakeholderController = ControllerRegistry.getStakeholderController();
+  private String projectId = "5de95d311c9d440000f81222";
 
   @Test
   @Order(1)
   public void testAddStakeholder () {
     stakeholderController.add(getTestStakeholder());
-    Stakeholder stakeholder = stakeholderController.get(getIdFromTestStakeholder());
+    Stakeholder stakeholder = stakeholderController.get(projectId,getIdFromTestStakeholder());
     assertTrue(stakeholder.getName().equals(getTestStakeholder().getName()) &&
             stakeholder.getEmail().equals(getTestStakeholder().getEmail()) &&
             stakeholder.getContact_person().equals(getTestStakeholder().getContact_person()) &&
@@ -31,15 +32,15 @@ class StakeholderControllerImplTest {
   @Test
   @Order(2)
   public void testGetTestStakeholder () {
-    assertEquals(getTestStakeholder().getName(),stakeholderController.get(getIdFromTestStakeholder()).getName());
+    assertEquals(getTestStakeholder().getName(),stakeholderController.get(projectId,getIdFromTestStakeholder()).getName());
   }
 
   @Test
   @Order(3)
   public void testUpdateStakeholder () {
     String id = getIdFromTestStakeholder();
-    stakeholderController.update(id, getTestUpdatedStakeholder());
-    Stakeholder stakeholder = stakeholderController.get(id);
+    stakeholderController.update(projectId,id, getTestUpdatedStakeholder());
+    Stakeholder stakeholder = stakeholderController.get(projectId,id);
     assertTrue(stakeholder.getName().equals(getTestUpdatedStakeholder().getName()) &&
             stakeholder.getEmail().equals(getTestUpdatedStakeholder().getEmail()) &&
             stakeholder.getContact_person().equals(getTestUpdatedStakeholder().getContact_person()) &&
@@ -49,14 +50,14 @@ class StakeholderControllerImplTest {
   @Test
   @Order(4)
   public void testGetAllStakeholders () {
-    assertNotNull(stakeholderController.getAll());
-    assertTrue(stakeholderController.getAll().size() > 0);
+    assertNotNull(stakeholderController.getAll(projectId));
+    assertTrue(stakeholderController.getAll(projectId).size() > 0);
   }
 
   @Test
   @Order(5)
   public void testDeleteStakeholder () {
-    stakeholderController.delete(getIdFromTestUpdatedStakeholder());
+    stakeholderController.delete(projectId,getIdFromTestUpdatedStakeholder());
     assertTrue(getIdFromTestUpdatedStakeholder() == null);
   }
 
@@ -66,6 +67,7 @@ class StakeholderControllerImplTest {
     stakeholder.setEmail("teststakeholder@gmail.com");
     stakeholder.setContact_person("Bo Testson");
     stakeholder.setStakeholder_type(false);
+    stakeholder.setProjectId(projectId);
     return stakeholder;
   }
 
@@ -75,11 +77,12 @@ class StakeholderControllerImplTest {
     stakeholder.setEmail("teststakeholderupdated@gmail.com");
     stakeholder.setContact_person("Bo Testson");
     stakeholder.setStakeholder_type(true);
+    stakeholder.setProjectId(projectId);
     return stakeholder;
   }
 
   public String getIdFromTestStakeholder() {
-    for (Stakeholder stakeholder : stakeholderController.getAll()) {
+    for (Stakeholder stakeholder : stakeholderController.getAll(projectId)) {
       if (stakeholder.getName().equals(getTestStakeholder().getName()) &&
               stakeholder.getEmail().equals(getTestStakeholder().getEmail()) &&
               stakeholder.getContact_person().equals(getTestStakeholder().getContact_person()) &&
@@ -90,7 +93,7 @@ class StakeholderControllerImplTest {
   }
 
   public String getIdFromTestUpdatedStakeholder() {
-    for (Stakeholder stakeholder : stakeholderController.getAll()) {
+    for (Stakeholder stakeholder : stakeholderController.getAll(projectId)) {
       if (stakeholder.getName().equals(getTestUpdatedStakeholder().getName()) &&
               stakeholder.getEmail().equals(getTestUpdatedStakeholder().getEmail()) &&
               stakeholder.getContact_person().equals(getTestUpdatedStakeholder().getContact_person()) &&

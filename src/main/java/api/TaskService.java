@@ -9,11 +9,13 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("task")
+@Path("project/{projectId}/task")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class TaskService {
     private TaskController taskController = ControllerRegistry.getTaskController();
+    @PathParam("projectId") String projectId;
+
 
     @POST
     @Secured({Role.Developer, Role.ProjectManager})
@@ -24,19 +26,19 @@ public class TaskService {
     @GET
     @Secured({Role.Developer, Role.ProjectManager})
     public List<Task> getTask() {
-        return taskController.getAll();
+        return taskController.getAll(projectId);
     }
 
     @PUT
     @Secured({Role.Developer, Role.ProjectManager})
     public void putTask(Task task) {
-        taskController.update(task.getId(), task);
+        taskController.update(projectId, task.getId(), task);
     }
 
     @DELETE
     @Secured({Role.Developer, Role.ProjectManager})
     public void deleteTask(String id) {
-        taskController.delete(id);
+        taskController.delete(projectId, id);
     }
 
 }

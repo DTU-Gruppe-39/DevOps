@@ -28,7 +28,8 @@ public class ProjectService {
   }
 
   @GET
-  public Project getProject(String id) {
+  @Path("{id}")
+  public Project getProject(@PathParam("id") String id) {
     return projectController.get(id);
   }
 
@@ -38,7 +39,7 @@ public class ProjectService {
   }
 
   @PUT
-  public void putProject (String id, Project updatedProject) {
-    projectController.update(id, updatedProject);
+  public void putProject (Project updatedProject) {
+    projectController.update(updatedProject.getId(), updatedProject);
   }
 }

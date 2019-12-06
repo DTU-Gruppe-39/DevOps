@@ -18,8 +18,8 @@ public class UsecaseControllerImpl implements UsecaseController {
     private UserController userController = ControllerRegistry.getUserController();
 
     @Override
-    public List<Usecase> getAll() {
-        List<Usecase> usecases = usecaseDocument.getAll();
+    public List<Usecase> getAll(String projectId) {
+        List<Usecase> usecases = usecaseDocument.getAll(projectId);
         for (Usecase usecase : usecases) {
             User user = userController.get(usecase.getResponsible());
             usecase.setResponsible(user.getEmail());
@@ -28,9 +28,9 @@ public class UsecaseControllerImpl implements UsecaseController {
     }
 
     @Override
-    public Usecase get(String id) {
+    public Usecase get(String projectId, String id) {
         try {
-            Usecase usecase = (Usecase) usecaseDocument.get(id);
+            Usecase usecase = (Usecase) usecaseDocument.get(projectId,id);
             User user = userController.get(usecase.getResponsible());
             usecase.setResponsible(user.getEmail());
             return usecase;
@@ -49,9 +49,9 @@ public class UsecaseControllerImpl implements UsecaseController {
     }
 
     @Override
-    public void update(String id, Usecase replaceUsecase) {
+    public void update(String projectId, String id, Usecase replaceUsecase) {
         try {
-            usecaseDocument.update(id, replaceUsecase);
+            usecaseDocument.update(projectId,id, replaceUsecase);
         }
         catch (NullPointerException nullPointerException) {
             throw new NotFoundException("Could not find usecase to update");
@@ -59,7 +59,7 @@ public class UsecaseControllerImpl implements UsecaseController {
     }
 
     @Override
-    public void delete(String id) {
-        usecaseDocument.delete(id);
+    public void delete(String projectId, String id) {
+        usecaseDocument.delete(projectId,id);
     }
 }

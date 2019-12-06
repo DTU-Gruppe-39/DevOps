@@ -21,9 +21,9 @@ public class StakeholderControllerImpl implements StakeholderController {
     }
 
     @Override
-    public void update(String id, Stakeholder replaceStakeholder) {
+    public void update(String projectId, String id, Stakeholder replaceStakeholder) {
         try {
-            stakeholderDocument.update(id, replaceStakeholder);
+            stakeholderDocument.update(projectId,id, replaceStakeholder);
         }
         catch (NullPointerException nullPointerException) {
             throw new NotFoundException("Could not find stakeholder to update");
@@ -31,19 +31,19 @@ public class StakeholderControllerImpl implements StakeholderController {
     }
 
     @Override
-    public void delete(String id) {
-        stakeholderDocument.delete(id);
+    public void delete(String projectId, String id) {
+        stakeholderDocument.delete(projectId,id);
     }
 
     @Override
-    public List<Stakeholder> getAll() {
-        return stakeholderDocument.getAll();
+    public List<Stakeholder> getAll(String projectId) {
+        return stakeholderDocument.getAll(projectId);
     }
 
     @Override
-    public Stakeholder get(String id) {
+    public Stakeholder get(String projectId, String id) {
         try {
-            return (Stakeholder) stakeholderDocument.get(id);
+            return (Stakeholder) stakeholderDocument.get(projectId,id);
         }
         catch (NullPointerException nullPointerException) {
             throw new NotFoundException("Could not find stakeholder");

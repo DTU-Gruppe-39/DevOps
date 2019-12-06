@@ -58,7 +58,7 @@ public class UserService {
 
   @DELETE
   @Secured({Role.Developer, Role.ProjectManager})
-  public void deleteUser(String id) {
-    userController.delete(id);
+  public void deleteUser() {
+    userController.delete((String) container.getProperty("id"));
   }
 }

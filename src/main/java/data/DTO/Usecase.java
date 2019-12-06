@@ -10,19 +10,22 @@ public class Usecase extends DocumentObject {
     private String userStory;
     private int priority;
     private String responsible;
+    private String projectId;
 
     public Usecase(){
 
     }
 
-    public Usecase(String id, String userStory, int priority, String responsible){
+    public Usecase(String id, String userStory, int priority, String responsible, String projectId){
         this.id = id;
         this.userStory = userStory;
         this.priority = priority;
         this.responsible = responsible;
+        this.projectId = projectId;
     }
 
-    public Usecase(String userStory, int priority, String responsible){
+    public Usecase(String userStory, int priority, String responsible, String projectId){
+        this.projectId = projectId;
         this.id = null;
         this.userStory = userStory;
         this.priority = priority;
@@ -35,6 +38,7 @@ public class Usecase extends DocumentObject {
         mapToReturn.put("userStory", getUserStory());
         mapToReturn.put("priority",getPriority());
         mapToReturn.put("responsible", new ObjectId(getResponsible()));
+        mapToReturn.put("projectId", new ObjectId(getProjectId()));
         return mapToReturn;
     }
 
@@ -44,6 +48,7 @@ public class Usecase extends DocumentObject {
         this.userStory = (String) mapOfObject.get("userStory");
         this.priority = Integer.parseInt(String.valueOf(mapOfObject.get("priority")));
         this.responsible = ((ObjectId) mapOfObject.get("responsible")).toString();
+        this.projectId = ((ObjectId) mapOfObject.get("projectId")).toString();
     }
 
     public String getId() {
@@ -81,5 +86,13 @@ public class Usecase extends DocumentObject {
     @Override
     public String toString(){
         return getId() + "" + getUserStory() + "" + getPriority() + "" + getResponsible();
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 }
