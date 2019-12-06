@@ -13,6 +13,24 @@ export const deleteTask = (task) => {
     return taskDel(task,'https://test-devops69.herokuapp.com')
 };
 
+export const postProject = (project) => {
+    console.log("This project will be created: " + JSON.stringify(project));
+    return projectPost(project,'https://test-devops69.herokuapp.com')
+};
+
+const projectPost = async (json, url) =>{
+    return await fetch(url + '/api/project/'+projectStore.currentProject.id+'/project',
+        {method:"POST",
+            // mode: '',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+            },
+            body: JSON.stringify(json)})
+    // then(resp=>resp.json()) + url
+};
+
 const taskPost = async (json, url) =>{
     return await fetch(url + '/api/project/'+projectStore.currentProject.id+'/task',
         {method:"POST",

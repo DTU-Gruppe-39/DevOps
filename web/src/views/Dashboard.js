@@ -3,9 +3,11 @@ import {observer} from "mobx-react";
 import {ProgressBar} from "react-bootstrap";
 import "./Dashboard.css"
 import {projectStore} from "../stores/ProjectStore";
+import {userStore} from "../stores/UserStore";
     function Dashboard() {
         useEffect(()=>{
             projectStore.getProject();
+            userStore.getUsers();
         },[])
         return(
             <div className="dashboard-progress">
