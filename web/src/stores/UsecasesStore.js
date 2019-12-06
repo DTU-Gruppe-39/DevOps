@@ -30,20 +30,23 @@ class UsecasesStore {
         id: "",
         userStory: '',
         priority: '',
-        responsible: ''
+        responsible: '',
+        projectId: ''
     }];
     inputUsecases = {
         id: null,
         userStory: '',
         priority: '',
-        responsible: ''
+        responsible: '',
+        projectId: ''
     };
 
     updateUsecases = {
         id: null,
         userStory: '',
         priority: '',
-        responsible: ''
+        responsible: '',
+        projectId: ''
     };
 
     modalShow = false;

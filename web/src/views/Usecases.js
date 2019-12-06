@@ -9,6 +9,7 @@ import {userStore} from "../stores/UserStore";
 import addCircle from "../add_circle-24px.svg"
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
+import {projectStore} from "../stores/ProjectStore";
 
 
 function Usecases() {
@@ -152,6 +153,7 @@ function editfunc(key, usecase) {
         usecasesStore.updateUsecases.userStory = usecase.userStory;
         usecasesStore.updateUsecases.priority = usecase.priority;
         usecasesStore.updateUsecases.responsible= usecase.responsible;
+        usecasesStore.updateUsecases.projectId = projectStore.currentProject.id;
         usecasesStore.modalKey = key;
         usecasesStore.modalShow = true;
     }
@@ -166,6 +168,7 @@ function updateUsecaseFunc(save) {
             usecasesStore.usecasesList[usecasesStore.modalKey].userStory = usecasesStore.updateUsecases.userStory;
             usecasesStore.usecasesList[usecasesStore.modalKey].priority = usecasesStore.updateUsecases.priority;
             usecasesStore.usecasesList[usecasesStore.modalKey].responsible = usecasesStore.updateUsecases.responsible;
+            usecasesStore.usecasesList[usecasesStore.modalKey].projectId = projectStore.currentProject.id;
             putUsecase(usecasesStore.usecasesList[usecasesStore.modalKey]).then(function (response) {
                 if (response.ok){
                     usecasesStore.getUsecases()
@@ -182,7 +185,8 @@ function updateUsecaseFunc(save) {
             id: null,
             userStory: '',
             priority: '',
-            responsible: ''
+            responsible: '',
+            projectId: ''
         };
         usecasesStore.modalKey = 0;
         usecasesStore.modalShow = false;
@@ -197,6 +201,7 @@ function inputUsecaseFunc(save) {
             // taskStore.updateTask.status = taskStore.currStatus.value;
             usecasesStore.inputUsecases.responsible = usecasesStore.inputUsecases.responsible.value;
             usecasesStore.inputUsecases.id = 1;
+            usecasesStore.inputUsecases.projectId = projectStore.currentProject.id;
             // might not want to push to the list
             usecasesStore.usecasesList.push(usecasesStore.inputUsecases);
             postUsecase(usecasesStore.inputUsecases).then(function (response) {
@@ -215,7 +220,8 @@ function inputUsecaseFunc(save) {
             id: null,
             userStory: '',
             priority: '',
-            responsible: ''
+            responsible: '',
+            projectId: ''
         };
         usecasesStore.inputModalShow = false;
     }
