@@ -22,10 +22,8 @@ import Row from "react-bootstrap/Row";
 import frontImage from "./Best-Project-Management-Software-1024x512.png";
 import ListGroup from "react-bootstrap/ListGroup";
 import Tab from "react-bootstrap/Tab";
-import Select from "react-select";
 import {userStore} from "./stores/UserStore";
 import {userPost} from "./stores/Api";
-import {stakeHolderStore} from "./stores/StakeholdersStore";
 
 
 function App() {
@@ -42,7 +40,7 @@ function App() {
                         (
                             <Dropdown onSelect={function(eventKey) {
                                 if (Number(eventKey) === 1) {
-                                    profileMenu();
+                                    {userStore.profileModal = true};
                                 }
                                 if (Number(eventKey) === 2) {
                                     logoutMenu();
@@ -139,7 +137,7 @@ function App() {
                     <div className="overflow-hidden">
                         <h4 className="title justify-content-center d-flex ">Projektstyringsværktøj</h4>
                         <p className="titleText justify-content-center d-flex">
-                            En applikation der hjælper dig med at få et overblik over dine projekter og opgaver
+                            En applikation der hjælper dig med at få et overblik over dine projekter og opgaver.
                         </p>
 
                         <form className="loginForm" onSubmit={getOnSubmit()}>
@@ -198,8 +196,8 @@ function App() {
                                     </Modal.Body>
 
                                     <br/>
-                                    <Modal.Footer className="col-5">
-                                        <Button className="justify-content-center d-flex" variant={"secondary"} onClick={modalShow(false)}>
+                                    <Modal.Footer className="col-9 justify-content-center d-flex">
+                                        <Button className="" variant={"secondary"} onClick={modalShow(false)}>
                                             Discard changes
                                         </Button>
                                         <Button variant={"primary"}>
@@ -207,14 +205,9 @@ function App() {
                                         </Button>
                                     </Modal.Footer>
                                 </center>
-
                             </Modal>
-
                         </form>
-
-
                         <Col className="frontimage">
-
                             <Row>
                                 <img  className="col-9" src={frontImage}/>
                             </Row>
@@ -236,6 +229,52 @@ function App() {
                     </Modal.Footer>
 
                 </Modal>
+
+                <Modal className="" show={userStore.profileModal} size={"col-12"}>
+                    <center>
+                        <Modal.Header className=" justify-content-center d-flex">
+                            <Modal.Title> <center> Profile </center></Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div className="justify-content-center">
+                                <li>
+                                    <center><b> Email </b> <br/>
+                                        <input name="email" type="text" placeholder="Email"
+                                               value={authenticationStore.currentAuthentication.user.email}
+                                               onChange={(e) => userStore.inputUser.email = e.target.value} required/>
+                                    </center>
+                                </li>
+                                <br/>
+                                <li>
+                                    <b> Role </b> <br/>
+                                    <input name="role" type="text" placeholder="Role"
+                                           value={authenticationStore.currentAuthentication.user.role}
+                                           onChange={(e) => userStore.inputUser.role = e.target.value}
+                                           required/>
+                                </li>
+                                <br/>
+                                <li>
+                                    <b> Confirm password </b> <br/>
+                                    <input name="password" type="password" placeholder="Confirm password"
+                                        // onChange={(e) => userStore.inputUser.role = e.target.value}
+                                           required/>
+                                </li>
+                            </div>
+                        </Modal.Body>
+
+                        <br/>
+                        <Modal.Footer className="col-9 justify-content-center d-flex">
+                            <Button className="justify-content-center d-flex" variant={"secondary"}  onClick={() => userStore.profileModal = false}>
+                                Discard changes
+                            </Button>
+                            <Button variant={"primary"}>
+                                Save changes
+                            </Button>
+                        </Modal.Footer>
+                    </center>
+
+                </Modal>
+
             </div>
             {/*<header className="App-header">*/}
             {/*</header>*/}
@@ -274,9 +313,8 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     </Button>
 ));
 
-function profileMenu() {
 
-}
+
 function logoutMenu() {
     authenticationStore.logout();
     return <Redirect to="/"/>
@@ -290,7 +328,7 @@ function modalShow(mode) {
         } else {
             userStore.modal = false;
         }
-    }
+    };
 }
 
 
