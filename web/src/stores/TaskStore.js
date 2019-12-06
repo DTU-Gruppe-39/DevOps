@@ -1,10 +1,11 @@
 import {decorate, observable} from "mobx";
 import {authenticationStore} from "./AuthenticationStore";
+import {projectStore} from "./ProjectStore";
 
 class TaskStore {
     getTasks(){
         // const localurl = "http://localhost:8080/api/task";
-        const serverurl = "https://test-devops69.herokuapp.com/api/task";
+        const serverurl = "https://test-devops69.herokuapp.com/api/"+projectStore.currentProject.id+"/task";
         console.log("Getting tasks");
         fetch(serverurl, {
             method: "GET",
