@@ -324,8 +324,7 @@ function addProject(save) {
             id: "",
             name: "",
             progress: 0,
-            vision: "",
-            isProjectManager: false
+            vision: ""
         };
         projectStore.modalShow = false;
 
@@ -353,8 +352,8 @@ function signUp() {
     return (e) => {
         e.preventDefault();
         console.log("Test");
-        userStore.user.email = userStore.loginDetails.email;
-        userStore.user.role = 'Developer';
+        userStore.user.email = userStore.loginDetails.username;
+        userStore.user.projectManagerProjects = [];
 
         console.log(userStore.user);
         console.log(userStore.loginDetails);
@@ -377,7 +376,7 @@ function signUp() {
         };
         userStore.user = {
             email: "",
-            role: "",
+            projectManagerProjects: [],
         };
         userStore.modal = false;
     };

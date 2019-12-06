@@ -16,7 +16,6 @@ class ProjectStore {
         name: "",
         progress: 0,
         vision: "",
-        isProjectManager: false
     };
 
     listOfProjects = [{

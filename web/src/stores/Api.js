@@ -19,7 +19,7 @@ export const postProject = (project) => {
 };
 
 const projectPost = async (json, url) =>{
-    return await fetch(url + '/api/project/'+projectStore.currentProject.id+'/project',
+    return await fetch(url + '/api/project',
         {method:"POST",
             // mode: '',
             headers: {

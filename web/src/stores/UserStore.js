@@ -50,14 +50,17 @@ class UserStore {
     };
     user = {
         email: "",
-        role: ""
+        projectManagerProjects: []
     };
     loginDetails = {
         username: "",
         password: ""
     };
     createUser = {
-        user: this.user,
+        user: {
+            email:"",
+            projectManagerProjects: []
+        },
         loginDetails: {
             username:"",
             password:""
