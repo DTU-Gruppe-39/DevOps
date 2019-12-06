@@ -22,8 +22,8 @@ class ProjectStore {
     inputVision = "";
 
     getProject() {
-        const localurl = "http://localhost:5005/api/authentication/project";
-        const serverurl = "https://test-devops69.herokuapp.com/api/authentication/project";
+        const localurl = "http://localhost:5005/api/project";
+        const serverurl = "https://test-devops69.herokuapp.com/api/project";
         console.log("Getting Project");
         fetch(serverurl, {
             method: "GET",

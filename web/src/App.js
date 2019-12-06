@@ -24,7 +24,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Tab from "react-bootstrap/Tab";
 import {userStore} from "./stores/UserStore";
 import {postUser, userPost} from "./stores/Api";
-import {stakeHolderStore} from "./stores/StakeholdersStore";
+import {projectStore} from "./stores/ProjectStore";
 
 
 function App() {
@@ -84,35 +84,11 @@ function App() {
                                 <Row>
                                     <Col>
                                         <ListGroup style={{maxHeight: '200px', overflow: 'scroll'}}>
-                                            {/*{projectStore.projects.map((project, key)=> (*/}
-                                            {/*    <ListGroup.Item action onClick={()=>alert("test")}>*/}
-                                            {/*        Link 1*/}
-                                            {/*    </ListGroup.Item>*/}
-                                            {/*))}*/}
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 1
-                                            </ListGroup.Item>
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 2
-                                            </ListGroup.Item>
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 1
-                                            </ListGroup.Item>
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 2
-                                            </ListGroup.Item>
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 1
-                                            </ListGroup.Item>
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 2
-                                            </ListGroup.Item>
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 1
-                                            </ListGroup.Item>
-                                            <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>alert("test")}>
-                                                Link 2
-                                            </ListGroup.Item>
+                                            {projectStore.listOfProjects.map((project, key)=> (
+                                                <ListGroup.Item style={{padding: '10px', paddingLeft: '20px'}} action onClick={()=>setCurrentProject(project)}>
+                                                    {project.name}
+                                                </ListGroup.Item>
+                                            ))}
                                         </ListGroup>
                                     </Col>
                                 </Row>
@@ -357,6 +333,12 @@ function signUp() {
         userStore.modal = false;
     };
 }
+
+function setCurrentProject(project) {
+    projectStore.currentProject = project;
+    console.log("Setting current project");
+}
+
 
 
 export default observer(App);
