@@ -52,7 +52,8 @@ class RequestStore {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(track)
         }).then(function (response) {
@@ -79,7 +80,8 @@ class RequestStore {
             method: "DELETE",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(track)
         }) .then(function (response) {
