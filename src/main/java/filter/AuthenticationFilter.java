@@ -57,23 +57,26 @@ public class AuthenticationFilter implements ContainerRequestFilter {
   private void validate (String httpHeader, Secured secured, ContainerRequestContext container) {
     //Splitting Bearer from the JWT
     String[] jwt = httpHeader.split(" ");
-    if (jwt[1] !=  null) {
-      //Validating JWT and getting claims if valid
-      Claims claims = JWTutil.parseToken(jwt[1]);
-      String userid = (String) claims.get("id");
-      List<String> projectManagerProjects = (List<String>) claims.get("projectManagerProjects");
-      String useremail = (String) claims.getSubject();
-      container.setProperty("token",jwt[1]);
-      container.setProperty("id", userid);
-      container.setProperty("projectManagerProjects", projectManagerProjects);
-      container.setProperty("email", useremail);
+    if (jwt.length > 0) {
+      if (jwt[1] != null) {
+        //Validating JWT and getting claims if valid
+        Claims claims = JWTutil.parseToken(jwt[1]);
+        String userid = (String) claims.get("id");
+        List<String> projectManagerProjects = (List<String>) claims.get("projectManagerProjects");
+        String useremail = (String) claims.getSubject();
+        container.setProperty("token", jwt[1]);
+        container.setProperty("id", userid);
+        container.setProperty("projectManagerProjects", projectManagerProjects);
+        container.setProperty("email", useremail);
 
-      //Check if user has the required role
-      if (checkRole(secured, container, projectManagerProjects)) {
-        return;
-      }
-      else {
-        throw new ForbiddenException("Your role does not fit the required role");
+        //Check if user has the required role
+        if (checkRole(secured, container, projectManagerProjects)) {
+          return;
+        } else {
+          throw new ForbiddenException("Your role does not fit the required role");
+        }
+      } else {
+        throw new NotAuthorizedException("");
       }
     }
     else {

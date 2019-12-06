@@ -4,9 +4,6 @@ import {authenticationStore} from "./AuthenticationStore";
 
 
 class UserStore {
-    constructor(){
-        this.getUsers();
-    }
     getUsers(){
         const localurl = "http://localhost:8080/api/user";
         const serverurl = "https://test-devops69.herokuapp.com/api/user";
