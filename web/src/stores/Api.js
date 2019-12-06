@@ -12,6 +12,8 @@ export const deleteTask = (task) => {
     return taskDel(task,'https://test-devops69.herokuapp.com')
 };
 
+
+
 const taskPost = async (json, url) =>{
     return await fetch(url + '/api/task',
         {method:"POST",
@@ -163,14 +165,19 @@ const usecasePost = async (json, url) =>{
     // then(resp=>resp.json()) + url
 };
 
-export const userPost = async (json, url) =>{
+export const postUser = (user) => {
+    console.log(JSON.stringify(user));
+    return userPost(user,'https://test-devops69.herokuapp.com')
+};
+
+const userPost = async (json, url) =>{
     return await fetch(url + '/api/user',
         {method:"POST",
             // mode: '',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
+                'Content-Type': 'application/json'
+                // 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             },
             body: JSON.stringify(json)})
 };
