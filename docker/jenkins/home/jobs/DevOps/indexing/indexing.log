@@ -1,0 +1,62 @@
+Started by user [8mha:////4OpJkdhINKt66tKgK6cbSAlsVImmVNNNp2bKrGZllzIsAAAAmR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAy2EgZe/dLi1CL9YkNzUyMjQwDnyDlxwgAAAA==[0mRasmus
+[Fri Dec 06 09:30:27 GMT 2019] Starting branch indexing...
+[8mha:////4D1GkytGprY57/Cekjr4XQSXC1W0F+jk0jmvggGB8sK+AAAAhB+LCAAAAAAAAP9b85aBtbiIwSa/KF0vKzUvOzOvODlTryCnNB3I0kvPLMkoTYpPKkrMS86IL84vLUpO1XPPLPEoTXLOzyvOz0n1yy9JZYAARiYGRi8GzpLM3NTiksTcgooiBqmM0pTi/Dy9ZIhiPayaGCoKgHTere5rmgDKvXA2jgAAAA==[0mConnecting to https://api.github.com using s175221/****** (GitHub Access Token)
+Examining [8mha:////4IAH+SPcCk37Is4/ffu5UyAoF8AL88ir/gh3cW4EyIY6AAAApx+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMgQKWFQzygpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLygGAPCmL7+sAAAA[0mDTU-Gruppe-39/DevOps
+
+  Checking branches...
+
+  Getting remote branches...
+
+    Checking branch [8mha:////4LCZ6oUbNRUscuqULDcDTFtntPWfII1P8mewPg5tqAV2AAAAsx+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMhgK2EwzigpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLyjWLylKTdXPTSwuSS0CAAtqr624AAAA[0mmaster
+      ‘Jenkinsfile’ found
+    Met criteria
+Scheduled build for branch: master
+
+    Checking branch [8mha:////4CECs3rwUKrJ3XTs9eFBG2967MzvuBBkrMaCulwfiqHwAAAAwR+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMgQK2FwzigpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLyjWLylKTdX3SCzOAFoT75iXEu9akZxaUJIJNB0AkCcZGsgAAAA=[0mHashing_And_Exceptions
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4HBfFqZf8969fhkCxPhVatKW3UVeKQXMg/bFVdxNmsqnAAAAwR+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMgQKWFwzCgpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLyjWLylKTdX3TsxLSsyL9y9ITyxLLYoPNY0PNQMAtwqNLcYAAAA=[0mKanban_Opgaver_U5_U6
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4K8AWxPgLfTuyWjP93KR/+02muJn5PQ66+I1SJun4SbRAAAAuh+LCAAAAAAAAP9djDEKwjAUhp8VHR0cxSu0GQRBSycLKhQdrLNUfaTRNA3JS6nX8Bq6eAiP4x2sdPNb/m/5v+cHetbAOHdnW6rgVCpbSgxWN41GCnXdlITT6PGK7vrtgbeGvkTFKU+g64wkGCaXrMqYzBRnOzJC8bA2MPrLLdr9xaCl4wHUupEBQZgTaTtnjAvK3bF5FSxO9/7SOK3Rn8xYjNVWW0YGkaVo6SAKLbFARV/thwtJwAAAAA==[0mTest_implement
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4IslbSHC/MxJxe7VzCbMLjsIif9/R6SrMsQHY8QqueJoAAAAth+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMjgLGEwyygpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLyjWLylKTdVPrUgtSs4sTi0GABuk/xG7AAAA[0mexercises
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4DA6jTaCZl+ZEPunWVTQXnlOib6x0Soc6GuEB1Y3Z0+xAAAAvB+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMjgL2GwySgpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLyjWLylKTdVPS00sKS1KjU9KTM5OzUsBALuOudvBAAAA[0mfeature_backend
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4Gn25UtyYVu/5gcEsgs9b5Nk8bq9M2D02vs7h5676M9oAAAAvR+LCAAAAAAAAP9djEEOwUAUhp8KB2AnrlCzkEiQJhJNkDQssJaqZ1rGzOTNG6lruAYbh3Acd0DsfJv/2/zf/QU1R9DO/c4Z3cmMdkZhZ3qxSKrQx7lh7EW3R3S1zwCCGdQVasl5AlVPiqGRHNJzKlSqpVgyFVoOS4LWX278228MflQCgNJ+pMkwypmtGwghC8799vM6iXi1DifkrcWw2xcxnhfWCSZEoYws9MY7pM0e04w94Rs9pBdfxQAAAA==[0mlogin_user_feacture
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4B0uM0IWrhlwG03hak6G3XKLS6mfr9oPG26+pE+1VUANAAAAtx+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMjgKmEwzygpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLyjWLylKTdUvKMpPKU0uyczPAwD3mN94vAAAAA==[0mproduction
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4H0rCZYkUOdwEuVoUIVcb5XAECNNmKImWzvqoAjVHlEhAAAAvB+LCAAAAAAAAP9djEEOQTEURZ8vLICZ2MLXgUSCSCQkSIQBFlA8v6Xa5vX159uGbTCxCMuxB8TMmdwzuef+gkogaKq4D862ds4GZ7A1vXgko+1p4Rg7g9tjcPXPBJIZVA3ajNUcypEMQ21+lLkURtpMrJi0zfoFQeMvN/rtNwY/SglA4T9SZxgqZh96QmSaVdx+XmcxXm/SCUXvMW13xRjzpQ+CCVF4ckfccartwdFZsnb2DeeE65HFAAAA[0mproject-information
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+    Checking branch [8mha:////4BPzZBjoCoYbIFQpzSy1nCMYHEHsTeHPm9HMrQiXbK3OAAAAvh+LCAAAAAAAAP9b85aBtbiIQSajNKU4P08vOT+vOD8nVc+jsiC1KCczL9svvyTVzHb1RttJBUeZGJg8GdhyUvPSSzJ8GJhLi3JKGIR8shLLEvVzEvPS9YNLijLz0q0rihik0IxzhtAgwxgggJGJgaGiAMgQKmFwyCgpKSi20tdPzyzJKE0C6srVdwkJ1XUvKi0oSNU1ttR3SS3zLyjWLylKTdUvKMrPSk0uic84vDQvpSQVZCUAQuiUfMUAAAA=[0mproject_håndtering
+      ‘Jenkinsfile’ not found
+    Does not meet criteria
+
+  10 branches were processed
+
+  Checking pull-requests...
+
+  Getting remote pull requests...
+
+  0 pull requests were processed
+
+Finished examining DTU-Gruppe-39/DevOps
+
+[Fri Dec 06 09:30:32 GMT 2019] Finished branch indexing. Indexing took 5 sec
+Finished: SUCCESS

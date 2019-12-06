@@ -1,0 +1,32 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<fingerprint>
+  <timestamp>2019-12-06 09:56:18.115 UTC</timestamp>
+  <original>
+    <name>DevOps/master</name>
+    <number>4</number>
+  </original>
+  <md5sum>5435658a63acb615bd9ab5d9249be37d</md5sum>
+  <fileName>Docker image sha256:5435658a63acb615bd9ab5d9249be37de8a1b4e996a6996e26a5127e2a14e79c</fileName>
+  <usages/>
+  <facets>
+    <org.jenkinsci.plugins.docker.commons.fingerprint.DockerRunFingerprintFacet plugin="docker-commons@1.15">
+      <timestamp>1575626178134</timestamp>
+      <imageId>sha256:5435658a63acb615bd9ab5d9249be37de8a1b4e996a6996e26a5127e2a14e79c</imageId>
+      <usages>
+        <entry>
+          <string>DevOps/master</string>
+          <ranges>4</ranges>
+        </entry>
+      </usages>
+      <records class="java.util.concurrent.CopyOnWriteArrayList">
+        <org.jenkinsci.plugins.docker.commons.fingerprint.ContainerRecord>
+          <host>73de5c13dc39</host>
+          <containerId>73de5c13dc39a5c18fc41aa02af9d648afba7f4ed8cb35a250a5913bca59d0eb</containerId>
+          <containerName>/great_lederberg</containerName>
+          <created>1575626176000</created>
+          <tags/>
+        </org.jenkinsci.plugins.docker.commons.fingerprint.ContainerRecord>
+      </records>
+    </org.jenkinsci.plugins.docker.commons.fingerprint.DockerRunFingerprintFacet>
+  </facets>
+</fingerprint>
