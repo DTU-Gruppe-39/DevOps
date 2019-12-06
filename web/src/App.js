@@ -79,7 +79,14 @@ function App() {
                             <Link to="/Music" className="list-group-item list-group-item-action bg-light">Music</Link>
                         </div>
                         <div className="projects-list" style={{marginTop: '80px'}}>
-                            <h4 style={{paddingLeft: '10px'}}>Projects</h4>
+                            <Row>
+                                <Col style={{padding: '0px', paddingLeft: '10px'}}>
+                                    <h4 style={{paddingTop: '6px', paddingLeft: '15px', margin: '0px'}}>Projects</h4>
+                                </Col>
+                                <Col style={{padding: '0px'}}>
+                                    <Button variant="link" onClick={()=>alert("plus")} style={{color: "green", marginLeft: '10px', padding: '0px', fontSize: '26px', textDecoration: 'none'}}>+</Button>
+                                </Col>
+                            </Row>
                             <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
                                 <Row>
                                     <Col>
