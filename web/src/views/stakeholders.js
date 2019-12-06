@@ -2,8 +2,9 @@ import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import "./Stakeholders.css";
 import {stakeHolderStore} from "../stores/StakeholdersStore";
-import {deleteStakeholder, postStakeholder, putStakeholder} from "../stores/Api";
+import {deleteStakeholder, postStakeholder, postTask, putStakeholder} from "../stores/Api";
 import {Button, Modal} from "react-bootstrap";
+import {taskStore} from "../stores/TaskStore";
 
 
     function Stakeholders() {
@@ -13,6 +14,51 @@ import {Button, Modal} from "react-bootstrap";
         return (
             <div class="container col-10">
                 <div className="row justify-content-lg-center">
+                    <Button variant={"primary"} onClick={showInputBox()}>Add</Button>
+                    <Modal show={stakeHolderStore.inputModalShow} size={"lg"}>
+                        <Modal.Header>
+                            <Modal.Title> Creating stakeholder </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div>
+                                <label>
+                                    <input name="name " type="text" placeholder="Name"
+                                           value={stakeHolderStore.inputStakeholder.name}
+                                           onChange={(e) => stakeHolderStore.inputStakeholder.name = e.target.value} required/>
+                                </label>
+                                <label>
+                                    <input name="contactperson" type="text" placeholder="Contact person"
+                                           value={stakeHolderStore.inputStakeholder.contact_person}
+                                           onChange={(e) => stakeHolderStore.inputStakeholder.contact_person = e.target.value}
+                                           required/>
+                                </label>
+                                <label>
+                                    <input name="email" type="email" placeholder="Email"
+                                           value={stakeHolderStore.inputStakeholder.email}
+                                           onChange={(e) => stakeHolderStore.inputStakeholder.email = e.target.value} required/>
+                                </label>
+                                <label>
+                                    Direct stakeholder:
+                                    <input
+                                        name="direct"
+                                        type="checkbox"
+                                        checked={stakeHolderStore.inputStakeholder.stakeholder_type}
+                                        onChange={(e) => {stakeHolderStore.inputStakeholder.stakeholder_type ^= true}}/>
+                                </label>
+
+                            </div>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button variant={"secondary"} onClick={inputStakeholderFunc(false)}>
+                                Discard
+                            </Button>
+                            <Button variant={"primary"} onClick={inputStakeholderFunc(true)}>
+                                Create
+                            </Button>
+                        </Modal.Footer>
+
+                    </Modal>
                     <Modal show={stakeHolderStore.modalShow} size={"lg"}>
                         <Modal.Header>
                             <Modal.Title> Editing stakeholder </Modal.Title>
@@ -43,10 +89,8 @@ import {Button, Modal} from "react-bootstrap";
                                         checked={stakeHolderStore.updateStakeholder.stakeholder_type}
                                         onChange={(e) => {stakeHolderStore.updateStakeholder.stakeholder_type ^= true}}/>
                                 </label>
-
                             </div>
                         </Modal.Body>
-
                         <Modal.Footer>
                             <Button variant={"secondary"} onClick={updateStakeholderFunc(false)}>
                                 Discard changes
@@ -55,36 +99,7 @@ import {Button, Modal} from "react-bootstrap";
                                 Save changes
                             </Button>
                         </Modal.Footer>
-
                     </Modal>
-
-                        <form className="" onSubmit={getOnSubmit()}>
-                            <label>
-                                <input name="name " type="text" placeholder="Name"
-                                       value={stakeHolderStore.inputStakeholder.name}
-                                       onChange={(e) => stakeHolderStore.inputStakeholder.name = e.target.value} required/>
-                            </label>
-                            <label>
-                                <input name="contactperson" type="text" placeholder="Contact person"
-                                       value={stakeHolderStore.inputStakeholder.contact_person}
-                                       onChange={(e) => stakeHolderStore.inputStakeholder.contact_person = e.target.value}
-                                       required/>
-                            </label>
-                            <label>
-                                <input name="email" type="email" placeholder="Email"
-                                       value={stakeHolderStore.inputStakeholder.email}
-                                       onChange={(e) => stakeHolderStore.inputStakeholder.email = e.target.value} required/>
-                            </label>
-                            <label>
-                                Direct stakeholder:
-                                <input
-                                    name="direct"
-                                    type="checkbox"
-                                    checked={stakeHolderStore.inputStakeholder.stakeholder_type}
-                                    onChange={(e) => {stakeHolderStore.inputStakeholder.stakeholder_type ^= true}}/>
-                            </label>
-                            <input type="submit" value="Submit"/>
-                        </form>
                     <div className="stakeholderList justify-content-center">
                         <ul>
                             <h3 className="d-flex justify-content-center">Stakeholders</h3>
@@ -127,7 +142,12 @@ function updateStakeholderFunc(save) {
             stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].contact_person = stakeHolderStore.updateStakeholder.contact_person;
             stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].email = stakeHolderStore.updateStakeholder.email;
             stakeHolderStore.stakeholderList[stakeHolderStore.modalKey].stakeholder_type = stakeHolderStore.updateStakeholder.stakeholder_type;
-            putStakeholder(stakeHolderStore.stakeholderList[stakeHolderStore.modalKey]);
+            putStakeholder(stakeHolderStore.stakeholderList[stakeHolderStore.modalKey]).then(function (response) {
+                if (response.ok){
+                    stakeHolderStore.getStakeholders();
+                }
+                // exception handling
+            });
 
         }
         stakeHolderStore.updateStakeholder = {
@@ -138,6 +158,32 @@ function updateStakeholderFunc(save) {
         };
         stakeHolderStore.modalKey = 0;
         stakeHolderStore.modalShow = false;
+    }
+}
+
+function inputStakeholderFunc(save) {
+    return (e) => {
+        e.preventDefault();
+        if(save === true){
+            // stakeHolderStore.inputStakeholder.id = 1;
+            // might not want to push to the list
+            stakeHolderStore.stakeholderList.push(stakeHolderStore.inputStakeholder);
+            postStakeholder(stakeHolderStore.inputStakeholder).then(function (response) {
+                if (response.ok){
+                    stakeHolderStore.getStakeholders();
+                }
+                // exception handling
+            });
+
+        }
+        stakeHolderStore.inputStakeholder = {
+            id: '',
+            name: '',
+            contact_person: '',
+            email: '',
+            stakeholder_type: true
+        };
+        stakeHolderStore.inputModalShow = false;
     }
 }
 
@@ -161,19 +207,13 @@ function delFunc(stake, key) {
 
     };
 }
+function showInputBox() {
+    return (e) => {
+        e.preventDefault();
+        stakeHolderStore.inputModalShow = true;
+        // userStore.currUser.label="";
+        // userStore.currUser.value="";
 
-    function getOnSubmit() {
-        return (e) => {
-            e.preventDefault();
-            stakeHolderStore.stakeholderList.push(stakeHolderStore.inputStakeholder);
-            postStakeholder(stakeHolderStore.inputStakeholder).then();
-            stakeHolderStore.inputStakeholder = {
-                name: '',
-                contact_person: '',
-                email: '',
-                stakeholder_type: true
-            };
-
-        };
     }
+}
 export default observer(Stakeholders);

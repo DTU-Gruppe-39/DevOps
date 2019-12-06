@@ -10,7 +10,7 @@ import {taskStore} from "../stores/TaskStore";
 import {userStore} from "../stores/UserStore"
 import KanbanTest from "../containers/test/dragdropTest";
 import InputModalBox from "./InputModalBox";
-import api, {putTask, deleteTask} from "../stores/Api";
+import {putTask, deleteTask} from "../stores/Api";
 
 
 function TaskOverview() {

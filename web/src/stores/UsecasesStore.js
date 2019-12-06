@@ -11,7 +11,7 @@ class UsecasesStore {
             headers: {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
-        })
+        }) // add exception handling
             .then((response)=>response.json()
                 .then((jsonresponse)=>{
                     console.log(jsonresponse);
@@ -42,6 +42,7 @@ class UsecasesStore {
     modalShow = false;
     modalKey;
     modalDropdown = false;
+    inputModalShow = false;
 }
 
 
@@ -51,7 +52,8 @@ decorate(UsecasesStore, {
     updateUsecases:observable,
     modalDropdown:observable,
     modalKey:observable,
-    modalShow:observable
+    modalShow:observable,
+    inputModalShow:observable
 });
 
 export const usecasesStore = new UsecasesStore();

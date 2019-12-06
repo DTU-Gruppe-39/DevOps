@@ -2,9 +2,8 @@ import {taskStore} from "../stores/TaskStore";
 import Select from "react-select";
 import {userStore} from "../stores/UserStore";
 import {Button} from "react-bootstrap";
-import Col from "react-bootstrap/Col";
 import React from "react";
-import {postTask, putTask} from "../stores/Api";
+import {postTask} from "../stores/Api";
 import Modal from "react-bootstrap/Modal";
 import {observer} from "mobx-react";
 

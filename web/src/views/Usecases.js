@@ -1,9 +1,12 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {usecasesStore} from "../stores/UsecasesStore";
-import {deleteUsecase, postUsecase, putUsecase} from "../stores/Api";
+import {deleteUsecase, postTask, postUsecase, putUsecase} from "../stores/Api";
 import "./Usecases.css";
 import {Button, Modal} from "react-bootstrap";
+import {taskStore} from "../stores/TaskStore";
+import Select from "react-select";
+import {userStore} from "../stores/UserStore";
 
 
 function Usecases() {
@@ -13,6 +16,7 @@ function Usecases() {
     return(
         <div className="container">
             <div class="row justify-content-center">
+                <Button variant={"primary"} onClick={showInputBox()}>Add</Button>
                 <Modal show={usecasesStore.modalShow} size={"lg"}>
                     <Modal.Header>
                         <Modal.Title> Editing usecase </Modal.Title>
@@ -31,12 +35,11 @@ function Usecases() {
                                        onChange={(e) => usecasesStore.updateUsecases.priority = e.target.value}
                                        required/>
                             </label>
-                            <label>
-                                <input name="name" type="text" placeholder="Responsible"
-                                       value={usecasesStore.updateUsecases.responsible}
-                                       onChange={(e) => usecasesStore.updateUsecases.responsible = e.target.value}
-                                       required/>
-                            </label>
+                            <li>
+                                <b> Responsible </b>
+                                <Select options={userStore.userSelect} value={usecasesStore.updateUsecases.responsible}
+                                        onChange={(e) => usecasesStore.updateUsecases.responsible = e} required/>
+                            </li>
                         </div>
                     </Modal.Body>
 
@@ -48,31 +51,44 @@ function Usecases() {
                             Save changes
                         </Button>
                     </Modal.Footer>
-
                 </Modal>
-                <div className="usecase-form">
-                    <form className="usecaseinput" onSubmit={getOnSubmit()}>
-                        <label>
-                            <input name="userStory" type="text" placeholder="User story"
-                                   value={usecasesStore.inputUsecases.userStory}
-                                   onChange={(e) => usecasesStore.inputUsecases.userStory = e.target.value}
-                                   required/>
-                        </label>
-                        <label>
-                            <input name="priority" type="number" placeholder="Priority"
-                                   value={usecasesStore.inputUsecases.priority}
-                                   onChange={(e) => usecasesStore.inputUsecases.priority = e.target.value}
-                                   required/>
-                        </label>
-                        <label>
-                            <input name="name" type="text" placeholder="Responsible"
-                                   value={usecasesStore.inputUsecases.responsible}
-                                   onChange={(e) => usecasesStore.inputUsecases.responsible = e.target.value}
-                                   required/>
-                        </label>
-                        <input type="submit" value="Submit"/>
-                    </form>
-                </div>
+
+                <Modal show={usecasesStore.inputModalShow} size={"lg"}>
+                    <Modal.Header>
+                        <Modal.Title> Creating usecase </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div>
+                            <label>
+                                <input name="userStory" type="text" placeholder="User story"
+                                       value={usecasesStore.inputUsecases.userStory}
+                                       onChange={(e) => usecasesStore.inputUsecases.userStory = e.target.value}
+                                       required/>
+                            </label>
+                            <label>
+                                <input name="priority" type="number" placeholder="Priority"
+                                       value={usecasesStore.inputUsecases.priority}
+                                       onChange={(e) => usecasesStore.inputUsecases.priority = e.target.value}
+                                       required/>
+                            </label>
+                            <li>
+                                <b> Responsible </b>
+                                <Select options={userStore.userSelect} value={usecasesStore.inputUsecases.responsible}
+                                        onChange={(e) => usecasesStore.inputUsecases.responsible = e} required/>
+                            </li>
+                        </div>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <Button variant={"secondary"} onClick={inputUsecaseFunc(false)}>
+                            Discard
+                        </Button>
+                        <Button variant={"primary"} onClick={inputUsecaseFunc(true)}>
+                            Create
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
                 <div className="usecaseList d-flex justify-content-center">
                     <ul>
                         <h3 className="d-flex justify-content-center">Usecases</h3>
@@ -105,19 +121,11 @@ function Usecases() {
     );
 }
 
-function getOnSubmit() {
+function showInputBox() {
     return (e) => {
         e.preventDefault();
-        usecasesStore.inputUsecases.id = usecasesStore.usecasesList.length + 1;
-        usecasesStore.usecasesList.push(usecasesStore.inputUsecases);
-        postUsecase(usecasesStore.inputUsecases);
-        usecasesStore.inputUsecases = {
-            id: null,
-            userStory: '',
-            priority: '',
-            responsible: ''
-        };
-    };
+        usecasesStore.inputModalShow = true;
+    }
 }
 
 function deleteFunc(usecase, key) {
@@ -146,12 +154,19 @@ function updateUsecaseFunc(save) {
     return (e) => {
         e.preventDefault();
         if(save === true){
-
+            usecasesStore.updateUsecases.responsible = usecasesStore.updateUsecases.responsible.value;
             usecasesStore.usecasesList[usecasesStore.modalKey].id = usecasesStore.updateUsecases.id;
             usecasesStore.usecasesList[usecasesStore.modalKey].userStory = usecasesStore.updateUsecases.userStory;
             usecasesStore.usecasesList[usecasesStore.modalKey].priority = usecasesStore.updateUsecases.priority;
             usecasesStore.usecasesList[usecasesStore.modalKey].responsible = usecasesStore.updateUsecases.responsible;
-            putUsecase(usecasesStore.usecasesList[usecasesStore.modalKey]);
+            putUsecase(usecasesStore.usecasesList[usecasesStore.modalKey]).then(function (response) {
+                if (response.ok){
+                    usecasesStore.getUsecases()
+                }
+                else {
+                    // exception handling
+                }
+            });
 
         }
         usecasesStore.updateUsecases = {
@@ -162,6 +177,34 @@ function updateUsecaseFunc(save) {
         };
         usecasesStore.modalKey = 0;
         usecasesStore.modalShow = false;
+    }
+}
+
+function inputUsecaseFunc(save) {
+    return (e) => {
+        e.preventDefault();
+        if(save === true){
+            //taskStore.inputTask.responsible = taskStore.inputTask.responsible.value;
+            // taskStore.updateTask.status = taskStore.currStatus.value;
+            usecasesStore.inputUsecases.responsible = usecasesStore.inputUsecases.responsible.value;
+            usecasesStore.inputUsecases.id = 1;
+            // might not want to push to the list
+            usecasesStore.usecasesList.push(usecasesStore.inputUsecases);
+            postUsecase(usecasesStore.inputUsecases).then(function (response) {
+                if (response.ok){
+                    usecasesStore.getUsecases();
+                }
+                // alert with bad response code
+            });
+
+        }
+        usecasesStore.inputUsecases = {
+            id: null,
+            userStory: '',
+            priority: '',
+            responsible: ''
+        };
+        usecasesStore.inputModalShow = false;
     }
 }
 
