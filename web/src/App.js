@@ -22,6 +22,7 @@ import Row from "react-bootstrap/Row";
 import frontImage from "./Best-Project-Management-Software-1024x512.png";
 import ListGroup from "react-bootstrap/ListGroup";
 import Tab from "react-bootstrap/Tab";
+import Select from "react-select";
 
 function App() {
     return (
@@ -132,38 +133,91 @@ function App() {
                     <Redirect to="/Dashboard"/>
                     :
                     <div className="">
-                            <form className="loginForm" onSubmit={getOnSubmit()}>
-                                <label>
-                                    Username
-                                    <br/>
-                                    <input name="email" type="email" placeholder="Email" className="col-12 form-control"
-                                           value={authenticationStore.inputLogin.username}
-                                           onChange={(e) => authenticationStore.inputLogin.username = e.target.value} required/>
-                                </label>
+                        <h4 className="title justify-content-center d-flex ">Projektstyringsværktøj</h4>
+                        <p className="titleText justify-content-center d-flex">
+                            En applikation der hjælper dig med at få et overblik over dine projekter og opgaver
+                        </p>
+
+                        <form className="loginForm" onSubmit={getOnSubmit()}>
+                            <label>
+                                Username
                                 <br/>
-                                <label>
-                                    Password
-                                    <br/>
-                                    <input
-                                        name="password" type="password" placeholder="Password" className="col-12 form-control"
-                                        value={authenticationStore.inputLogin.password}
-                                        onChange={(e) => {authenticationStore.inputLogin.password = e.target.value}} required/>
-                                </label>
+                                <input name="email" type="email" placeholder="Email" className="col-12 form-control"
+                                       value={authenticationStore.inputLogin.username}
+                                       onChange={(e) => authenticationStore.inputLogin.username = e.target.value} required/>
+                            </label>
+                            <br/>
+                            <label>
+                                Password
                                 <br/>
-                                <input type="submit" className="btn btn-success col-11 justify-content-center d-flex" value="Log in"/>
-                                <br/>
-                                <p className="justify-content-center d-flex">OR</p>
-                                <hr/>
-                                <br/>
-                                <Button className="btn btn-primary col-11 d-flex justify-content-center"> Sign up</Button>
-                            </form>
+                                <input
+                                    name="password" type="password" placeholder="Password" className="col-12 form-control"
+                                    value={authenticationStore.inputLogin.password}
+                                    onChange={(e) => {authenticationStore.inputLogin.password = e.target.value}} required/>
+                            </label>
+                            <br/>
+                            <input type="submit" className="btn btn-success col-11 justify-content-center d-flex" value="Log in"/>
+                            <br/>
+                            <p className="justify-content-center d-flex">OR</p>
+                            <hr/>
+                            <br/>
+                            <Button className="btn btn-primary d-flex justify-content-center col-11"> Sign up</Button>
+
+                            <Modal show={false} size={"lg"}>
+                                <Modal.Header>
+                                    <Modal.Title> Editing task </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <div>
+                                        <li>
+                                            <b> Name </b>
+                                            <input name="name" type="text" placeholder="Name"
+                                                   onChange={(e) => e.target.value} required/>
+                                        </li>
+                                        <li>
+                                            <b> Description </b>
+                                            <input name="description" type="text" placeholder="Description"
+                                                   onChange={(e) => e.target.value}
+                                                   required/>
+                                        </li>
+
+                                        <li>
+                                            <b> Responsible </b>
+                                            <input name="responsible" type="text" placeholder="Task Responsible name"
+                                                // value={taskStore.inputTask.responsible.name}
+                                                   onChange={(e) =>  e.target.value}
+                                                // onChange={(e) => taskStore.inputTask.responsible.name = e.target.value}
+                                                   required/>
+                                        </li>
+                                        <li>
+                                            <b> Status </b>
+                                            <Select options
+                                                    onChange={(e) =>  e} required>
+                                            </Select>
+                                        </li>
+
+                                    </div>
+                                </Modal.Body>
+
+                                <Modal.Footer>
+                                    <Button variant={"secondary"}>
+                                        Discard changes
+                                    </Button>
+                                    <Button variant={"primary"}>
+                                        Save changes
+                                    </Button>
+                                </Modal.Footer>
+
+                            </Modal>
+
+                        </form>
 
 
                         <Col className="frontimage">
 
                             <Row>
-                            <img className="col-9" src={frontImage} alt="Project management software" />
-                        </Row>
+                                <img  className="col-9" src={frontImage}/>
+                            </Row>
                         </Col>
                     </div>
                 }
