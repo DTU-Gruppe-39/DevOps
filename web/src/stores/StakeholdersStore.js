@@ -43,6 +43,7 @@ class StakeholdersStore {
     modalShow = false;
     modalKey;
     modalDropdown = false;
+    inputModalShow = false;
 }
 
 
@@ -52,7 +53,8 @@ decorate(StakeholdersStore, {
     updateStakeholder:observable,
     modalDropdown:observable,
     modalKey:observable,
-    modalShow:observable
+    modalShow:observable,
+    inputModalShow:observable
 });
 
 export const stakeHolderStore = new StakeholdersStore();
