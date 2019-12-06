@@ -12,13 +12,25 @@ class StakeholdersStore {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
         })
-            .then((response)=>response.json()
-                .then((jsonresponse)=>{
-                    console.log(jsonresponse);
-                    this.stakeholderList = jsonresponse;
-                })
-            )
+            .then(function (response) {
+                if (response.ok){
+                    response.json().then(function (jsonresponse) {
+                       // console.log(jsonresponse);
+                        stakeHolderStore.stakeholderList = jsonresponse;
+                    })
+                }
+                else {
+                    alert("Status code: " + response.status + "\n " + response.statusText)
+                }
+            })
     }
+
+// .then((response)=>response.json()
+// .then((jsonresponse)=>{
+//     console.log(jsonresponse);
+//     this.stakeholderList = jsonresponse;
+// })
+// )
     stakeholderList = [{
         id: '',
         name: '',

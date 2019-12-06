@@ -12,13 +12,19 @@ class UsecasesStore {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
         }) // add exception handling
-            .then((response)=>response.json()
-                .then((jsonresponse)=>{
-                    console.log(jsonresponse);
-                    this.usecasesList = jsonresponse;
-                })
-            )
+            .then(function (response) {
+                if (response.ok){
+                    response.json().then(function (jsonresponse) {
+                        //console.log(jsonresponse);
+                        usecasesStore.usecasesList = jsonresponse;
+                    })
+                }
+                else {
+                    alert("Status code: " + response.status + "\n " + response.statusText);
+                }
+            })
     }
+
     usecasesList = [{
         id: "",
         userStory: '',

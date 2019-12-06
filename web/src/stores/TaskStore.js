@@ -12,13 +12,25 @@ class TaskStore {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
         })
-            .then((response)=>response.json()
-                .then((jsonresponse)=>{
-                    console.log(jsonresponse);
-                    this.taskList = jsonresponse;
-                })
-            )
+            .then(function (response) {
+                if (response.ok){
+                    response.json().then(function (jsonresponse) {
+                        // console.log(jsonresponse)
+                        taskStore.taskList = jsonresponse;
+                    })
+                }
+                else {
+                    alert("Status code: " + response.status + "\n " + response.statusText)
+                }
+            })
     }
+
+// .then((response)=>response.json()
+// .then((jsonresponse)=>{
+//     console.log(jsonresponse);
+//     this.taskList = jsonresponse;
+// })
+// )
     viewmode = "List";
     modalShow = false;
     modalKey;

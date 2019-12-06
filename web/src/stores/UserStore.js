@@ -17,14 +17,19 @@ class UserStore {
                 'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
             }
         })
-            .then((response)=>response.json()
-                .then((jsonresponse)=>{
-                    console.log(jsonresponse);
-                    this.userList = jsonresponse;
-                    this.getUserSelect(jsonresponse)
-                })
-            )
+            .then(function (response) {
+                if (response.ok){
+                    response.json().then(function (jsonresponse) {
+                        userStore.userList = jsonresponse;
+                        userStore.getUserSelect(jsonresponse);
+                    })
+                }
+                else {
+                    alert("Status code: " + response.status + "\n " + response.statusText);
+                }
+            })
     }
+
     getUserSelect(list){
         list.map((result, key) => (
             userStore.userSelect.push({label: result.email, value: result.id})

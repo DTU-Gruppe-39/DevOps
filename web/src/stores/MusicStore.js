@@ -34,13 +34,17 @@ class MusicStore {
                     'Authorization': "Bearer "+authenticationStore.currentAuthentication.token
                 }
             })
-                .then((response) => response.json()
-                    .then((jsonresponse) => {
-                        // console.log(jsonresponse);
-                        this.searchResult = jsonresponse;
-                        this.showResult = jsonresponse;
-                    })
-                )
+                .then(function (response) {
+                    if (response.ok){
+                        response.json().then(function (jsonresponse) {
+                            musicStore.searchResult = jsonresponse;
+                            musicStore.showResult = jsonresponse;
+                        })
+                    }
+                    else {
+                        alert("Status code: " + response.status + "\n " + response.statusText);
+                    }
+                })
         }
     }
 }
