@@ -43,7 +43,7 @@ class ProjectStore {
                 response.json().then(function (projects) {
                     console.log(projects);
                     projectStore.listOfProjects = projects;
-                    if (projectStore.listOfProjects.length > 0) {
+                    if (projectStore.listOfProjects.length > 0 && projectStore.currentProject.id === "") {
                         projectStore.currentProject = projectStore.listOfProjects[0];
                     }
                 })}
