@@ -71,6 +71,11 @@ function InputModalBox() {
                     if (response.ok){
                         taskStore.getTasks();
                     }
+                    else{
+                        // alerts the status code and the associated text
+                        // fx Status Code: 200       Status: OK
+                        alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
+                    }
                 });
 
             }

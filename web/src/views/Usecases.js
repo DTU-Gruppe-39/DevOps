@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {usecasesStore} from "../stores/UsecasesStore";
-import {deleteUsecase, postTask, postUsecase, putUsecase} from "../stores/Api";
+import {deleteUsecase, postUsecase, putUsecase} from "../stores/Api";
 import "./Usecases.css";
 import {Button, Modal} from "react-bootstrap";
-import {taskStore} from "../stores/TaskStore";
 import Select from "react-select";
 import {userStore} from "../stores/UserStore";
+import addCircle from "../add_circle-24px.svg"
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
 
@@ -18,7 +18,6 @@ function Usecases() {
     return(
         <div className="container">
             <div class="row justify-content-center">
-                <Button variant={"primary"} onClick={showInputBox()}>Add</Button>
                 <Modal show={usecasesStore.modalShow} size={"lg"}>
                     <Modal.Header>
                         <Modal.Title> Editing usecase </Modal.Title>
@@ -94,6 +93,9 @@ function Usecases() {
                 <div className="usecaseList d-flex justify-content-center">
                     <ul>
                         <h3 className="d-flex justify-content-center">Usecases</h3>
+                        <br/>
+                        {/*<Button className="addButton justify-content-center" variant={"primary"} onClick={showInputBox()}> Add usecase </Button>*/}
+                        <img className="addButton justify-content-center" src={addCircle} alt="Add usecase" width="48" height="48" title="Add usecase" onClick={showInputBox()}/>
                         <table>
                             <tr>
                                 <th>ID</th>
@@ -168,8 +170,10 @@ function updateUsecaseFunc(save) {
                 if (response.ok){
                     usecasesStore.getUsecases()
                 }
-                else {
-                    // exception handling
+                else{
+                    // alerts the status code and the associated text
+                    // fx Status Code: 404       Status: Not Found
+                    alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
                 }
             });
 
@@ -199,7 +203,11 @@ function inputUsecaseFunc(save) {
                 if (response.ok){
                     usecasesStore.getUsecases();
                 }
-                // alert with bad response code
+                else{
+                    // alerts the status code and the associated text
+                    // fx Status Code: 404       Status: Not Found
+                    alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
+                }
             });
 
         }

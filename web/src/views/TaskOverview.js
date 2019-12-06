@@ -13,6 +13,7 @@ import InputModalBox from "./InputModalBox";
 import {putTask, deleteTask} from "../stores/Api";
 import editPencil from "../edit-24px.svg";
 import deletelogo from "../baseline_close_black_48dp.png";
+import addCircle from "../add_circle-24px.svg";
 
 
 function TaskOverview() {
@@ -23,16 +24,18 @@ function TaskOverview() {
         <Container>
             <div className="spacer"/>
 
+            <div className="row justify-content-lg-center">
+                <InputModalBox/>
+            </div>
+            <h3 className="d-flex justify-content-center">Tasks</h3>
             <div className="btn-group " id="overview" role="group">
                 <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("List")}>List</button>
                 <button type="button overviewBtn" className="btn btn-secondary" onClick={clickFunc("Kanban")}>Kanban</button>
             </div>
+            <img className="addButton justify-content-center" src={addCircle} alt="Add task" width="48" height="48" title="Add task" onClick={showInputBox()}/>
+            <br/>
+            <br/>
 
-            <div className="row justify-content-lg-center">
-                <Button variant={"primary"} onClick={showInputBox()}>Add</Button>
-                <InputModalBox/>
-            </div>
-            <h3 className="d-flex justify-content-center">Tasks</h3>
             {taskStore.viewmode === "Kanban" &&<div id={"KanbanView"}>
                 <KanbanTest />
             </div>}
@@ -155,6 +158,11 @@ function TaskOverview() {
                     putTask(taskStore.taskList[taskStore.modalKey]).then(function (response) {
                         if(response.ok){
                             taskStore.getTasks();
+                        }
+                        else{
+                            // alerts the status code and the associated text
+                            // fx Status Code: 200       Status: OK
+                            alert( "Status Code: " + response.status + "\n" + " Status: " + response.statusText)
                         }
                     });
                 }
