@@ -23,7 +23,7 @@ import frontImage from "./Best-Project-Management-Software-1024x512.png";
 import ListGroup from "react-bootstrap/ListGroup";
 import Tab from "react-bootstrap/Tab";
 import {userStore} from "./stores/UserStore";
-import {postUser, userPost} from "./stores/Api";
+import {postProject, postUser, userPost} from "./stores/Api";
 import {projectStore} from "./stores/ProjectStore";
 
 
@@ -84,7 +84,7 @@ function App() {
                                     <h4 style={{paddingTop: '6px', paddingLeft: '15px', margin: '0px'}}>Projects</h4>
                                 </Col>
                                 <Col style={{padding: '0px'}}>
-                                    <Button variant="link" onClick={()=>alert("plus")} style={{color: "green", marginLeft: '10px', padding: '0px', fontSize: '26px', textDecoration: 'none'}}>+</Button>
+                                    <Button variant="link" onClick={()=> projectStore.modalShow = true} style={{color: "green", marginLeft: '10px', padding: '0px', fontSize: '26px', textDecoration: 'none'}}>+</Button>
                                 </Col>
                             </Row>
                             <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
@@ -102,8 +102,10 @@ function App() {
                             </Tab.Container>
                         </div>
                     </div>
+
                 )
             }
+
             <div className="main">
                 <Switch>
                     <SecureRoute exact path="/Dashboard" component={Dashboard}/>
@@ -149,6 +151,7 @@ function App() {
                             <br/>
                             <Button className="btn btn-primary d-flex justify-content-center col-11" onClick={modalShow(true)}> Sign up</Button>
 
+
                             <Modal className=""  show={userStore.modal} size={"col-6"}>
                                 <center>
                                     <Modal.Header className="col-6 justify-content-center d-flex">
@@ -176,10 +179,10 @@ function App() {
                                     <br/>
                                     <Modal.Footer className="col-9 justify-content-center d-flex">
                                         <Button className="" variant={"secondary"} onClick={modalShow(false)}>
-                                            Discard changes
+                                            Cancel
                                         </Button>
                                         <Button variant={"primary"} onClick={signUp()}>
-                                            Save changes
+                                            Sign Up
                                         </Button>
                                     </Modal.Footer>
                                 </center>
@@ -217,43 +220,52 @@ function App() {
                             <div className="justify-content-center">
                                 <li>
                                     <center><b> Email </b> <br/>
-                                        <input name="email" type="text" placeholder="Email"
-                                               value={authenticationStore.currentAuthentication.user.email}
-                                               onChange={(e) => userStore.inputUser.email = e.target.value} required/>
+                                    <h7>{authenticationStore.currentAuthentication.user.email}</h7>
                                     </center>
                                 </li>
-                                <br/>
-                                <li>
-                                    <b> Project you are project manager in </b> <br/>
-                                    <ul >
-                                        <li>project1</li>
-                                    </ul>
-                                    <input name="role" type="text" placeholder="Role"
-                                           value={authenticationStore.currentAuthentication.user.role}
-                                           onChange={(e) => userStore.inputUser.role = e.target.value}
-                                           required/>
-                                </li>
-                                <br/>
                             </div>
                         </Modal.Body>
 
                         <br/>
                         <Modal.Footer className="col-9 justify-content-center d-flex">
                             <Button className="justify-content-center d-flex" variant={"secondary"}  onClick={() => userStore.profileModal = false}>
-                                Discard changes
-                            </Button>
-                            <Button variant={"primary"}>
-                                Save changes
+                                Cancel
                             </Button>
                         </Modal.Footer>
                     </center>
 
                 </Modal>
+                <Modal className="projectModal"  show={projectStore.modalShow} size={"col-6"}>
+                    <center>
+                        <Modal.Header className="col-6 justify-content-center d-flex">
+                            <Modal.Title> <center> Project creation </center></Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div className="justify-content-center">
+                                <li>
+                                    <center><b> Project name </b> <br/>
+                                        <input name="project name" type="text" placeholder="project name"
+                                               onChange={(e) => projectStore.inputProject.name = e.target.value} required/>
+                                    </center>
+                                </li>
+                            </div>
+                        </Modal.Body>
+
+                        <br/>
+                        <Modal.Footer className="col-9 justify-content-center d-flex">
+                            <Button className="" variant={"secondary"} onClick={addProject(false)}>
+                                Discard
+                            </Button>
+                            <Button variant={"primary"} onClick={addProject(true)}>
+                                Create project
+                            </Button>
+                        </Modal.Footer>
+                    </center>
+                </Modal>
 
             </div>
             {/*<header className="App-header">*/}
             {/*</header>*/}
-
         </div>
 
     );
@@ -288,7 +300,34 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     </Button>
 ));
 
+function addProject(save) {
+    return (e) => {
+        e.preventDefault();
+        if (save === true){
+            projectStore.inputProject.id = 1;
+            projectStore.inputProject.progress = 0;
+            projectStore.inputProject.vision = "";
+            projectStore.listOfProjects.push(projectStore.inputProject);
+            postProject(projectStore.inputProject).then(function (response) {
+                if (response.ok){
+                    projectStore.getProject();
+                }
+                else {
+                    alert("Status code: " + response.status + "\n " + " Status: "  + response.statusText);
+                }
+            })
+        }
+        projectStore.inputProject = {
+            id: "",
+            name: "",
+            progress: 0,
+            vision: "",
+            isProjectManager: false
+        };
+        projectStore.modalShow = false;
 
+    }
+}
 
 function logoutMenu() {
     authenticationStore.logout();
