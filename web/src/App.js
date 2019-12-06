@@ -25,6 +25,9 @@ import Tab from "react-bootstrap/Tab";
 import {userStore} from "./stores/UserStore";
 import {postProject, postUser, userPost} from "./stores/Api";
 import {projectStore} from "./stores/ProjectStore";
+import {stakeHolderStore} from "./stores/StakeholdersStore";
+import {usecasesStore} from "./stores/UsecasesStore";
+import {taskStore} from "./stores/TaskStore";
 
 
 function App() {
@@ -382,6 +385,9 @@ function signUp() {
 
 function setCurrentProject(project) {
     projectStore.currentProject = project;
+    stakeHolderStore.getStakeholders();
+    usecasesStore.getUsecases();
+    taskStore.getTasks();
     console.log("Setting current project");
 }
 
