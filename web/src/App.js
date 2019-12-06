@@ -23,7 +23,8 @@ import frontImage from "./Best-Project-Management-Software-1024x512.png";
 import ListGroup from "react-bootstrap/ListGroup";
 import Tab from "react-bootstrap/Tab";
 import {userStore} from "./stores/UserStore";
-import {userPost} from "./stores/Api";
+import {postUser, userPost} from "./stores/Api";
+import {stakeHolderStore} from "./stores/StakeholdersStore";
 
 
 function App() {
@@ -175,23 +176,17 @@ function App() {
                                             <li>
                                                 <center><b> Email </b> <br/>
                                                     <input name="email" type="text" placeholder="Email"
-                                                           onChange={(e) => userStore.inputUser.email = e.target.value} required/>
+                                                           onChange={(e) => userStore.loginDetails.username = e.target.value} required/>
                                                 </center>
                                             </li>
                                             <br/>
                                             <li>
                                                 <b> Password </b> <br/>
                                                 <input name="password" type="password" placeholder="Password"
-                                                    // onChange={(e) => userStore.inputUser.role = e.target.value}
+                                                       onChange={(e) => userStore.loginDetails.password = e.target.value}
                                                        required/>
                                             </li>
                                             <br/>
-                                            <li>
-                                                <b> Confirm password </b> <br/>
-                                                <input name="password" type="password" placeholder="Confirm password"
-                                                    // onChange={(e) => userStore.inputUser.role = e.target.value}
-                                                       required/>
-                                            </li>
                                         </div>
                                     </Modal.Body>
 
@@ -200,7 +195,7 @@ function App() {
                                         <Button className="" variant={"secondary"} onClick={modalShow(false)}>
                                             Discard changes
                                         </Button>
-                                        <Button variant={"primary"}>
+                                        <Button variant={"primary"} onClick={signUp()}>
                                             Save changes
                                         </Button>
                                     </Modal.Footer>
@@ -246,19 +241,16 @@ function App() {
                                 </li>
                                 <br/>
                                 <li>
-                                    <b> Role </b> <br/>
+                                    <b> Project you are project manager in </b> <br/>
+                                    <ul >
+                                        <li>project1</li>
+                                    </ul>
                                     <input name="role" type="text" placeholder="Role"
                                            value={authenticationStore.currentAuthentication.user.role}
                                            onChange={(e) => userStore.inputUser.role = e.target.value}
                                            required/>
                                 </li>
                                 <br/>
-                                <li>
-                                    <b> Confirm password </b> <br/>
-                                    <input name="password" type="password" placeholder="Confirm password"
-                                        // onChange={(e) => userStore.inputUser.role = e.target.value}
-                                           required/>
-                                </li>
                             </div>
                         </Modal.Body>
 
@@ -332,17 +324,37 @@ function modalShow(mode) {
 }
 
 
-function getSignup() {
+function signUp() {
     return (e) => {
         e.preventDefault();
-        userStore.userList.push(userStore.inputUser);
-        userPost(userStore.inputUser).then();
-        userStore.inputUser = {
-            email: "",
-            id: '',
-            role: ""
-        };
+        console.log("Test");
+        userStore.user.email = userStore.loginDetails.email;
+        userStore.user.role = 'Developer';
 
+        console.log(userStore.user);
+        console.log(userStore.loginDetails);
+        console.log(userStore.createUser);
+        userStore.createUser.user = userStore.user;
+        userStore.createUser.loginDetails = userStore.loginDetails;
+        //userStore.userList.push(userStore.inputUser);
+        postUser(userStore.createUser).then(function (response) {
+            console.log(response);
+            if (response.ok) {
+                console.log("Sign up successful");
+        //        userStore.getUsers();
+            } else {
+                console.log("Sign up unsuccessful");
+            }
+        });
+        userStore.loginDetails = {
+            username: "",
+            password: '',
+        };
+        userStore.user = {
+            email: "",
+            role: "",
+        };
+        userStore.modal = false;
     };
 }
 

@@ -51,7 +51,23 @@ class UserStore {
         id: '',
         role: ""
     };
+    user = {
+        email: "",
+        role: ""
+    };
+    loginDetails = {
+        username: "",
+        password: ""
+    };
+    createUser = {
+        user: this.user,
+        loginDetails: {
+            username:"",
+            password:""
+        }
+    };
     // currStatus = [{label: "", value: ""}];
+    confirmPassword = "";
     userSelect = [];
     modal = false;
     profileModal = false;
@@ -66,7 +82,9 @@ decorate(UserStore, {
     userSelect: observable,
     currUser: observable,
     modal:observable,
-    profileModal:observable
+    profileModal:observable,
+    newUser:observable,
+    createUser:observable
 });
 
 export const userStore = new UserStore();

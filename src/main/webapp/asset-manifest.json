@@ -1,5 +1,20 @@
 {
   "files": {
+<<<<<<< HEAD
+    "main.css": "/static/css/main.2237816b.chunk.css",
+    "main.js": "/static/js/main.125b8d98.chunk.js",
+    "main.js.map": "/static/js/main.125b8d98.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.0b761a9c.js",
+    "runtime~main.js.map": "/static/js/runtime~main.0b761a9c.js.map",
+    "static/css/2.22a7d4ef.chunk.css": "/static/css/2.22a7d4ef.chunk.css",
+    "static/js/2.a35e2152.chunk.js": "/static/js/2.a35e2152.chunk.js",
+    "static/js/2.a35e2152.chunk.js.map": "/static/js/2.a35e2152.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.1f7dbeabac553c15f954e3511f9b6af3.js": "/precache-manifest.1f7dbeabac553c15f954e3511f9b6af3.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.22a7d4ef.chunk.css.map": "/static/css/2.22a7d4ef.chunk.css.map",
+    "static/css/main.2237816b.chunk.css.map": "/static/css/main.2237816b.chunk.css.map",
+=======
     "main.css": "/static/css/main.2cb94f68.chunk.css",
     "main.js": "/static/js/main.1f1269f5.chunk.js",
     "main.js.map": "/static/js/main.1f1269f5.chunk.js.map",
@@ -13,6 +28,7 @@
     "service-worker.js": "/service-worker.js",
     "static/css/2.22a7d4ef.chunk.css.map": "/static/css/2.22a7d4ef.chunk.css.map",
     "static/css/main.2cb94f68.chunk.css.map": "/static/css/main.2cb94f68.chunk.css.map",
+>>>>>>> master
     "static/media/Best-Project-Management-Software-1024x512.png": "/static/media/Best-Project-Management-Software-1024x512.456abcf3.png",
     "static/media/add_circle-24px.svg": "/static/media/add_circle-24px.121fb69a.svg",
     "static/media/edit-24px.svg": "/static/media/edit-24px.45b30f6a.svg",
