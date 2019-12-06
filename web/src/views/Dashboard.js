@@ -1,8 +1,8 @@
 import React from "react";
 import {observer} from "mobx-react";
 import {ProgressBar} from "react-bootstrap";
-import {progressStore} from "../stores/ProgressStore";
 import "./Dashboard.css"
+import {projectStore} from "../stores/ProjectStore";
     function Dashboard() {
         return(
             <div className="dashboard-progress">
@@ -10,9 +10,9 @@ import "./Dashboard.css"
                     <div className="row justify-content-center">
                         <h1>Project progress</h1>
                     </div>
-                    <div className="row justify-content-center">
-                        <div className="col-10">
-                            <ProgressBar max={100} min={0} now={progressStore.progress} label={`${progressStore.progress}%`} style={{height: 40}} />
+                    <div class="row justify-content-center">
+                        <div class="col-10">
+                            <ProgressBar max={100} min={0} now={projectStore.currentProject.progress} label={`${projectStore.currentProject.progress}%`} style={{height: 40}} />
                         </div>
                     </div>
                     <div className="progress-input">
@@ -22,12 +22,12 @@ import "./Dashboard.css"
                                     <label>
                                             <input name="progress"
                                                    type="number" placeholder="Update progress"
-                                                   onFocus={() => (progressStore.progress !== 0) ? progressStore.inputProgress = progressStore.progress : null}
-                                                   value={progressStore.inputProgress}
+                                                   onFocus={() => (projectStore.currentProject.progress !== 0) ? projectStore.inputProgress = projectStore.currentProject.progress : null}
+                                                   value={projectStore.inputProgress}
                                                    min={0}
                                                    max={100}
                                                    style={{width: 175}}
-                                                   onChange={(e) => progressStore.inputProgress = e.target.value} required/>
+                                                   onChange={(e) => projectStore.inputProgress = e.target.value} required/>
                                     </label>
                                     <input type="submit" value="Save"/>
                                 </form>
@@ -43,13 +43,13 @@ import "./Dashboard.css"
     function getOnSubmit() {
         return (e) => {
             e.preventDefault();
-            if (progressStore.inputProgress < 0) {
-                progressStore.inputProgress = 0;
-            } else if (progressStore.inputProgress > 100) {
-                progressStore.inputProgress = 100;
+            if (projectStore.inputProgress < 0) {
+                projectStore.inputProgress = 0;
+            } else if (projectStore.inputProgress > 100) {
+                projectStore.inputProgress = 100;
             }
-            progressStore.progress = progressStore.inputProgress;
-            progressStore.inputProgress = "";
+            projectStore.currentProject.progress = projectStore.inputProgress;
+            projectStore.inputProgress = "";
 
         }
     }

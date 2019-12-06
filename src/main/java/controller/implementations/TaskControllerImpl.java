@@ -20,8 +20,8 @@ public class TaskControllerImpl implements TaskController {
   private UserController userController = ControllerRegistry.getUserController();
 
   @Override
-  public List<Task> getAll() {
-    List<Task> tasks = taskDocument.getAll();
+  public List<Task> getAll(String projectId) {
+    List<Task> tasks = taskDocument.getAll(projectId);
     for (Task task : tasks) {
       User user = userController.get(task.getResponsible());
       task.setResponsible(user.getEmail());
@@ -30,9 +30,9 @@ public class TaskControllerImpl implements TaskController {
   }
 
   @Override
-  public Task get(String id) {
+  public Task get(String projectId,String id) {
     try {
-      Task task = (Task) taskDocument.get(id);
+      Task task = (Task) taskDocument.get(projectId,id);
       User user = userController.get(task.getResponsible());
       task.setResponsible(user.getEmail());
       return task;
@@ -51,9 +51,9 @@ public class TaskControllerImpl implements TaskController {
   }
 
   @Override
-  public void update(String id, Task replaceTask) {
+  public void update(String projectId, String id, Task replaceTask) {
     try {
-      taskDocument.update(id, replaceTask);
+      taskDocument.update(projectId,id, replaceTask);
     }
     catch (NullPointerException nullPointerException) {
       throw new NotFoundException("Could not find task to update");
@@ -61,7 +61,7 @@ public class TaskControllerImpl implements TaskController {
   }
 
   @Override
-  public void delete(String id) {
-    taskDocument.delete(id);
+  public void delete(String projectId, String id) {
+    taskDocument.delete(projectId,id);
   }
 }

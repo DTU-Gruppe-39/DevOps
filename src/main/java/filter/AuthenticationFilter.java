@@ -16,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by magnus
@@ -60,15 +61,15 @@ public class AuthenticationFilter implements ContainerRequestFilter {
       //Validating JWT and getting claims if valid
       Claims claims = JWTutil.parseToken(jwt[1]);
       String userid = (String) claims.get("id");
-      Role userrole = Role.valueOf((String) claims.get("role"));
+      List<String> projectManagerProjects = (List<String>) claims.get("projectManagerProjects");
       String useremail = (String) claims.getSubject();
       container.setProperty("token",jwt[1]);
       container.setProperty("id", userid);
-      container.setProperty("role", userrole);
+      container.setProperty("projectManagerProjects", projectManagerProjects);
       container.setProperty("email", useremail);
 
       //Check if user has the required role
-      if (checkRole(secured, container, userrole)) {
+      if (checkRole(secured, container, projectManagerProjects)) {
         return;
       }
       else {
@@ -80,10 +81,21 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
   }
 
-  private boolean checkRole (Secured secured, ContainerRequestContext container, Role userrole) {
+  private boolean checkRole (Secured secured, ContainerRequestContext container, List<String> projectManagerProjects) {
     for (Role role : secured.value()) {
-      if (role.equals(userrole))
-        return true;
+      if (role.equals(Role.Developer))
+          return true;
+      else {
+        if (container.getUriInfo().getPathParameters().get("projectId").get(0) != null) {
+          String projectId = container.getUriInfo().getPathParameters().get("projectId").get(0);
+          //Go through all the users project which the person is project manager
+          for (String checkProjectId : projectManagerProjects) {
+            //If the projectid the person is applying for is same as written in his projectmanagerArray
+            if (projectId.equals(checkProjectId))
+              return true;
+          }
+        }
+      }
     }
     return false;
   }

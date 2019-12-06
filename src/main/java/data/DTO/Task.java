@@ -14,20 +14,23 @@ public class Task extends DocumentObject {
   private String description;
   private String responsible;
   private Status status;
+  private String projectId;
 
-  public Task(String id, String name, String description, String responsible) {
+  public Task(String id, String name, String description, String responsible, String projectId) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.responsible = responsible;
+    this.projectId = projectId;
     this.status = Status.NotStarted;
   }
-  public Task(String name, String description, String responsible) {
+  public Task(String name, String description, String responsible, String projectId) {
     this.id = null;
     this.name = name;
     this.description = description;
     this.responsible = responsible;
     this.status = Status.NotStarted;
+    this.projectId = projectId;
   }
 
   public Task() {
@@ -50,6 +53,7 @@ public class Task extends DocumentObject {
     mapToReturn.put("description",getDescription());
     mapToReturn.put("responsible", new ObjectId(getResponsible()));
     mapToReturn.put("status",getStatus().toString());
+    mapToReturn.put("projectId", new ObjectId(getProjectId()));
     return mapToReturn;
   }
 
@@ -60,6 +64,7 @@ public class Task extends DocumentObject {
     this.description = (String) mapOfObject.get("description");
     this.responsible = ((ObjectId) mapOfObject.get("responsible")).toString();
     this.status = Status.valueOf((String) mapOfObject.get("status"));
+    this.projectId = ((ObjectId) mapOfObject.get("projectId")).toString();
   }
 
   public String getId() {
@@ -97,5 +102,13 @@ public class Task extends DocumentObject {
   @Override
   public String toString() {
     return getId()+", "+getName()+", "+getDescription()+", "+getResponsible()+", "+getStatus().toString();
+  }
+
+  public String getProjectId() {
+    return projectId;
+  }
+
+  public void setProjectId(String projectId) {
+    this.projectId = projectId;
   }
 }

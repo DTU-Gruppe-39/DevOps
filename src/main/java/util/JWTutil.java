@@ -16,7 +16,7 @@ public class JWTutil {
     Claims tokenClaims = Jwts.claims()
             .setSubject(user.getEmail());
     tokenClaims.put("id",user.getId());
-    tokenClaims.put("role",user.getRole());
+    tokenClaims.put("projectManagerProjects",user.getProjectManagerProjects());
     return Jwts.builder()
             .setClaims(tokenClaims)
             .signWith(SignatureAlgorithm.HS512, secret)

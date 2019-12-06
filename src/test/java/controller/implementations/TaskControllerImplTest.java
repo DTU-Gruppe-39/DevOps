@@ -17,12 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TaskControllerImplTest {
   TaskController taskController = ControllerRegistry.getTaskController();
+  private String projectId = "5de95d311c9d440000f81222";
 
   @Test
   @Order(1)
   public void testAddTask () {
     taskController.add(getTestTask());
-    Task task = taskController.get(getIdFromTestTask());
+    Task task = taskController.get(projectId,getIdFromTestTask());
     assertTrue(task.getName().equals(getTestTask().getName()) &&
             task.getStatus().equals(getTestTask().getStatus()) &&
             task.getDescription().equals(getTestTask().getDescription()) &&
@@ -32,7 +33,7 @@ class TaskControllerImplTest {
   @Test
   @Order(2)
   public void testGetTestTask () {
-    Task task = taskController.get(getIdFromTestTask());
+    Task task = taskController.get(projectId,getIdFromTestTask());
     assertEquals(getTestTask().getName(),task.getName());
     assertEquals("test@gmail.com",task.getResponsible());
   }
@@ -41,8 +42,8 @@ class TaskControllerImplTest {
   @Order(3)
   public void testUpdateTask () {
     String id = getIdFromTestTask();
-    taskController.update(id, getTestUpdatedTask());
-    Task task = taskController.get(id);
+    taskController.update(projectId,id, getTestUpdatedTask());
+    Task task = taskController.get(projectId,id);
     assertTrue(task.getName().equals(getTestUpdatedTask().getName()) &&
             task.getStatus().equals(getTestUpdatedTask().getStatus()) &&
             task.getDescription().equals(getTestUpdatedTask().getDescription()));
@@ -51,15 +52,15 @@ class TaskControllerImplTest {
   @Test
   @Order(4)
   public void testGetAllTask () {
-    assertNotNull(taskController.getAll());
-    assertTrue(taskController.getAll().size() > 0);
+    assertNotNull(taskController.getAll(projectId));
+    assertTrue(taskController.getAll(projectId).size() > 0);
   }
 
 
   @Test
   @Order(5)
   public void testDeleteTask () {
-    taskController.delete(getIdFromTestUpdatedTask());
+    taskController.delete(projectId,getIdFromTestUpdatedTask());
     assertTrue(getIdFromTestUpdatedTask() == null);
   }
 
@@ -69,6 +70,7 @@ class TaskControllerImplTest {
     task.setDescription("This is a test task. Will be removed soon");
     task.setResponsible("5dcd8c382fb23360ee7b3a10");
     task.setStatus(Status.NotStarted);
+    task.setProjectId(projectId);
     return task;
   }
 
@@ -78,11 +80,12 @@ class TaskControllerImplTest {
     task.setDescription("This is a test task. Will be removed soon");
     task.setResponsible("5dcd8c382fb23360ee7b3a10");
     task.setStatus(Status.InProgress);
+    task.setProjectId(projectId);
     return task;
   }
 
   public String getIdFromTestTask() {
-    for (Task task : taskController.getAll()) {
+    for (Task task : taskController.getAll(projectId)) {
       if (task.getName().equals(getTestTask().getName()) &&
               task.getStatus().equals(getTestTask().getStatus()) &&
               task.getDescription().equals(getTestTask().getDescription()) &&
@@ -93,7 +96,7 @@ class TaskControllerImplTest {
   }
 
   public String getIdFromTestUpdatedTask() {
-    for (Task task : taskController.getAll()) {
+    for (Task task : taskController.getAll(projectId)) {
       if (task.getName().equals(getTestUpdatedTask().getName()) &&
               task.getStatus().equals(getTestUpdatedTask().getStatus()) &&
               task.getDescription().equals(getTestUpdatedTask().getDescription()) &&

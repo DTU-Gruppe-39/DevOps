@@ -1,11 +1,12 @@
 package util;
 
-import data.DTO.Role;
 import data.DTO.User;
 import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.NotAuthorizedException;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class JWTutilTest {
   public User getTestUser() {
     User user = new User();
-    user.setRole(Role.ProjectManager);
+    user.setProjectManagerProjects(new ArrayList<>());
     user.setEmail("kqly@gmail.com");
     user.setId("1");
     return user;
@@ -29,7 +30,7 @@ class JWTutilTest {
 
     Claims JWTClaims = JWTutil.parseToken(JWT);
     assertEquals("kqly@gmail.com",JWTClaims.getSubject());
-    assertEquals(Role.ProjectManager,Role.valueOf((String) JWTClaims.get("role")));
+    //assertEquals(Role.ProjectManager,Role.valueOf((String) JWTClaims.get("role")));
   }
 
   @Test

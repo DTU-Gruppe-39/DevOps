@@ -1,7 +1,7 @@
 import React from "react";
 import {observer} from "mobx-react";
-import {visionStore} from "../stores/VisionStore";
 import "./Vision.css";
+import {projectStore} from "../stores/ProjectStore";
 
     function Vision() {
         return (
@@ -14,9 +14,9 @@ import "./Vision.css";
                             <form className="visioninputform" onSubmit={getOnSubmit()}>
                                 <div class="col-12">
                                     <label>
-                                        <textarea class="form-control z-depth-1" rows="5" cols="50" name="vision" type="text" placeholder="Click to add/edit vision" onFocus={()=>visionStore.inputVision = visionStore.vision}
-                                               value={visionStore.inputVision}
-                                               onChange={(e) => visionStore.inputVision = e.target.value} required/>
+                                        <textarea class="form-control z-depth-1" rows="5" cols="50" name="vision" type="text" placeholder="Click to add/edit vision" onFocus={()=>projectStore.inputVision = projectStore.currentProject.vision}
+                                               value={projectStore.inputVision}
+                                               onChange={(e) => projectStore.inputVision = e.target.value} required/>
                                     </label>
                                     <div class="row justify-content-center">
                                         <div class="col-2">
@@ -29,7 +29,7 @@ import "./Vision.css";
                             <div className="vision">
                                 <div className="row justify-content-center">
                                     <div class="col-6">
-                                        <h6>{visionStore.vision}</h6>
+                                        <h6>{projectStore.currentProject.vision}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -42,8 +42,8 @@ import "./Vision.css";
     function getOnSubmit() {
         return (e) => {
             e.preventDefault();
-            visionStore.vision = visionStore.inputVision;
-            visionStore.inputVision = "";
+            projectStore.currentProject.vision = projectStore.inputVision;
+            projectStore.inputVision = "";
 
         }
     }

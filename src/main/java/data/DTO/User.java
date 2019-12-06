@@ -3,6 +3,7 @@ package data.DTO;
 import org.bson.types.ObjectId;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,12 +12,12 @@ import java.util.Map;
 public class User extends DocumentObject {
   private String id;
   private String email;
-  private Role role;
+  private List<String> projectManagerProjects;
 
-  public User(String id, String email, String password, Role role, String login_reference_id) {
+  public User(String id, String email, List<String> projectManagerProjects) {
     this.id = id;
     this.email = email;
-    this.role = role;
+    this.projectManagerProjects = projectManagerProjects;
   }
 
   public User() {
@@ -26,7 +27,7 @@ public class User extends DocumentObject {
   public Map<String, Object> toMap() {
     Map<String, Object> mapToReturn = new HashMap<>();
     mapToReturn.put("email",getEmail());
-    mapToReturn.put("role",getRole().toString());
+    mapToReturn.put("projectManagerProjects", getProjectManagerProjects());
     return mapToReturn;
   }
 
@@ -34,7 +35,7 @@ public class User extends DocumentObject {
   public void toObject(Map<String, Object> mapOfObject) {
     this.id = ((ObjectId) mapOfObject.get("_id")).toString();
     this.email = (String) mapOfObject.get("email");
-    this.role = Role.valueOf((String) mapOfObject.get("role"));
+    this.projectManagerProjects = (List<String>) mapOfObject.get("projectManagerProjects");
   }
 
   public String getId() {
@@ -53,11 +54,11 @@ public class User extends DocumentObject {
     this.email = email;
   }
 
-  public Role getRole() {
-    return role;
+  public List<String> getProjectManagerProjects() {
+    return projectManagerProjects;
   }
 
-  public void setRole(Role role) {
-    this.role = role;
+  public void setProjectManagerProjects(List<String> projectManagerProjects) {
+    this.projectManagerProjects = projectManagerProjects;
   }
 }

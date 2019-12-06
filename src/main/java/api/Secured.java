@@ -17,5 +17,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface Secured {
   //Define role for annotation value to determine access level
-  Role[] value() default {};
+  Role[] value() default {Role.Developer};
 }
