@@ -1,10 +1,11 @@
 import {decorate, observable} from "mobx";
 import {authenticationStore} from "./AuthenticationStore";
+import {projectStore} from "./ProjectStore";
 
 class UsecasesStore {
     getUsecases(){
         // const localurl = "http://localhost:8080/api/usecase";
-        const serverurl = "https://test-devops69.herokuapp.com/api/usecase";
+        const serverurl = "https://test-devops69.herokuapp.com/api/"+projectStore.currentProject.id+"/usecase";
         console.log("Getting usecases");
         fetch(serverurl, {
             method: "GET",

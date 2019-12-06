@@ -1,4 +1,5 @@
 import {authenticationStore} from "./AuthenticationStore";
+import {projectStore} from "./ProjectStore";
 
 // const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:3000/":""; //Check if dev environment
 
@@ -12,10 +13,8 @@ export const deleteTask = (task) => {
     return taskDel(task,'https://test-devops69.herokuapp.com')
 };
 
-
-
 const taskPost = async (json, url) =>{
-    return await fetch(url + '/api/task',
+    return await fetch(url + '/api/project/'+projectStore.currentProject.id+'/task',
         {method:"POST",
             // mode: '',
             headers: {
@@ -33,7 +32,7 @@ export const putTask = (task) => {
 };
 
 const taskPut = async (json, url) =>{
-    return await fetch(url + '/api/task',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/task',
         {method:"PUT",
          // mode: '',
          headers: {
@@ -46,7 +45,7 @@ const taskPut = async (json, url) =>{
     };
     
 const taskDel = async (json, url) =>{
-    return await fetch(url + '/api/task',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/task',
         {method:"DELETE",
             // mode: '',
             headers: {
@@ -64,7 +63,7 @@ export const postStakeholder = (stakeholder) => {
 };
 
 const stakeholderPost = async (json, url) =>{
-    return await fetch(url + '/api/stakeholder',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/stakeholder',
         {method:"POST",
             // mode: '',
             headers: {
@@ -82,7 +81,7 @@ export const putStakeholder = (stakeholder) => {
 };
 
 const stakeholderPut = async (json, url) =>{
-    return await fetch(url + '/api/stakeholder',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/stakeholder',
         {method:"PUT",
             // mode: '',
             headers: {
@@ -100,7 +99,7 @@ export const deleteStakeholder = (stakeholder) => {
 };
 
 const stakeholderDel = async (json, url) =>{
-    return await fetch(url + '/api/stakeholder',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/stakeholder',
         {method:"DELETE",
             // mode: '',
             headers: {
@@ -117,7 +116,7 @@ export const putUsecase = (usecase) => {
 };
 
 const usecasePut = async (json, url) =>{
-    return await fetch(url + '/api/usecase',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/usecase',
         {method:"PUT",
             // mode: '',
             headers: {
@@ -135,7 +134,7 @@ export const deleteUsecase = (usecase) => {
 };
 
 const usecaseDel = async (json, url) =>{
-    return await fetch(url + '/api/usecase',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/usecase',
         {method:"DELETE",
             // mode: '',
             headers: {
@@ -153,7 +152,7 @@ export const postUsecase = (usecase) => {
 };
 
 const usecasePost = async (json, url) =>{
-    return await fetch(url + '/api/usecase',
+    return await fetch(url + '/api/'+projectStore.currentProject.id+'/usecase',
         {method:"POST",
             // mode: '',
             headers: {

@@ -86,7 +86,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
       if (role.equals(Role.Developer))
           return true;
       else {
-        if (container.getUriInfo().getPathParameters().get("projectId").get(0) != null) {
+        if (container.getUriInfo().getPathParameters().get("projectId") != null) {
           String projectId = container.getUriInfo().getPathParameters().get("projectId").get(0);
           //Go through all the users project which the person is project manager
           for (String checkProjectId : projectManagerProjects) {
