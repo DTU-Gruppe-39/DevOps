@@ -240,10 +240,10 @@ function App() {
                         <br/>
                         <Modal.Footer className="col-9 justify-content-center d-flex">
                             <Button className="justify-content-center d-flex" variant={"secondary"}  onClick={() => userStore.profileModal = false}>
-                                Discard changes
+                                Cancel
                             </Button>
                             <Button variant={"primary"}>
-                                Save changes
+                                Sign Up
                             </Button>
                         </Modal.Footer>
                     </center>
