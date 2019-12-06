@@ -19,6 +19,32 @@
   color: white;
 }
 
+.loginForm {
+    margin: 100px;
+    border: 1px solid grey;
+    border-radius: 15px;
+    width: 20%;
+    padding: 20px;
+    justify-content: left;
+    position: absolute;
+}
+
+.title {
+  margin-top: 50px;
+  color: dimgrey;
+  font-family: Georgia;
+}
+
+.titleText {
+  font-size: 16px;
+  font-family: Georgia;
+}
+
+.frontimage {
+    position: relative;
+    right: -30%;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -33,7 +59,7 @@
   padding: 0;
   background-color: #f1f1f1;
   position: absolute;
-  height: 91%; /*hack to prevent unnecessary scrolling*/
+  height: 100%;
   display: block;
 }
 
