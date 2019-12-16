@@ -116,7 +116,7 @@ import {projectStore} from "../stores/ProjectStore";
                             <br/>
                             <table>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>NameS</th>
                                     <th>Contact Person</th>
                                     <th>Email</th>
                                     <th>Direct Stakeholder</th>
